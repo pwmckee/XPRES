@@ -9,67 +9,119 @@
         Width="1280"
         Height="720"
         WindowState="Maximized"
+        Closing="Window_Closing"
         mc:Ignorable="d">
+
+    <!--#region Window Properties-->
     <Window.DataContext>
         <vm:ObSaagVm />
     </Window.DataContext>
+    <!--#endregion Window Properties-->
+
     <Grid Background="{StaticResource SolidBackDark}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
+
+        <!--#region Menu-->
+
         <Border Grid.Row="0"
                 Margin="5"
-                Style="{StaticResource CustomBorder}">
-            <StackPanel>
-                <StackPanel Name="spMainNavMenu"
+                Style="{StaticResource CustomBorder}"
+                Visibility="Visible">
+            <Grid Name="grdMainMenu">
+
+                <!--#region Command Entry-->
+
+                <StackPanel Name="spCommand"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Visibility="Visible">
+                    <Label Content="Scan your task:" FontSize="21" />
+                    <TextBox Name="txtCommand"
+                             Width="150"
+                             Background="{x:Null}"
+                             CaretBrush="Yellow"
+                             FontSize="21"
+                             Foreground="Yellow"
+                             KeyDown="txtCommand_KeyDown"
+                             Text="{Binding CommandScan,
+                                            Mode=TwoWay,
+                                            UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.Template>
+                            <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                                <Border x:Name="border"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        SnapsToDevicePixels="True">
+                                    <ScrollViewer x:Name="PART_ContentHost"
+                                                  Focusable="False"
+                                                  HorizontalScrollBarVisibility="Hidden"
+                                                  VerticalScrollBarVisibility="Hidden" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter TargetName="border" Property="Opacity" Value="0.56" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="BorderBrush" Value="Yellow" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter TargetName="border" Property="BorderBrush" Value="Yellow" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </TextBox.Template>
+                        <TextBox.Style>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="BorderBrush" Value="Yellow" />
+                                <Setter Property="BorderThickness" Value="2" />
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </StackPanel>
+
+                <!--#endregion Command Entry-->
+
+                <!--#region Single Pick Entry-->
+
+                <StackPanel Name="spSinglePickEntry"
                             Height="50"
                             HorizontalAlignment="Center"
-                            Orientation="Horizontal">
-                    <Button Name="btnHome"
-                            Width="30"
-                            Height="30"
-                            Margin="5,0,5,0"
-                            HorizontalAlignment="Left"
-                            Click="btnHome_Click">
-                        <Image HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Source="{StaticResource HomeIcon}" />
-                    </Button>
-                    <Button Name="btnDash"
-                            Width="30"
-                            Height="30"
-                            Margin="5"
-                            HorizontalAlignment="Left"
-                            Click="btnDash_Click">
-                        <Image Width="25"
-                               Height="25"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Source="{StaticResource DashBoard2}" />
-                    </Button>
-                    <Button Width="30"
-                            Height="30"
-                            Margin="5"
-                            HorizontalAlignment="Left"
-                            Command="{Binding RefreshListCommand}">
-                        <Image Width="25"
-                               Height="25"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Source="{StaticResource RefreshIcon}" />
-                    </Button>
-
-
+                            Orientation="Horizontal"
+                            Visibility="Hidden">
+                    <Label Height="30"
+                           Margin="5"
+                           Content="Picker:"
+                           FontSize="16" />
+                    <TextBox x:Name="txtSinglePicker"
+                             Width="100"
+                             Height="30"
+                             Margin="5"
+                             Background="{x:Null}"
+                             CaretBrush="Yellow"
+                             FontSize="21"
+                             Foreground="Yellow"
+                             KeyDown="txtSinglePicker_KeyDown"
+                             Text="{Binding Picker,
+                                            Mode=TwoWay}"
+                             TextAlignment="Left" />
                     <Label Height="30"
                            Margin="5"
                            Content="Delivery ID:"
                            FontSize="16" />
-                    <TextBox x:Name="txtDeliveryID"
+                    <TextBox x:Name="txtSingleDeliveryID"
                              Width="100"
                              Height="30"
                              Margin="5"
-                             FontSize="16"
+                             Background="{x:Null}"
+                             CaretBrush="Yellow"
+                             FontSize="21"
+                             Foreground="Yellow"
+                             KeyDown="txtSingleDeliveryID_KeyDown"
                              Text="{Binding DelId,
                                             Mode=TwoWay}"
                              TextAlignment="Left" />
@@ -77,90 +129,136 @@
                            Margin="5"
                            Content="Line Count:"
                            FontSize="16" />
-                    <TextBox x:Name="txtLineCount"
+                    <TextBox x:Name="txtSingleLineCount"
                              Width="100"
                              Height="30"
                              Margin="5"
-                             FontSize="16"
+                             Background="{x:Null}"
+                             CaretBrush="Yellow"
+                             FontSize="21"
+                             Foreground="Yellow"
+                             KeyDown="txtSingleLineCount_KeyDown"
                              Text="{Binding LineCount,
-                                            Mode=TwoWay}"
-                             TextAlignment="Left" />
+                                            Mode=TwoWay,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Center">
+                        <!--<TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding StartSinglePickCommand}" />
+                        </TextBox.InputBindings>-->
+                    </TextBox>
+                </StackPanel>
+
+                <!--#endregion Single Pick Entry-->
+
+                <!--#region Multi Pick Entry-->
+
+                <StackPanel Name="spMultiPickEntry"
+                            Height="50"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal"
+                            Visibility="Hidden">
                     <Label Height="30"
                            Margin="5"
                            Content="Picker:"
                            FontSize="16" />
-                    <ComboBox x:Name="cboPicker"
-                              Width="100"
-                              Height="30"
-                              Margin="5"
-                              FontSize="16"
-                              ItemsSource="{Binding PickerList}"
-                              SelectedItem="{Binding Picker,
-                                                     Mode=TwoWay}" />
-                    <Button Name="btnStartSinglePick"
-                            Width="100"
-                            Margin="5"
-                            Command="{Binding StartSinglePickCommand}"
-                            Content="Single Order"
-                            FontSize="16" />
-                    <Button Name="btnCreateMultiPick"
-                            Width="100"
-                            Margin="5"
-                            Click="btnCreateMultiPick_Click"
-                            Content="Multi Order"
-                            FontSize="16" />
-                    <Button Name="btnEndPick"
-                            Width="100"
-                            Margin="5"
-                            Command="{Binding CompletePickCommand}"
-                            Content="Complete"
-                            FontSize="16" />
-                    <Button Name="btnOptions"
-                            Margin="5"
-                            Click="btnOptions_Click">
-                        <Image Source="{StaticResource SettingsIcon}" />
-                    </Button>
+                    <TextBox x:Name="txtMultiPicker"
+                             Width="100"
+                             Height="30"
+                             Margin="5"
+                             Background="{x:Null}"
+                             CaretBrush="Yellow"
+                             FontSize="21"
+                             Foreground="Yellow"
+                             KeyDown="txtMultiPicker_KeyDown"
+                             Text="{Binding Picker,
+                                            Mode=TwoWay}"
+                             TextAlignment="Left" />
+                    <Label Height="30"
+                           Margin="5"
+                           Content="Number of Picks:"
+                           FontSize="16" />
+                    <TextBox x:Name="txtMultiPickNum"
+                             Width="100"
+                             Height="30"
+                             Margin="5"
+                             Background="{x:Null}"
+                             CaretBrush="Yellow"
+                             FontSize="21"
+                             Foreground="Yellow"
+                             KeyDown="txtMultiPickNum_KeyDown"
+                             Text="{Binding MultiPickNum,
+                                            Mode=TwoWay}"
+                             TextAlignment="Left" />
+                    <Label Height="30"
+                           Margin="5"
+                           Content="Delivery ID:"
+                           FontSize="16" />
+                    <TextBox x:Name="txtMultiDeliveryID"
+                             Width="100"
+                             Height="30"
+                             Margin="5"
+                             Background="{x:Null}"
+                             CaretBrush="Yellow"
+                             FontSize="21"
+                             Foreground="Yellow"
+                             KeyDown="txtMultiDeliveryID_KeyDown"
+                             Text="{Binding DelId,
+                                            Mode=TwoWay}"
+                             TextAlignment="Left" />
+                    <Label Height="30"
+                           Margin="5"
+                           Content="Line Count:"
+                           FontSize="16" />
+                    <TextBox x:Name="txtMultiLineCount"
+                             Width="100"
+                             Height="30"
+                             Margin="5"
+                             Background="{x:Null}"
+                             CaretBrush="Yellow"
+                             FontSize="21"
+                             Foreground="Yellow"
+                             KeyDown="txtMultiLineCount_KeyDown"
+                             Text="{Binding LineCount,
+                                            Mode=TwoWay,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Center">
+                        <!--<TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding AddMultiPickCommand}" />
+                        </TextBox.InputBindings>-->
+                    </TextBox>
                 </StackPanel>
-                <StackPanel Name="spEditPickerList"
+
+                <!--#endregion Multi Pick Entry-->
+
+                <!--#region Complete Pick-->
+
+                <StackPanel Name="spComplete"
                             HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
                             Orientation="Horizontal"
-                            Visibility="Collapsed">
-                    <StackPanel Name="SpEditOperControls"
-                                HorizontalAlignment="Center"
-                                Orientation="Horizontal"
-                                Visibility="Visible">
-                        <Label Height="30"
-                               Margin="5"
-                               Content="First Name:"
-                               FontSize="16" />
-                        <TextBox Width="100"
-                                 Height="30"
-                                 Margin="5"
-                                 Text="{Binding FirstName,
-                                                Mode=TwoWay}" />
-                        <Label Height="30"
-                               Margin="5"
-                               Content="Last Name:"
-                               FontSize="16" />
-                        <TextBox Width="100"
-                                 Height="30"
-                                 Margin="5"
-                                 Text="{Binding LastName,
-                                                Mode=TwoWay}" />
-                        <Button Width="175"
-                                Margin="5"
-                                Command="{Binding AddPickerCommand}"
-                                Content="Add Operator"
-                                FontSize="16" />
-                        <Button Width="175"
-                                Margin="5"
-                                Command="{Binding DeletePickerCommand}"
-                                Content="Delete Operator"
-                                FontSize="16" />
-                    </StackPanel>
+                            Visibility="Hidden">
+                    <Label Content="Picker Name:" FontSize="21" />
+                    <TextBox Name="txtCompletePicker"
+                             Width="150"
+                             Background="{x:Null}"
+                             CaretBrush="Yellow"
+                             FontSize="21"
+                             Foreground="Yellow"
+                             KeyDown="txtCompletePicker_KeyDown"
+                             Text="{Binding Picker,
+                                            Mode=TwoWay,
+                                            UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
-            </StackPanel>
+
+                <!--#endregion Complete Pick-->
+
+            </Grid>
         </Border>
+
+        <!--#endregion Menu-->
+
+        <!--#region Center Views-->
+
         <Grid Name="grdCenterMain" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -229,7 +327,7 @@
                     Margin="5"
                     Style="{StaticResource CustomBorder}">
                 <Grid Name="grdRightMain">
-                    <Grid Name="grdMultiPick" Visibility="Visible">
+                    <Grid Name="grdMultiPick" Visibility="Hidden">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50" />
                             <RowDefinition Height="50" />
@@ -242,30 +340,11 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Button Name="btnAddMultiPick"
-                                    Grid.Column="0"
-                                    Margin="5"
-                                    HorizontalAlignment="Center"
-                                    Command="{Binding AddMultiPickCommand}"
-                                    FontSize="16"
-                                    ToolTip="Add Multi Pick">
-                                <Image Margin="5" Source="{StaticResource ExpandIcon}" />
-                            </Button>
                             <Label Grid.Column="1"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
                                    Content="Multi Order Pick List"
                                    FontSize="20" />
-                            <Button Name="btnStartMultiPick"
-                                    Grid.Column="2"
-                                    Margin="5"
-                                    HorizontalAlignment="Center"
-                                    Click="btnStartMulti_Click"
-                                    Command="{Binding StartMultiPickCommand}"
-                                    FontSize="16"
-                                    ToolTip="Start Multi Pick">
-                                <Image Source="{StaticResource SaveIcon}" />
-                            </Button>
                         </Grid>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
@@ -296,7 +375,7 @@
                             <ItemsControl ItemsSource="{Binding MultiPickCtrls}" />
                         </ScrollViewer>
                     </Grid>
-                    <Grid Name="grdFinishedPicks" Visibility="Hidden">
+                    <Grid Name="grdFinishedPicks" Visibility="Visible">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="35" />
                             <RowDefinition Height="50" />
@@ -354,5 +433,8 @@
                 </Grid>
             </Border>
         </Grid>
+
+        <!--#endregion Center Views-->
+
     </Grid>
 </Window>

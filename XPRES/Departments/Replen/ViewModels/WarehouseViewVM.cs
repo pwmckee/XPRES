@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using XPRES.Commands;
 using XPRES.DAL;
 using XPRES.Departments.Replen.Views;
+using XPRES.Helpers;
 
 namespace XPRES.Departments.Replen.ViewModels
 {
-    public class WarehouseViewVM : INotifyPropertyChanged
+    public class WarehouseViewVM : ViewModelBase
     {
-        public HomeCommand HomeEvent { get; set; }
-        private XpresEntities xps;
+        #region Constructor
 
         public WarehouseViewVM()
         {
-            HomeEvent = new HomeCommand();
             FillProdLines();
         }
+
+        #endregion Constructor
 
         #region Properties
 
@@ -32,7 +31,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _prodLineList = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -44,7 +43,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _prodLine = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -52,55 +51,20 @@ namespace XPRES.Departments.Replen.ViewModels
 
         #region ICommand Members
 
-        private ICommand _prodViewCommand;
+        public ICommand ProdViewCommand => new RelayCommand(x => OpenProdView());
 
-        public ICommand ProdViewCommand
-        {
-            get
-            {
-                if (_prodViewCommand == null)
-                    _prodViewCommand = new RelayCommand(param => ProdViewCommandExecute(param));
-                return _prodViewCommand;
-            }
-            set
-            {
-                _prodViewCommand = value;
-            }
-        }
-
-        private ICommand _dashViewCommand;
-
-        public ICommand DashViewCommand
-        {
-            get
-            {
-                if (_dashViewCommand == null)
-                    _dashViewCommand = new RelayCommand(param => DashViewCommandExecute(param));
-                return _dashViewCommand;
-            }
-            set
-            {
-                _dashViewCommand = value;
-            }
-        }
+        public ICommand DashViewCommand => new RelayCommand(x => OpenDashView());
 
         #endregion ICommand Members
 
         #region Methods
 
-        #region ICommand Methods
-
-        private void ProdViewCommandExecute(object param)
-        {
-            OpenProdView();
-        }
-
         private void OpenProdView()
         {
             bool _open = false;
-            foreach (Window wnd in Application.Current.Windows)
+            foreach (Window _wnd in Application.Current.Windows)
             {
-                if (wnd is ProductionView)
+                if (_wnd is ProductionView)
                 {
                     _open = true;
                 }
@@ -112,27 +76,22 @@ namespace XPRES.Departments.Replen.ViewModels
             }
             else
             {
-                foreach (Window wnd in Application.Current.Windows)
+                foreach (Window _wnd in Application.Current.Windows)
                 {
-                    if (wnd.Title == "Production View")
+                    if (_wnd.Title == "Production View")
                     {
-                        wnd.Activate();
+                        _wnd.Activate();
                     }
                 }
             }
         }
 
-        private void DashViewCommandExecute(object param)
-        {
-            OpenDashView();
-        }
-
         private void OpenDashView()
         {
             bool _open = false;
-            foreach (Window wnd in Application.Current.Windows)
+            foreach (Window _wnd in Application.Current.Windows)
             {
-                if (wnd is RepDash)
+                if (_wnd is RepDash)
                 {
                     _open = true;
                 }
@@ -144,53 +103,29 @@ namespace XPRES.Departments.Replen.ViewModels
             }
             else
             {
-                foreach (Window wnd in Application.Current.Windows)
+                foreach (Window _wnd in Application.Current.Windows)
                 {
-                    if (wnd.Title == "Replen Dash")
+                    if (_wnd.Title == "Replen Dash")
                     {
-                        wnd.Activate();
+                        _wnd.Activate();
                     }
                 }
             }
         }
 
-        #endregion ICommand Methods
-
         private void FillProdLines()
         {
             try
             {
-                xps = new XpresEntities();
-
-                _prodLineList = new List<string>();
-
-                var prodLines = (from a in xps.ProductionAreas
+                _prodLineList = (from a in new XpresEntities().ProductionAreas
                                  select a.ProdLine).ToList();
-                foreach (var p in prodLines)
-                {
-                    _prodLineList.Add(p.ToString());
-                }
             }
-            catch (Exception ex)
+            catch (Exception _ex)
             {
-                System.Windows.Forms.MessageBox.Show("Error retrieving production line list:" + ex.Message);
+                System.Windows.Forms.MessageBox.Show(@"Error retrieving production line list:" + _ex.Message);
             }
         }
 
         #endregion Methods
-
-        #region INotify Implementation
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion INotify Implementation
     }
 }

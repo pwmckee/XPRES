@@ -12,21 +12,21 @@ using XPRES.Helpers;
 
 namespace XPRES.Departments.Replen.ViewModels
 {
-    public class rpDashVM : INotifyPropertyChanged
+    public class rpDashVM : ViewModelBase
     {
-        private XpresEntities xps;
-        private GetPercentage percents;
-        public HomeCommand HomeEvent;
+        #region Contructor
 
         public rpDashVM()
         {
-            xps = new XpresEntities();
             percents = new GetPercentage();
-            HomeEvent = new HomeCommand();
             FillReplenInfo();
         }
 
+        #endregion Contructor
+
         #region Properties
+
+        private GetPercentage percents;
 
         private int _operators;
 
@@ -36,7 +36,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _operators = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -48,7 +48,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _reqs = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -60,7 +60,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _compReqs = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -72,7 +72,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _lph = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -84,7 +84,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _compPcnt = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -92,39 +92,18 @@ namespace XPRES.Departments.Replen.ViewModels
 
         #region ICommand Members
 
-        private ICommand _whViewCommand;
-
-        public ICommand WhViewCommand
-        {
-            get
-            {
-                if (_whViewCommand == null)
-                    _whViewCommand = new RelayCommand(param => WhViewCommandExecute(param));
-                return _whViewCommand;
-            }
-            set
-            {
-                _whViewCommand = value;
-            }
-        }
+        public ICommand WhViewCommand => new RelayCommand(x => OpenWhView());
 
         #endregion ICommand Members
 
         #region Methods
 
-        #region ICommand Methods
-
-        private void WhViewCommandExecute(object param)
-        {
-            OpenWhView();
-        }
-
         private void OpenWhView()
         {
             bool _open = false;
-            foreach (Window wnd in Application.Current.Windows)
+            foreach (Window _wnd in Application.Current.Windows)
             {
-                if (wnd is WarehouseView)
+                if (_wnd is WarehouseView)
                 {
                     _open = true;
                 }
@@ -136,76 +115,59 @@ namespace XPRES.Departments.Replen.ViewModels
             }
             else
             {
-                foreach (Window wnd in Application.Current.Windows)
+                foreach (Window _wnd in Application.Current.Windows)
                 {
-                    if (wnd.Title == "Warehouse View")
+                    if (_wnd.Title == @"Warehouse View")
                     {
-                        wnd.Activate();
+                        _wnd.Activate();
                     }
                 }
             }
-            foreach (Window wnd in Application.Current.Windows)
+            foreach (Window _wnd in Application.Current.Windows)
             {
-                if (wnd is RepDash)
+                if (_wnd is RepDash)
                 {
-                    wnd.Close();
+                    _wnd.Close();
                 }
             }
         }
 
-        #endregion ICommand Methods
-
         private void FillReplenInfo()
         {
-            xps = new XpresEntities();
             DateTime _sdate = DateTime.Today.Date;
             DateTime _edate = DateTime.Today.Date.AddDays(1);
 
             try
             {
-                var replens = (from a in xps.ReplenSAAGs
+                var _replens = (from a in new XpresEntities().ReplenSAAGs
                                where a.TimeStamp >= _sdate && a.TimeStamp < _edate
                                select a);
 
-                if (replens != null && replens.Count() > 0)
+                if (_replens != null && _replens.Count() > 0)
                 {
-                    List<string> opers = new List<string>();
-                    opers = replens.Select(a => a.Employee).Distinct().ToList();
-                    _operators = opers.Count;
+                    var _opers = new List<string>();
+                    _opers = _replens.Select(a => a.Employee).Distinct().ToList();
+                    _operators = _opers.Count;
                 }
 
-                var reqs = (from a in xps.MaterialRequests
+                var _reqsQuery = (from a in new XpresEntities().MaterialRequests
                             where a.SubTimestamp >= _sdate && a.SubTimestamp < _edate
                             select a).ToList();
 
-                if (reqs != null && reqs.Count > 0)
+                if (_reqsQuery != null && _reqsQuery.Count > 0)
                 {
-                    _reqs = reqs.Count;
-                    _compReqs = reqs.Count(a => a.ReqStatus == "Delivered");
+                    _reqs = _reqsQuery.Count;
+                    _compReqs = _reqsQuery.Count(a => a.ReqStatus == @"Delivered");
                     _compPcnt = (_compReqs / _reqs) * 100;
                     _compPcnt = Math.Round(_compPcnt, 2);
                 }
             }
-            catch (Exception ex)
+            catch (Exception _ex)
             {
-                System.Windows.Forms.MessageBox.Show("Error retrieving replen info: " + ex.Message);
+                System.Windows.Forms.MessageBox.Show(@"Error retrieving replen info: " + _ex.Message);
             }
         }
 
         #endregion Methods
-
-        #region INotify Implementation
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion INotify Implementation
     }
 }

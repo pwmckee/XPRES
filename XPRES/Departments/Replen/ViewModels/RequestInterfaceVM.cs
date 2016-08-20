@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using XPRES.Commands;
 using XPRES.DAL;
 using XPRES.Departments.Replen.Views;
+using XPRES.Helpers;
 
 namespace XPRES.Departments.Replen.ViewModels
 {
-    public class RequestInterfaceVM : INotifyPropertyChanged
+    public class RequestInterfaceVM : ViewModelBase
     {
-        private XpresEntities xps;
+        #region Constructor
 
         public RequestInterfaceVM()
         {
             FillProdLines();
             SetupTable();
         }
+
+        #endregion Constructor
 
         #region Properties
 
@@ -32,7 +33,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _prodLineList = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -44,7 +45,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _prodLine = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -56,7 +57,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _partNum = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
                 FillReqList();
             }
         }
@@ -69,7 +70,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 _qty = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
                 FillReqList();
             }
         }
@@ -82,7 +83,7 @@ namespace XPRES.Departments.Replen.ViewModels
             set
             {
                 value = _dtRequestList;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -90,204 +91,121 @@ namespace XPRES.Departments.Replen.ViewModels
 
         #region ICommand Members
 
-        private ICommand _submitRequestCommand;
+        public ICommand SubmitRequestCommand => new RelayCommand(x => SubmitRequest());
 
-        public ICommand SubmitRequestCommand
-        {
-            get
-            {
-                if (_submitRequestCommand == null)
-                    _submitRequestCommand = new RelayCommand(param => SubmitRequestCommandExecute(param));
-                return _submitRequestCommand;
-            }
-            set
-            {
-                _submitRequestCommand = value;
-            }
-        }
+        public ICommand ProdViewCommand => new RelayCommand(x => OpenProdView());
 
-        private ICommand _prodViewCommand;
+        public ICommand EditProdListCommand => new RelayCommand(x => OpenEditProdArea());
 
-        public ICommand ProdViewCommand
-        {
-            get
-            {
-                if (_prodViewCommand == null)
-                    _prodViewCommand = new RelayCommand(param => ProdViewCommandExecute(param));
-                return _prodViewCommand;
-            }
-            set
-            {
-                _prodViewCommand = value;
-            }
-        }
-
-        private ICommand _editProdListCommand;
-
-        public ICommand EditProdListCommand
-        {
-            get
-            {
-                if (_editProdListCommand == null)
-                    _editProdListCommand = new RelayCommand(param => EditProdListCommandExecute(param));
-                return _editProdListCommand;
-            }
-            set
-            {
-                _editProdListCommand = value;
-            }
-        }
-
-        private ICommand _saveProdListCommand;
-
-        public ICommand SaveProdListCommand
-        {
-            get
-            {
-                if (_saveProdListCommand == null)
-                    _saveProdListCommand = new RelayCommand(param => SaveProdListCommandExecute(param));
-                return _saveProdListCommand;
-            }
-            set
-            {
-                _saveProdListCommand = value;
-            }
-        }
+        public ICommand SaveProdListCommand => new RelayCommand(x => SaveProdArea());
 
         #endregion ICommand Members
 
         #region Methods
 
-        #region Command Methods
-
-        private void SaveProdListCommandExecute(object param)
-        {
-            SaveProdArea();
-        }
-
         private void SaveProdArea()
         {
             try
             {
-                xps = new XpresEntities();
-                ProductionArea p = new ProductionArea();
+                var _xps = new XpresEntities();
+                var _p = new ProductionArea();
                 if (_prodLine != null || _prodLine != "")
-                    p.ProdLine = _prodLine;
-                xps.ProductionAreas.Add(p);
-                xps.SaveChanges();
-                System.Windows.Forms.MessageBox.Show("Production area successfully saved.");
-                foreach (Window wnd in Application.Current.Windows)
+                    _p.ProdLine = _prodLine;
+                _xps.ProductionAreas.Add(_p);
+                _xps.SaveChanges();
+                System.Windows.Forms.MessageBox.Show(@"Production area successfully saved.");
+                foreach (Window _wnd in Application.Current.Windows)
                 {
-                    if (wnd is EditProdAreas)
+                    if (_wnd is EditProdAreas)
                     {
-                        wnd.Close();
+                        _wnd.Close();
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception _ex)
             {
-                System.Windows.Forms.MessageBox.Show("Error saving production area: " + ex.Message);
+                System.Windows.Forms.MessageBox.Show(@"Error saving production area: " + _ex.Message);
             }
-        }
-
-        public void SubmitRequestCommandExecute(object param)
-        {
-            SubmitRequest();
         }
 
         private void SubmitRequest()
         {
             if (_dtRequestList.Rows.Count > 0)
             {
-                xps = new XpresEntities();
+                var _xps = new XpresEntities();
                 MaterialRequest _request = new MaterialRequest();
 
                 try
                 {
-                    var id = (from a in xps.MaterialRequests
-                              select a.ID);
-                    int _id = 0;
-
-                    if (id.Count() > 0)
-                        _id = id.Max();
-
+                    var _id = (from a in _xps.MaterialRequests
+                              select a.ID).Max();
                     _id++;
 
-                    foreach (DataRow dr in _dtRequestList.Rows)
+                    foreach (DataRow _dr in _dtRequestList.Rows)
                     {
-                        dr[2] = _prodLine.ToString();
-                        dr[3] = DateTime.Now;
+                        _dr[2] = _prodLine.ToString();
+                        _dr[3] = DateTime.Now;
 
                         _request.RequestNum = "Req" + _id.ToString();
-                        _request.PartNum = dr[0].ToString();
-                        _request.ReqQty = dr[1].ToString();
-                        _request.ProdLine = dr[2].ToString();
-                        _request.SubTimestamp = Convert.ToDateTime(dr[3]);
+                        _request.PartNum = _dr[0].ToString();
+                        _request.ReqQty = _dr[1].ToString();
+                        _request.ProdLine = _dr[2].ToString();
+                        _request.SubTimestamp = Convert.ToDateTime(_dr[3]);
                         _request.ReqStatus = "Submitted";
-                        xps.MaterialRequests.Add(_request);
+                        _xps.MaterialRequests.Add(_request);
                     }
-                    xps.SaveChanges();
+                    _xps.SaveChanges();
                     _dtRequestList = new DataTable();
-                    System.Windows.Forms.MessageBox.Show("Request successfully saved.");
+                    System.Windows.Forms.MessageBox.Show(@"Request successfully saved.");
                     OpenProdView();
                 }
-                catch (Exception ex)
+                catch (Exception _ex)
                 {
-                    System.Windows.Forms.MessageBox.Show("Error saving request: " + ex.Message);
+                    System.Windows.Forms.MessageBox.Show(@"Error saving request: " + _ex.Message);
                 }
             }
-        }
-
-        private void ProdViewCommandExecute(object param)
-        {
-            OpenProdView();
         }
 
         private void OpenProdView()
         {
             bool _open = false;
-            foreach (Window wnd in Application.Current.Windows)
+            foreach (Window _wnd in Application.Current.Windows)
             {
-                if (wnd is ProductionView)
+                if (_wnd is ProductionView)
                 {
                     _open = true;
                 }
             }
             if (!_open)
             {
-                ProductionView _prodView = new ProductionView();
+                var _prodView = new ProductionView();
                 _prodView.Show();
             }
             else
             {
-                foreach (Window wnd in Application.Current.Windows)
+                foreach (Window _wnd in Application.Current.Windows)
                 {
-                    if (wnd.Title == "Production View")
+                    if (_wnd.Title == @"Production View")
                     {
-                        wnd.Activate();
+                        _wnd.Activate();
                     }
                 }
             }
-            foreach (Window wnd in Application.Current.Windows)
+            foreach (Window _wnd in Application.Current.Windows)
             {
-                if (wnd is RequestInterface)
+                if (_wnd is RequestInterface)
                 {
-                    wnd.Close();
+                    _wnd.Close();
                 }
             }
-        }
-
-        private void EditProdListCommandExecute(object param)
-        {
-            OpenEditProdArea();
         }
 
         private void OpenEditProdArea()
         {
             bool _open = false;
-            foreach (Window wnd in Application.Current.Windows)
+            foreach (Window _wnd in Application.Current.Windows)
             {
-                if (wnd is EditProdAreas)
+                if (_wnd is EditProdAreas)
                 {
                     _open = true;
                 }
@@ -299,36 +217,32 @@ namespace XPRES.Departments.Replen.ViewModels
             }
             else
             {
-                foreach (Window wnd in Application.Current.Windows)
+                foreach (Window _wnd in Application.Current.Windows)
                 {
-                    if (wnd.Title == "Edit Production Areas")
+                    if (_wnd.Title == @"Edit Production Areas")
                     {
-                        wnd.Activate();
+                        _wnd.Activate();
                     }
                 }
             }
         }
 
-        #endregion Command Methods
-
         private void FillProdLines()
         {
             try
             {
-                xps = new XpresEntities();
-
                 _prodLineList = new List<string>();
 
-                var prodLines = (from a in xps.ProductionAreas
+                var _prodLines = (from a in new XpresEntities().ProductionAreas
                                  select a.ProdLine).ToList();
-                foreach (var p in prodLines)
+                foreach (var _p in _prodLines)
                 {
-                    _prodLineList.Add(p.ToString());
+                    _prodLineList.Add(_p.ToString());
                 }
             }
-            catch (Exception ex)
+            catch (Exception _ex)
             {
-                System.Windows.Forms.MessageBox.Show("Error retrieving production line list:" + ex.Message);
+                System.Windows.Forms.MessageBox.Show(@"Error retrieving production line list:" + _ex.Message);
             }
         }
 
@@ -343,13 +257,13 @@ namespace XPRES.Departments.Replen.ViewModels
 
         private void FillReqList()
         {
-            if (_partNum != "" && _partNum != null && _qty != "" && _qty != null)
+            if (string.IsNullOrEmpty(_partNum) && string.IsNullOrEmpty(_qty))
             {
-                DataRow dr = _dtRequestList.NewRow();
-                dr[0] = _partNum;
-                dr[1] = _qty;
+                DataRow _dr = _dtRequestList.NewRow();
+                _dr[0] = _partNum;
+                _dr[1] = _qty;
 
-                _dtRequestList.Rows.Add(dr);
+                _dtRequestList.Rows.Add(_dr);
                 _partNum = "";
                 _qty = "";
             }
@@ -357,18 +271,5 @@ namespace XPRES.Departments.Replen.ViewModels
 
         #endregion Methods
 
-        #region INotify Implementation
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion INotify Implementation
     }
 }

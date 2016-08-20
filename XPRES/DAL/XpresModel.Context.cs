@@ -16,13 +16,13 @@ namespace XPRES.DAL
     public partial class XpresEntities : DbContext
     {
         public XpresEntities()
-            : base("name=XpresEntities")
+            : base("XpresEntities")
         {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            //throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<Adjustment> Adjustments { get; set; }

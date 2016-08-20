@@ -1,13 +1,16 @@
 ﻿<Window x:Class="XPRES.Departments.Replen.Views.RepDash"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:XPRES.Departments.Replen.Views"
-        xmlns:vm="clr-namespace:XPRES.Departments.Replen.ViewModels"
         xmlns:charts="clr-namespace:XPRES.Departments.Replen.Views.Charts"
-        mc:Ignorable="d"
-        Title="Replen Dash" Height="720" Width="1280" WindowState="Maximized">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:XPRES.Departments.Replen.Views"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:XPRES.Departments.Replen.ViewModels"
+        Title="Replen Dash"
+        Width="1280"
+        Height="720"
+        WindowState="Maximized"
+        mc:Ignorable="d">
     <Window.DataContext>
         <vm:rpDashVM />
     </Window.DataContext>
@@ -22,57 +25,106 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid>
-            <Border Grid.Row="0" Margin="5" Style="{StaticResource CustomBorder}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Name="btnHome" Margin="5" Click="btnHome_Click">
+            <Border Grid.Row="0"
+                    Margin="5"
+                    Style="{StaticResource CustomBorder}">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Name="btnHome"
+                            Margin="5"
+                            Click="btnHome_Click">
                         <Image Source="{StaticResource HomeIcon}" />
                     </Button>
                 </StackPanel>
             </Border>
         </Grid>
-        <Grid Name="grdTopMenu" Grid.Column="1" Grid.Row="0">
-            <Border Grid.Row="0" Margin="5" Style="{StaticResource CustomBorder}" />
+        <Grid Name="grdTopMenu"
+              Grid.Row="0"
+              Grid.Column="1">
+            <Border Grid.Row="0"
+                    Margin="5"
+                    Style="{StaticResource CustomBorder}" />
         </Grid>
-        <Grid Name="grdLeftMenus"  Grid.Column="0" Grid.Row="1">
+        <Grid Name="grdLeftMenus"
+              Grid.Row="1"
+              Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Margin="5" Style="{StaticResource CustomBorder}">
+            <Border Grid.Row="0"
+                    Margin="5"
+                    Style="{StaticResource CustomBorder}">
                 <StackPanel>
-                    <TextBlock Foreground="{StaticResource CoolBlue}" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Navigation" />
-                    <Button Name="btnRepSched" Content="SAAG" Margin="5" Height="45" Click="btnRepSched_Click" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="25"
+                               Foreground="{StaticResource CoolBlue}"
+                               Text="Navigation" />
+                    <Button Name="btnRepSched"
+                            Height="45"
+                            Margin="5"
+                            Click="btnRepSched_Click"
+                            Content="SAAG" />
                     <!--<Button Name="btnRepMetrics" Content="Metrics" Margin="5" Height="45" Click="btnRepMetrics_Click" />-->
-                    <Button Name="btnRepAndon" Content="Andon" Margin="5" Height="45" Command="{Binding WhViewCommand}" />
+                    <Button Name="btnRepAndon"
+                            Height="45"
+                            Margin="5"
+                            Command="{Binding WhViewCommand}"
+                            Content="Andon" />
                     <!--<Button Name="btnRepAudit" Content="Auditing" Margin="5" Height="45" Click="btnRepAudit_Click" />-->
-                    <Button Name="btnRepSWI" Content="SWI's" Margin="5" Height="45" Click="btnRepResources_Click" />
+                    <Button Name="btnRepSWI"
+                            Height="45"
+                            Margin="5"
+                            Click="btnRepResources_Click"
+                            Content="SWI's" />
                 </StackPanel>
             </Border>
-            <Border Grid.Row="1" Margin="5" Style="{StaticResource CustomBorder}">
+            <Border Grid.Row="1"
+                    Margin="5"
+                    Style="{StaticResource CustomBorder}">
                 <StackPanel>
-                    <TextBlock Foreground="{StaticResource CoolBlue}" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Charts" />
-                    <Button Name="btnLPH" Content="Lines Per Hour" Margin="5" Height="45" />
-                    <Button Name="btnAcc"  Content="Audits" Margin="5" Height="45" />
-                    <Button Name="btnLoc" Content="Location Pull Volume" Margin="5" Height="45" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="25"
+                               Foreground="{StaticResource CoolBlue}"
+                               Text="Charts" />
+                    <Button Name="btnLPH"
+                            Height="45"
+                            Margin="5"
+                            Content="Lines Per Hour" />
+                    <Button Name="btnAcc"
+                            Height="45"
+                            Margin="5"
+                            Content="Audits" />
+                    <Button Name="btnLoc"
+                            Height="45"
+                            Margin="5"
+                            Content="Location Pull Volume" />
                 </StackPanel>
             </Border>
         </Grid>
-        <Grid Name="grdCenter" Grid.Column="1" Grid.Row="1">
+        <Grid Name="grdCenter"
+              Grid.Row="1"
+              Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
-            <Border Style="{StaticResource CustomBorder}" Margin="5">
+            <Border Margin="5" Style="{StaticResource CustomBorder}">
                 <charts:ReplenChart />
             </Border>
             <StackPanel Grid.Column="1">
-                <Border Style="{StaticResource CustomBorder}" Margin="5">
+                <Border Margin="5" Style="{StaticResource CustomBorder}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Label Content="Replenishment Info" Grid.Row="0" HorizontalAlignment="Center" FontSize="20" FontWeight="Normal" />
+                        <Label Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               Content="Replenishment Info"
+                               FontSize="20"
+                               FontWeight="Normal" />
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
@@ -88,16 +140,60 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Label Content="Operators:" Grid.Row="2" Grid.Column="0" FontSize="12" FontWeight="Normal" HorizontalAlignment="Right" />
-                            <Label Name="lblOpr" Content="{Binding Operators}" Grid.Row="2" Grid.Column="1" FontSize="12" FontWeight="Normal" HorizontalAlignment="Center" />
-                            <Label Content="Total Requests:" Grid.Row="3" Grid.Column="0" FontSize="12" FontWeight="Normal" HorizontalAlignment="Right" />
-                            <Label Name="lblReqs" Content="{Binding Reqs}" Grid.Row="3" Grid.Column="1" FontSize="12" FontWeight="Normal" HorizontalAlignment="Center" />
-                            <Label Content="Total Complete:" Grid.Row="4" Grid.Column="0" FontSize="12" FontWeight="Normal" HorizontalAlignment="Right" />
-                            <Label Name="lblComp" Content="{Binding CompReqs}" Grid.Row="4" Grid.Column="1" FontSize="12" FontWeight="Normal" HorizontalAlignment="Center" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Operators:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="lblOpr"
+                                   Grid.Row="2"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   Content="{Binding Operators}"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Grid.Row="3"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Total Requests:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="lblReqs"
+                                   Grid.Row="3"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   Content="{Binding Reqs}"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Grid.Row="4"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Total Complete:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="lblComp"
+                                   Grid.Row="4"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   Content="{Binding CompReqs}"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
                             <!--<Label Content="Lines Per Hour" Grid.Row="5" Grid.Column="0" FontSize="12" FontWeight="Normal" HorizontalAlignment="Right" />
                             <Label Name="lblLph" Grid.Row="5" Grid.Column="1" FontSize="12" FontWeight="Normal" HorizontalAlignment="Center" />-->
-                            <Label Content="Percent Complete:" Grid.Row="6" Grid.Column="0" FontSize="12" FontWeight="Normal" HorizontalAlignment="Right" />
-                            <Label Name="lblPcnt" Content="{Binding CompPcnt}" Grid.Row="6" Grid.Column="1" FontSize="12" FontWeight="Normal" HorizontalAlignment="Center" />
+                            <Label Grid.Row="6"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Percent Complete:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="lblPcnt"
+                                   Grid.Row="6"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   Content="{Binding CompPcnt}"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
                         </Grid>
                     </Grid>
                 </Border>

@@ -62,13 +62,7 @@ namespace XPRES.Main.Views
 
         private void RefreshCharts()
         {
-            Dispatcher.Invoke((Action)(() =>
-            {
-                RotateCharts(_c);
-                _c++;
-                if (_c == _charts.Count)
-                    _c = 0;
-            }));
+            Dispatcher.Invoke(() => { RotateCharts(_c); _c++; if (_c == _charts.Count) _c = 0; });
         }
 
         private void RotateCharts(int counter)
