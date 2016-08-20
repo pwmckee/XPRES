@@ -1,0 +1,291 @@
+﻿<UserControl x:Class="XPRES.Departments.Inventory.Views.Controls.CycoMgmt"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrl="clr-namespace:XPRES.Departments.Inventory.Views.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XPRES.Departments.Inventory.ViewModels"
+             d:DesignHeight="700"
+             d:DesignWidth="1280"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:CycoMgmtVm />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border Name="BdrCenterMenu"
+                Grid.ColumnSpan="3"
+                Margin="5"
+                Style="{StaticResource CustomBorder}">
+            <StackPanel Name="SpCountMgmt"
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Visibility="Visible">
+                <Button Name="BtnCreateCounts"
+                        MinWidth="240"
+                        Margin="5"
+                        Click="BtnCreateCounts_OnClick"
+                        Content="Create Counts"
+                        FontSize="16" />
+                <Button Name="BtnFirstCounts"
+                        MinWidth="240"
+                        Margin="5"
+                        Click="BtnFirstCounts_OnClick"
+                        Command="{Binding FirstCountsCommand}"
+                        Content="First Counts"
+                        FontSize="16" />
+                <Button Name="BtnSecondCounts"
+                        MinWidth="240"
+                        Margin="5"
+                        Click="BtnFirstCounts_OnClick"
+                        Command="{Binding SecondCountsCommand}"
+                        Content="Second Counts"
+                        FontSize="16" />
+                <Button Name="BtnReviewCounts"
+                        MinWidth="240"
+                        Margin="5"
+                        Click="BtnReviewCounts_OnClick"
+                        Content="Review Counts"
+                        FontSize="16" />
+            </StackPanel>
+        </Border>
+        <Grid Name="GrdCenterView"
+              Grid.Row="1"
+              Visibility="Visible">
+            <Grid Name="GrdCreate" Visibility="Hidden">
+                <ctrl:CycoCreateControl />
+            </Grid>
+            <Grid Name="GrdCountEntries"
+                  Margin="5"
+                  Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid Name="GrdLeftControls">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Border Name="BrdLeftTop"
+                            Margin="0,0,5,5"
+                            Style="{StaticResource CustomBorder}">
+                        <StackPanel VerticalAlignment="Center">
+                            <Label Name="LblCountId"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Content="Count ID"
+                                   FontWeight="Bold" />
+                            <TextBox x:Name="TxtCountId"
+                                     Width="150"
+                                     Height="30"
+                                     Margin="0,0,0,5"
+                                     FontSize="16"
+                                     Text="{Binding CountId,
+                                                    Mode=TwoWay}"
+                                     TextAlignment="Left" />
+                            <Label Name="LblCounter"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Content="Counter:"
+                                   FontWeight="Bold" />
+                            <TextBox x:Name="TxtName"
+                                     Width="150"
+                                     Height="30"
+                                     Margin="0,0,0,5"
+                                     FontSize="16"
+                                     Text="{Binding Counter,
+                                                    Mode=TwoWay}"
+                                     TextAlignment="Left" />
+                        </StackPanel>
+                    </Border>
+                    <Border Name="BrdLeftBottom"
+                            Grid.Row="1"
+                            Margin="0,0,5,0"
+                            Style="{StaticResource CustomBorder}">
+                        <StackPanel Name="SpFirstCountLeft"
+                                    Grid.Row="1"
+                                    Visibility="Visible">
+                            <Button Name="BtnFirstCountExport"
+                                    Height="40"
+                                    Margin="5"
+                                    Click="BtnFirstCountExport_OnClick"
+                                    Command="{Binding ExportCountCommand}"
+                                    Content="Export" />
+                            <Button Name="BtnLoadCount"
+                                    Height="40"
+                                    Margin="5"
+                                    Click="BtnLoadCount_OnClick"
+                                    Command="{Binding LoadCountCommand}"
+                                    Content="Load" />
+                            <Button Name="BtnSubmitFirst"
+                                    Height="40"
+                                    Margin="5"
+                                    Click="BtnSubmitFirst_OnClick"
+                                    Command="{Binding SubmitCountCommand}"
+                                    Content="Submit" />
+                            <Button Name="BtnViewSheet"
+                                    Height="40"
+                                    Margin="5"
+                                    Click="BtnViewSheet_OnClick"
+                                    Content="View Loaded Sheet" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Border Name="BrdCenter"
+                        Grid.Column="1"
+                        Style="{StaticResource CustomBorder}">
+                    <Grid Name="GrdCenterCtrls"
+                          Grid.Column="1"
+                          Visibility="Visible">
+                        <Grid Name="GrdStack" Visibility="Visible">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid Name="GrdHeader">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="18" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Count ID"
+                                       FontSize="20" />
+                                <Label Grid.Column="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Date"
+                                       FontSize="20" />
+                                <Label Grid.Column="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Zone"
+                                       FontSize="20" />
+                                <Label Grid.Column="3"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Status"
+                                       FontSize="20" />
+                                <Label Grid.Column="4"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="First Count"
+                                       FontSize="20" />
+                                <Label Grid.Column="5"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Second Count"
+                                       FontSize="20" />
+                            </Grid>
+
+                            <ScrollViewer Grid.Row="1"
+                                          Margin="5"
+                                          VerticalScrollBarVisibility="Auto">
+                                <ItemsControl Name="IcReqPanel" ItemsSource="{Binding CycoCtrlCollection}" />
+                            </ScrollViewer>
+                        </Grid>
+                        <Grid Name="GrdSheet" Visibility="Visible">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="100" />
+                            </Grid.RowDefinitions>
+                            <DataGrid Name="DgCountSheet"
+                                      AutoGenerateColumns="False"
+                                      CanUserAddRows="False"
+                                      ItemsSource="{Binding CycoSheetCollection,
+                                                            Mode=TwoWay}"
+                                      Style="{StaticResource CustomDataGrid}">
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding CountDate}" Header="Date" />
+                                    <DataGridTextColumn Binding="{Binding ORG}" Header="ORG" />
+                                    <DataGridTextColumn Binding="{Binding Subinventory}" Header="SUB" />
+                                    <DataGridTextColumn Binding="{Binding Locator}" Header="Locator" />
+                                    <DataGridTextColumn Binding="{Binding PID}" Header="Item" />
+                                    <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
+                                    <DataGridTextColumn Binding="{Binding CountedQTY}" Header="Count" />
+                                    <DataGridTextColumn Binding="{Binding FirstCount}" Header="First Counter" />
+                                    <DataGridTextColumn Binding="{Binding SecondCount}" Header="Second Counter" />
+                                    <DataGridTextColumn Binding="{Binding CountID}" Header="Count ID" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Grid Name="GrdWriteIns" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Location"
+                                       FontSize="20" />
+                                <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Part Number"
+                                       FontSize="20" />
+                                <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Count"
+                                       FontSize="20" />
+                                <TextBox Name="TxtWriteinLoc"
+                                         Grid.Row="1"
+                                         Grid.Column="0"
+                                         Width="150"
+                                         Height="35"
+                                         Text="{Binding WriteInLoc}" />
+                                <TextBox Name="TxtWriteinPid"
+                                         Grid.Row="1"
+                                         Grid.Column="1"
+                                         Width="150"
+                                         Height="35"
+                                         Text="{Binding WriteInPid}" />
+                                <TextBox Name="TxtWriteinCount"
+                                         Grid.Row="1"
+                                         Grid.Column="2"
+                                         Width="150"
+                                         Height="35"
+                                         Text="{Binding WriteInCnt}" />
+                                <Button Name="BtnAddWritein"
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        Margin="10"
+                                        Click="BtnAddWritein_OnClick"
+                                        Command="{Binding AddWriteInCommand}"
+                                        Content="Add Write-in"
+                                        FontSize="20" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid Name="GrdReview" Visibility="Hidden">
+                <ctrl:CycoReviewControl />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

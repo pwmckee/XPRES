@@ -1,0 +1,10 @@
+Org	Sub	Locator	Item	Item Description	On-hand	Inbound	Ordered Quantity	Unpacked	Packed	Cost Group	LPN	Loaded	LPN Context	Planning Party	Owning Party	Lot	Serial	Grade	Lot Expiry Date	Parent Lot	Supplier Lot	Document Type	Document Number	Document Line Number	Line Type	Release Number	Release Line Number	Shipment Number	ASN	Trading Partner	Trading Partner Site	From Org	To Org	Expected Receipt Date	Shipped Date	Owning Org	Project	Task	Status	
+MID	Available	BB060601A..	2176-K009-V001	CD10129:MS Gap Brackets f/16in CD	124			124	0																															
+MID	Available	BB060203C..	2176-K009-V001	CD10129:MS Gap Brackets f/16in CD	120			120	0																															
+MID	Available	BB060802B..	2176-K009-V001	CD10129:MS Gap Brackets f/16in CD	240			240	0																															
+MID	Available	BB060802C..	2176-K009-V001	CD10129:MS Gap Brackets f/16in CD	114			114	0																															
+MID	Available	BB050403B..	2176-K009-V001	CD10129:MS Gap Brackets f/16in CD	212			212	0																															
+MID	Available	BB081002A..	2176-K009-V001	CD10129:MS Gap Brackets f/16in CD	200			200	0																															
+MID	MFGINVREC	GC..	2176-K009-V001	CD10129:MS Gap Brackets f/16in CD	8			8	0																															
+MID	Available	BB050801B..	2176-K009-V001	CD10129:MS Gap Brackets f/16in CD	1			1	0																															
+MID	Shipping	SEKO1..	2176-K009-V001	CD10129:MS Gap Brackets f/16in CD	3			0	3																															

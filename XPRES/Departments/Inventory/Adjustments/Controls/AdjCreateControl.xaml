@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="XPRES.Departments.Inventory.Adjustments.Controls.AdjCreateControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:XPRES.Departments.Inventory.Adjustments.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="576" d:DesignWidth="1058">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+        <DataGrid Name="dgSubmit" Margin="10" CanUserAddRows="False" AutoGenerateColumns="False" Style="{StaticResource CustomDataGrid}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Part Number" Binding="{Binding PartNumber}" Width="Auto" />
+                <DataGridTextColumn Header="Sequence" Binding="{Binding Sequence}" Width="Auto" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="200" />
+                <DataGridTextColumn Header="Adj Qty +/-" Binding="{Binding AdjQTY}" Width="Auto" />
+                <DataGridTextColumn Header="Unit Cost" Binding="{Binding UnitCost}" Width="Auto" />
+                <DataGridTextColumn Header="Ext Cost" Binding="{Binding ExtCost}" Width="Auto" />
+                <DataGridTextColumn Header="Comments" Binding="{Binding Comments}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="1">
+            <Grid Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="Request Info" Margin="0,0,0,5" Foreground="#FF19BAF1">
+                    <GroupBox.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF2A2A2B" Offset="0.211" />
+                            <GradientStop Color="#FF474747" Offset="1" />
+                            <GradientStop Color="#FF363636" Offset="0.789" />
+                        </LinearGradientBrush>
+                    </GroupBox.Background>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="100" />
+                            <ColumnDefinition MinWidth="100" />
+                            <ColumnDefinition MinWidth="100" />
+                            <ColumnDefinition MinWidth="100" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="blkPID" Text="Part Number:" Grid.Row="0" Style="{StaticResource CustomTextBlock}" />
+                        <TextBox x:Name="txtPID" Grid.Row="1" Margin="5" />
+                        <TextBlock x:Name="blkSequence" TextAlignment="Center" Text="Sequence" Grid.Column="1" Grid.Row="0" Style="{StaticResource CustomTextBlock}" />
+                        <TextBox x:Name="txtSeq" Grid.Row="1" Grid.Column="1" Margin="5" />
+                        <TextBlock x:Name="blkQTY" TextAlignment="Center" Text="Adj QTY" Grid.Column="2" Grid.Row="0" Style="{StaticResource CustomTextBlock}" />
+                        <TextBox x:Name="txtAdj" Grid.Row="1" Grid.Column="2" Margin="5" />
+                        <TextBlock x:Name="blkComments" TextAlignment="Center" Text="Comments" Grid.Row="2" Style="{StaticResource CustomTextBlock}" />
+                        <Button x:Name="btnDelete" Content="Delete Sequence" Grid.Column="1" Grid.Row="2" Margin="5,0,5,0" Click="btnDelete_Click" />
+                        <TextBox x:Name="txtComments" Grid.Row="3" Grid.ColumnSpan="3"  MaxLength="255" Margin="5" />
+                        <TextBlock TextAlignment="Center" Text="Ext Cost" Grid.Column="3" Grid.Row="0" Style="{StaticResource CustomTextBlock}" />
+                        <TextBox x:Name="txtCheckCost" Grid.Column="3" Grid.Row="1" Margin="5,5,10,5" />
+                        <Button x:Name="btnCheckCost" Content="Check Ext Cost" Click="btnCheckCost_Click" Margin="5,0,5,0" Grid.Column="3" Grid.Row="2" />
+                        <Button x:Name="btnAdd" Content="Add Item" Click="btnAdd_Click" Margin="5" FontSize="20" Grid.Column="3" Grid.Row="4" />
+                    </Grid>
+                </GroupBox>
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Research Steps Taken" Foreground="#FF19BAF1" Margin="5,0,5,5">
+                        <GroupBox.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF2A2A2B" Offset="0.211" />
+                                <GradientStop Color="#FF474747" Offset="1" />
+                                <GradientStop Color="#FF363636" Offset="0.789" />
+                            </LinearGradientBrush>
+                        </GroupBox.Background>
+                        <Grid Grid.Row="1" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="chkCurrent" Content="Current Locations" Foreground="#FF19BAF1" Margin="5" VerticalAlignment="Center" />
+                            <CheckBox x:Name="chkOldLoc" Content="Old Locations" Grid.Column="0" Grid.Row="1" Foreground="#FF19BAF1" Margin="5" VerticalAlignment="Center" />
+                            <CheckBox x:Name="chkPriorAdj" Content="Prior Adjustments" Grid.Row="0" Grid.Column="1" Foreground="#FF19BAF1" Margin="5" VerticalAlignment="Center" />
+                            <CheckBox x:Name="chkPriorAcc" Content="Account Transactions" Grid.Column="1" Grid.Row="1" Foreground="#FF19BAF1" Margin="5" VerticalAlignment="Center" />
+                            <CheckBox x:Name="chkTD" Content="Teardowns" Grid.Column="1" Grid.Row="2" Foreground="#FF19BAF1" Margin="5" VerticalAlignment="Center" />
+                            <CheckBox x:Name="chkBOM" Content="BOM Issues" Grid.Column="0" Grid.Row="2" Foreground="#FF19BAF1" Margin="5" VerticalAlignment="Center" />
+                            <CheckBox x:Name="chkPO" Content="PO Receipts" Grid.Column="1" Grid.Row="3" Foreground="#FF19BAF1" Margin="5" VerticalAlignment="Center" />
+                            <CheckBox x:Name="chkWalk" Content="Warehouse Walk" Grid.Column="0" Grid.Row="3" Foreground="#FF19BAF1" Margin="5" VerticalAlignment="Center" />
+                            <TextBox x:Name="txtPriorAdj" Grid.Column="2" Grid.Row="0" Margin="10" BorderBrush="#FF19BAF1" BorderThickness="1" />
+                            <TextBox x:Name="txtPriorAcc" Grid.Column="2" Grid.Row="1"  Margin="10" BorderBrush="#FF19BAF1" BorderThickness="1" />
+                            <TextBox x:Name="txtTD" Grid.Column="2" Grid.Row="2" Margin="10" BorderBrush="#FF19BAF1" BorderThickness="1" />
+                            <TextBox x:Name="txtPO" Grid.Column="2" Grid.Row="3" Margin="10" BorderBrush="#FF19BAF1" BorderThickness="1" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Column="2" Header="Finalize" Foreground="#FF19BAF1" Margin="0,0,5,5">
+                        <GroupBox.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF2A2A2B" Offset="0.211" />
+                                <GradientStop Color="#FF474747" Offset="1" />
+                                <GradientStop Color="#FF363636" Offset="0.789" />
+                            </LinearGradientBrush>
+                        </GroupBox.Background>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="blkType" Foreground="#FF19BAF1" Text="Adjustment Type:" Grid.Column="1" Grid.Row="0" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <ComboBox x:Name="cboType" MinWidth="75" MaxHeight="23" Margin="10">
+                                        <ComboBoxItem x:Name="cbi1" Content="GC" />
+                                        <ComboBoxItem x:Name="cbi2" Content="MISC" />
+                                        <ComboBoxItem x:Name="cbi3" Content="ADHOC" />
+                                        <ComboBoxItem x:Name="cbi4" Content="Negatives" />
+                                        <ComboBoxItem x:Name="cbi5" Content="Returns" />
+                                        <ComboBoxItem x:Name="cbi6" Content="FSL" />
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="#FF19BAF1" Text="Requestor:" Grid.Column="1" Grid.Row="0" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <TextBox x:Name="txtRequestor" Grid.Column="2" Grid.Row="3" Margin="10" BorderBrush="#FF19BAF1" BorderThickness="1" Width="104" Height="25" />
+                                </StackPanel>
+                            </StackPanel>
+                            <Button x:Name="btnSubmit" Content="Submit" Click="btnSubmit_Click" Grid.Row="1" Margin="5" MaxWidth="150" MaxHeight="50" Grid.Column="1" BorderBrush="#FF19BAF1" Height="30" Foreground="#FF19BAF1" Background="{x:Null}" />
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Total Cost:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <Label Name="lblTotalCost" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

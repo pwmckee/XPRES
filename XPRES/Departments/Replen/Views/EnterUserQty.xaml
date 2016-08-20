@@ -1,0 +1,32 @@
+﻿<Window x:Class="XPRES.Departments.Replen.Views.EnterUserQty"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XPRES.Departments.Replen.Views"
+        xmlns:vm="clr-namespace:XPRES.Departments.Replen.ViewModels"
+        mc:Ignorable="d"
+        Title="Enter Request Qty" Height="300" Width="300">
+    <Window.DataContext>
+        <vm:RequestInterfaceVM />
+    </Window.DataContext>
+    <Grid Background="{StaticResource SolidBackDark}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <Label Content="{Binding Qty}" Grid.Row="2" />
+
+        <Label Content="Please Enter Request Qty" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <ComboBox Name="cboRequestQty" SelectedItem="{Binding Qty}" Width="100" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" />
+        <Button Name="btnOK" Content="OK" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Click="btnOK_Click" />
+        <Button Content="Clear" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" />
+    </Grid>
+</Window>

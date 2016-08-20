@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="XPRES.Departments.Replen.Controls.rpProdViewStackControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:XPRES.Departments.Replen.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="50" d:DesignWidth="981">
+    <Grid>
+        <Border Style="{StaticResource CustomBorder}">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Name="lblPID" Content="Part Number" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" />
+                <Label Name="lblDesc" Content="Description" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" />
+                <Label Name="lblLastTouch" Content="Last Touch" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" />
+                <Label Name="lblStatus" Content="Status" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" />
+                <Button Name="btnAck" Content="Acknowledge" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Visibility="Hidden" Click="btnAck_Click" />
+                <Button Name="btnFill" Content="Filled" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Visibility="Hidden" Click="btnFill_Click" />
+                <Button Name="btnDlvr" Content="Delivered" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Visibility="Visible" Click="btnDlvr_Click" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

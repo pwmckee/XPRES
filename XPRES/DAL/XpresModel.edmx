@@ -1,0 +1,1098 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XpresModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adjustments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PID" Type="nvarchar" MaxLength="255" />
+          <Property Name="SEQ" Type="nvarchar" MaxLength="255" />
+          <Property Name="Desc" Type="nvarchar" MaxLength="255" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="ABSQty" Type="float" />
+          <Property Name="UnitCost" Type="float" />
+          <Property Name="NetValue" Type="float" />
+          <Property Name="ABSValue" Type="float" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="255" />
+          <Property Name="ReqDate" Type="datetime" />
+          <Property Name="CompDate" Type="datetime" />
+          <Property Name="Type" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" />
+          <Property Name="FileID" Type="int" />
+          <Property Name="ReqID" Type="nvarchar" MaxLength="255" />
+          <Property Name="Requester" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="BomChanges">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DR" Type="nvarchar" MaxLength="255" />
+          <Property Name="RevisedItemStatus" Type="nvarchar" MaxLength="255" />
+          <Property Name="RevisedItem" Type="nvarchar" MaxLength="255" />
+          <Property Name="RevisedItemDesc" Type="nvarchar" MaxLength="255" />
+          <Property Name="MorB" Type="nvarchar" MaxLength="255" />
+          <Property Name="MIP" Type="datetime" />
+          <Property Name="ComponentAction" Type="nvarchar" MaxLength="255" />
+          <Property Name="ComponentItem" Type="nvarchar" MaxLength="255" />
+          <Property Name="ComponentDesc" Type="nvarchar" MaxLength="255" />
+          <Property Name="remarks" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="CarrierList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Carrier" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CCTracker">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountDate" Type="datetime" />
+          <Property Name="ORG" Type="nvarchar" MaxLength="255" />
+          <Property Name="Subinventory" Type="nvarchar" MaxLength="255" />
+          <Property Name="Locator" Type="nvarchar" MaxLength="255" />
+          <Property Name="PID" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="SystemQTY" Type="float" />
+          <Property Name="CountedQTY" Type="float" />
+          <Property Name="Difference" Type="float" />
+          <Property Name="Action" Type="nvarchar" MaxLength="255" />
+          <Property Name="Error" Type="nvarchar" MaxLength="255" />
+          <Property Name="FirstCount" Type="nvarchar" MaxLength="255" />
+          <Property Name="SecondCount" Type="nvarchar" MaxLength="255" />
+          <Property Name="Zone" Type="int" />
+          <Property Name="UnitCost" Type="float" />
+          <Property Name="CountStatus" Type="nvarchar" MaxLength="255" />
+          <Property Name="CountID" Type="int" />
+        </EntityType>
+        <EntityType Name="CountSchedule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Zone" Type="int" />
+          <Property Name="CountArea" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountRange" Type="nvarchar" MaxLength="50" />
+          <Property Name="GoalYear" Type="nvarchar" MaxLength="4" />
+          <Property Name="GoalQuarter" Type="int" />
+          <Property Name="GoalMonth" Type="int" />
+          <Property Name="GoalWeek" Type="int" />
+          <Property Name="GoalDate" Type="date" />
+          <Property Name="ActualYear" Type="nvarchar" MaxLength="4" />
+          <Property Name="ActualQuarter" Type="int" />
+          <Property Name="ActualMonth" Type="int" />
+          <Property Name="ActualWeek" Type="int" />
+          <Property Name="ActualDate" Type="date" />
+          <Property Name="SecondPassDate" Type="date" />
+          <Property Name="FirstCount" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondCount" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountStatus" Type="nvarchar" MaxLength="100" />
+          <Property Name="CountID" Type="int" />
+        </EntityType>
+        <EntityType Name="DynamicInbMetrics">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="CategoryName" Type="nchar" MaxLength="255" />
+          <Property Name="CategoryType" Type="nchar" MaxLength="255" />
+          <Property Name="CategoryNumValue" Type="float" />
+          <Property Name="CategoryTextValue" Type="nchar" MaxLength="255" />
+          <Property Name="CategoryTreeLevel" Type="int" />
+          <Property Name="State" Type="bit" />
+          <Property Name="Parent" Type="nchar" MaxLength="255" />
+          <Property Name="ChildNum" Type="int" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="HireDate" Type="datetime" />
+          <Property Name="TermDate" Type="datetime" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Dept" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" />
+          <Property Name="Company" Type="nvarchar" MaxLength="255" />
+          <Property Name="XpresAccess" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+          <Property Name="Picture" Type="image" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Role" Type="nvarchar" MaxLength="255" />
+          <Property Name="OutBound" Type="bit" />
+          <Property Name="InBound" Type="bit" />
+          <Property Name="Inventory" Type="bit" />
+          <Property Name="Replen" Type="bit" />
+        </EntityType>
+        <EntityType Name="InboundActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PO_LPN" Type="nvarchar" MaxLength="50" />
+          <Property Name="Start" Type="datetime" />
+          <Property Name="Finish" Type="datetime" />
+          <Property Name="LineItems" Type="int" />
+          <Property Name="Operator" Type="nvarchar" MaxLength="50" />
+          <Property Name="CtrlId" Type="nvarchar" MaxLength="255" />
+          <Property Name="Type" Type="nvarchar" MaxLength="255" />
+          <Property Name="LPH" Type="float" />
+        </EntityType>
+        <EntityType Name="MaterialReference">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="PID" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="ProdLine" Type="nvarchar" MaxLength="255" />
+          <Property Name="Sub" Type="nvarchar" MaxLength="255" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="MaterialRequests">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="FacilityCode" Type="varchar" MaxLength="50" />
+          <Property Name="ProdLine" Type="varchar" MaxLength="50" />
+          <Property Name="SubAssem" Type="varchar" MaxLength="50" />
+          <Property Name="PartNum" Type="varchar" MaxLength="50" />
+          <Property Name="SubTimestamp" Type="datetime" />
+          <Property Name="AckTimestamp" Type="datetime" />
+          <Property Name="FillTimestamp" Type="datetime" />
+          <Property Name="DelvrTimestamp" Type="datetime" />
+          <Property Name="ReqStatus" Type="varchar" MaxLength="50" />
+          <Property Name="Comments" Type="varchar" MaxLength="255" />
+          <Property Name="InvStatus" Type="varchar" MaxLength="50" />
+          <Property Name="ReqQty" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MetricsAdj">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="PID" Type="nchar" MaxLength="50" />
+          <Property Name="Description" Type="nchar" MaxLength="255" />
+          <Property Name="Source" Type="nchar" MaxLength="50" />
+          <Property Name="Sub" Type="nchar" MaxLength="50" />
+          <Property Name="UnitCost" Type="float" />
+          <Property Name="AdjQty" Type="float" />
+          <Property Name="AdjValue" Type="float" />
+          <Property Name="AbsValue" Type="float" />
+          <Property Name="Type" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MetricsInbound">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="CategoryName" Type="nchar" MaxLength="255" />
+          <Property Name="CategoryType" Type="nchar" MaxLength="255" />
+          <Property Name="CategoryTreeLevel" Type="int" />
+          <Property Name="State" Type="bit" />
+          <Property Name="Parent" Type="nchar" MaxLength="255" />
+          <Property Name="TextValue" Type="nchar" MaxLength="255" />
+          <Property Name="NumValue" Type="float" />
+        </EntityType>
+        <EntityType Name="MetricsInboundV2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Main" Type="nvarchar(max)" />
+          <Property Name="Sub" Type="nvarchar(max)" />
+          <Property Name="Mic" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MetricsInv">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="TotalUnits" Type="float" />
+          <Property Name="UnitsSub" Type="float" />
+          <Property Name="UnitsAdd" Type="float" />
+          <Property Name="UnitsNet" Type="float" />
+          <Property Name="UnitsAbs" Type="float" />
+          <Property Name="TotalValue" Type="float" />
+          <Property Name="ValueSub" Type="float" />
+          <Property Name="ValueAdd" Type="float" />
+          <Property Name="ValueNet" Type="float" />
+          <Property Name="ValueAbs" Type="float" />
+          <Property Name="TotalLocations" Type="float" />
+          <Property Name="FirstPassLocations" Type="float" />
+          <Property Name="SecondPassLocations" Type="float" />
+          <Property Name="GCNIL" Type="float" />
+          <Property Name="ExpectedZones" Type="float" />
+          <Property Name="CountedZones" Type="float" />
+          <Property Name="CountArea" Type="nvarchar" MaxLength="255" />
+          <Property Name="CountYear" Type="int" />
+          <Property Name="Qtr" Type="int" />
+          <Property Name="CountMonth" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeliveryID" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="LineCount" Type="int" />
+          <Property Name="Picker" Type="nchar" MaxLength="50" />
+          <Property Name="AuditStart" Type="datetime" />
+          <Property Name="AuditEnd" Type="datetime" />
+          <Property Name="DeliveryTime" Type="datetime" />
+          <Property Name="MultiPick" Type="bit" />
+          <Property Name="LPH" Type="int" />
+          <Property Name="PickNum" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductionArea">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProdLine" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubAssem" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RcvSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Appt" Type="datetime" />
+          <Property Name="Carrier" Type="nchar" MaxLength="100" />
+          <Property Name="PalletNum" Type="int" />
+          <Property Name="Arrive" Type="datetime" />
+          <Property Name="UnloadStart" Type="datetime" />
+          <Property Name="UnloadStop" Type="datetime" />
+          <Property Name="RecStop" Type="datetime" />
+          <Property Name="PutawayStop" Type="datetime" />
+          <Property Name="Ltl" Type="bit" />
+          <Property Name="ApptID" Type="nvarchar" MaxLength="100" />
+          <Property Name="PoRcvd" Type="int" />
+          <Property Name="PoNotRcvd" Type="int" />
+          <Property Name="PoPtwy" Type="int" />
+          <Property Name="PoNotPtwy" Type="int" />
+          <Property Name="VNC" Type="int" />
+        </EntityType>
+        <EntityType Name="ReplenSAAG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="Employee" Type="nchar" MaxLength="100" />
+          <Property Name="LK00001" Type="int" />
+          <Property Name="KARDEX" Type="int" />
+          <Property Name="PL" Type="int" />
+          <Property Name="HUBSECURE" Type="int" />
+          <Property Name="CtrlID" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UnitCost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Unit Cost" Type="float" />
+        </EntityType>
+        <EntityType Name="WorkBenchCounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountDate" Type="datetime" />
+          <Property Name="ORG" Type="nvarchar" MaxLength="255" />
+          <Property Name="Subinventory" Type="nvarchar" MaxLength="255" />
+          <Property Name="Locator" Type="nvarchar" MaxLength="255" />
+          <Property Name="PID" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="SystemQTY" Type="float" />
+          <Property Name="Unpacked" Type="float" />
+          <Property Name="Packed" Type="float" />
+          <Property Name="CountedQTY" Type="float" />
+          <Property Name="SysVar" Type="float" />
+          <Property Name="CorrAmnt" Type="float" />
+          <Property Name="Action" Type="nvarchar" MaxLength="255" />
+          <Property Name="CounterName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="XpresModelStoreContainer">
+          <EntitySet Name="Adjustments" EntityType="Self.Adjustments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BomChanges" EntityType="Self.BomChanges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarrierList" EntityType="Self.CarrierList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CCTracker" EntityType="Self.CCTracker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CountSchedule" EntityType="Self.CountSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DynamicInbMetrics" EntityType="Self.DynamicInbMetrics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InboundActivity" EntityType="Self.InboundActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialReference" EntityType="Self.MaterialReference" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialRequests" EntityType="Self.MaterialRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetricsAdj" EntityType="Self.MetricsAdj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetricsInbound" EntityType="Self.MetricsInbound" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetricsInboundV2" EntityType="Self.MetricsInboundV2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetricsInv" EntityType="Self.MetricsInv" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductionArea" EntityType="Self.ProductionArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RcvSchedule" EntityType="Self.RcvSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplenSAAG" EntityType="Self.ReplenSAAG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitCost" EntityType="Self.UnitCost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkBenchCounts" EntityType="Self.WorkBenchCounts" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XpresModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="XpresEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adjustments" EntityType="XpresModel.Adjustment" />
+          <EntitySet Name="BomChanges" EntityType="XpresModel.BomChanx" />
+          <EntitySet Name="CarrierLists" EntityType="XpresModel.CarrierList" />
+          <EntitySet Name="CCTrackers" EntityType="XpresModel.CCTracker" />
+          <EntitySet Name="CountSchedules" EntityType="XpresModel.CountSchedule" />
+          <EntitySet Name="DynamicInbMetrics" EntityType="XpresModel.DynamicInbMetric" />
+          <EntitySet Name="Employees" EntityType="XpresModel.Employee" />
+          <EntitySet Name="InboundActivities" EntityType="XpresModel.InboundActivity" />
+          <EntitySet Name="MaterialReferences" EntityType="XpresModel.MaterialReference" />
+          <EntitySet Name="MaterialRequests" EntityType="XpresModel.MaterialRequest" />
+          <EntitySet Name="MetricsAdjs" EntityType="XpresModel.MetricsAdj" />
+          <EntitySet Name="MetricsInbounds" EntityType="XpresModel.MetricsInbound" />
+          <EntitySet Name="MetricsInboundV2" EntityType="XpresModel.MetricsInboundV2" />
+          <EntitySet Name="MetricsInvs" EntityType="XpresModel.MetricsInv" />
+          <EntitySet Name="Orders" EntityType="XpresModel.Order" />
+          <EntitySet Name="ProductionAreas" EntityType="XpresModel.ProductionArea" />
+          <EntitySet Name="RcvSchedules" EntityType="XpresModel.RcvSchedule" />
+          <EntitySet Name="ReplenSAAGs" EntityType="XpresModel.ReplenSAAG" />
+          <EntitySet Name="UnitCosts" EntityType="XpresModel.UnitCost" />
+          <EntitySet Name="WorkBenchCounts" EntityType="XpresModel.WorkBenchCount" />
+        </EntityContainer>
+        <EntityType Name="Adjustment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SEQ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="ABSQty" Type="Double" />
+          <Property Name="UnitCost" Type="Double" />
+          <Property Name="NetValue" Type="Double" />
+          <Property Name="ABSValue" Type="Double" />
+          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ReqDate" Type="DateTime" Precision="3" />
+          <Property Name="CompDate" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FileID" Type="Int32" />
+          <Property Name="ReqID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Requester" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BomChanx">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DR" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RevisedItemStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RevisedItem" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RevisedItemDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MorB" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MIP" Type="DateTime" Precision="3" />
+          <Property Name="ComponentAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentItem" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CarrierList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Carrier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CCTracker">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountDate" Type="DateTime" Precision="3" />
+          <Property Name="ORG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Subinventory" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Locator" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SystemQTY" Type="Double" />
+          <Property Name="CountedQTY" Type="Double" />
+          <Property Name="Difference" Type="Double" />
+          <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Error" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FirstCount" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SecondCount" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Zone" Type="Int32" />
+          <Property Name="UnitCost" Type="Double" />
+          <Property Name="CountStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CountID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CountSchedule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Zone" Type="Int32" />
+          <Property Name="CountArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountRange" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GoalYear" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="GoalQuarter" Type="Int32" />
+          <Property Name="GoalMonth" Type="Int32" />
+          <Property Name="GoalWeek" Type="Int32" />
+          <Property Name="GoalDate" Type="DateTime" Precision="0" />
+          <Property Name="ActualYear" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ActualQuarter" Type="Int32" />
+          <Property Name="ActualMonth" Type="Int32" />
+          <Property Name="ActualWeek" Type="Int32" />
+          <Property Name="ActualDate" Type="DateTime" Precision="0" />
+          <Property Name="SecondPassDate" Type="DateTime" Precision="0" />
+          <Property Name="FirstCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CountID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DynamicInbMetric">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="CategoryName" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="CategoryType" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="CategoryNumValue" Type="Double" />
+          <Property Name="CategoryTextValue" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="CategoryTreeLevel" Type="Int32" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="Parent" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="ChildNum" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HireDate" Type="DateTime" Precision="3" />
+          <Property Name="TermDate" Type="DateTime" Precision="3" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Dept" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="XpresAccess" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OutBound" Type="Boolean" />
+          <Property Name="InBound" Type="Boolean" />
+          <Property Name="Inventory" Type="Boolean" />
+          <Property Name="Replen" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="InboundActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PO_LPN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="DateTime" Precision="3" />
+          <Property Name="Finish" Type="DateTime" Precision="3" />
+          <Property Name="LineItems" Type="Int32" />
+          <Property Name="Operator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CtrlId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LPH" Type="Double" />
+        </EntityType>
+        <EntityType Name="MaterialReference">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ProdLine" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Sub" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MaterialRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FacilityCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProdLine" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubAssem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="AckTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="FillTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="DelvrTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="ReqStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="InvStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReqQty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MetricsAdj">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="PID" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="Source" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Sub" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="UnitCost" Type="Double" />
+          <Property Name="AdjQty" Type="Double" />
+          <Property Name="AdjValue" Type="Double" />
+          <Property Name="AbsValue" Type="Double" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MetricsInbound">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="CategoryName" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="CategoryType" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="CategoryTreeLevel" Type="Int32" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="Parent" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="TextValue" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="NumValue" Type="Double" />
+        </EntityType>
+        <EntityType Name="MetricsInboundV2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Main" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sub" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MetricsInv">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="TotalUnits" Type="Double" />
+          <Property Name="UnitsSub" Type="Double" />
+          <Property Name="UnitsAdd" Type="Double" />
+          <Property Name="UnitsNet" Type="Double" />
+          <Property Name="UnitsAbs" Type="Double" />
+          <Property Name="TotalValue" Type="Double" />
+          <Property Name="ValueSub" Type="Double" />
+          <Property Name="ValueAdd" Type="Double" />
+          <Property Name="ValueNet" Type="Double" />
+          <Property Name="ValueAbs" Type="Double" />
+          <Property Name="TotalLocations" Type="Double" />
+          <Property Name="FirstPassLocations" Type="Double" />
+          <Property Name="SecondPassLocations" Type="Double" />
+          <Property Name="GCNIL" Type="Double" />
+          <Property Name="ExpectedZones" Type="Double" />
+          <Property Name="CountedZones" Type="Double" />
+          <Property Name="CountArea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CountYear" Type="Int32" />
+          <Property Name="Qtr" Type="Int32" />
+          <Property Name="CountMonth" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeliveryID" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="LineCount" Type="Int32" />
+          <Property Name="Picker" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="AuditStart" Type="DateTime" Precision="3" />
+          <Property Name="AuditEnd" Type="DateTime" Precision="3" />
+          <Property Name="DeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="MultiPick" Type="Boolean" />
+          <Property Name="LPH" Type="Int32" />
+          <Property Name="PickNum" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductionArea">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProdLine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubAssem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RcvSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Appt" Type="DateTime" Precision="3" />
+          <Property Name="Carrier" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="PalletNum" Type="Int32" />
+          <Property Name="Arrive" Type="DateTime" Precision="3" />
+          <Property Name="UnloadStart" Type="DateTime" Precision="3" />
+          <Property Name="UnloadStop" Type="DateTime" Precision="3" />
+          <Property Name="RecStop" Type="DateTime" Precision="3" />
+          <Property Name="PutawayStop" Type="DateTime" Precision="3" />
+          <Property Name="Ltl" Type="Boolean" />
+          <Property Name="ApptID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PoRcvd" Type="Int32" />
+          <Property Name="PoNotRcvd" Type="Int32" />
+          <Property Name="PoPtwy" Type="Int32" />
+          <Property Name="PoNotPtwy" Type="Int32" />
+          <Property Name="VNC" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReplenSAAG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="Employee" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="LK00001" Type="Int32" />
+          <Property Name="KARDEX" Type="Int32" />
+          <Property Name="PL" Type="Int32" />
+          <Property Name="HUBSECURE" Type="Int32" />
+          <Property Name="CtrlID" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UnitCost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Unit_Cost" Type="Double" />
+        </EntityType>
+        <EntityType Name="WorkBenchCount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountDate" Type="DateTime" Precision="3" />
+          <Property Name="ORG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Subinventory" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Locator" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SystemQTY" Type="Double" />
+          <Property Name="Unpacked" Type="Double" />
+          <Property Name="Packed" Type="Double" />
+          <Property Name="CountedQTY" Type="Double" />
+          <Property Name="SysVar" Type="Double" />
+          <Property Name="CorrAmnt" Type="Double" />
+          <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CounterName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XpresModelStoreContainer" CdmEntityContainer="XpresEntities">
+          <EntitySetMapping Name="Adjustments">
+            <EntityTypeMapping TypeName="XpresModel.Adjustment">
+              <MappingFragment StoreEntitySet="Adjustments">
+                <ScalarProperty Name="Requester" ColumnName="Requester" />
+                <ScalarProperty Name="ReqID" ColumnName="ReqID" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CompDate" ColumnName="CompDate" />
+                <ScalarProperty Name="ReqDate" ColumnName="ReqDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ABSValue" ColumnName="ABSValue" />
+                <ScalarProperty Name="NetValue" ColumnName="NetValue" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="ABSQty" ColumnName="ABSQty" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="SEQ" ColumnName="SEQ" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BomChanges">
+            <EntityTypeMapping TypeName="XpresModel.BomChanx">
+              <MappingFragment StoreEntitySet="BomChanges">
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="ComponentDesc" ColumnName="ComponentDesc" />
+                <ScalarProperty Name="ComponentItem" ColumnName="ComponentItem" />
+                <ScalarProperty Name="ComponentAction" ColumnName="ComponentAction" />
+                <ScalarProperty Name="MIP" ColumnName="MIP" />
+                <ScalarProperty Name="MorB" ColumnName="MorB" />
+                <ScalarProperty Name="RevisedItemDesc" ColumnName="RevisedItemDesc" />
+                <ScalarProperty Name="RevisedItem" ColumnName="RevisedItem" />
+                <ScalarProperty Name="RevisedItemStatus" ColumnName="RevisedItemStatus" />
+                <ScalarProperty Name="DR" ColumnName="DR" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarrierLists">
+            <EntityTypeMapping TypeName="XpresModel.CarrierList">
+              <MappingFragment StoreEntitySet="CarrierList">
+                <ScalarProperty Name="Carrier" ColumnName="Carrier" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CCTrackers">
+            <EntityTypeMapping TypeName="XpresModel.CCTracker">
+              <MappingFragment StoreEntitySet="CCTracker">
+                <ScalarProperty Name="CountID" ColumnName="CountID" />
+                <ScalarProperty Name="CountStatus" ColumnName="CountStatus" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="Zone" ColumnName="Zone" />
+                <ScalarProperty Name="SecondCount" ColumnName="SecondCount" />
+                <ScalarProperty Name="FirstCount" ColumnName="FirstCount" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Difference" ColumnName="Difference" />
+                <ScalarProperty Name="CountedQTY" ColumnName="CountedQTY" />
+                <ScalarProperty Name="SystemQTY" ColumnName="SystemQTY" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="Locator" ColumnName="Locator" />
+                <ScalarProperty Name="Subinventory" ColumnName="Subinventory" />
+                <ScalarProperty Name="ORG" ColumnName="ORG" />
+                <ScalarProperty Name="CountDate" ColumnName="CountDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CountSchedules">
+            <EntityTypeMapping TypeName="XpresModel.CountSchedule">
+              <MappingFragment StoreEntitySet="CountSchedule">
+                <ScalarProperty Name="CountID" ColumnName="CountID" />
+                <ScalarProperty Name="CountStatus" ColumnName="CountStatus" />
+                <ScalarProperty Name="SecondCount" ColumnName="SecondCount" />
+                <ScalarProperty Name="FirstCount" ColumnName="FirstCount" />
+                <ScalarProperty Name="SecondPassDate" ColumnName="SecondPassDate" />
+                <ScalarProperty Name="ActualDate" ColumnName="ActualDate" />
+                <ScalarProperty Name="ActualWeek" ColumnName="ActualWeek" />
+                <ScalarProperty Name="ActualMonth" ColumnName="ActualMonth" />
+                <ScalarProperty Name="ActualQuarter" ColumnName="ActualQuarter" />
+                <ScalarProperty Name="ActualYear" ColumnName="ActualYear" />
+                <ScalarProperty Name="GoalDate" ColumnName="GoalDate" />
+                <ScalarProperty Name="GoalWeek" ColumnName="GoalWeek" />
+                <ScalarProperty Name="GoalMonth" ColumnName="GoalMonth" />
+                <ScalarProperty Name="GoalQuarter" ColumnName="GoalQuarter" />
+                <ScalarProperty Name="GoalYear" ColumnName="GoalYear" />
+                <ScalarProperty Name="CountRange" ColumnName="CountRange" />
+                <ScalarProperty Name="CountArea" ColumnName="CountArea" />
+                <ScalarProperty Name="Zone" ColumnName="Zone" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DynamicInbMetrics">
+            <EntityTypeMapping TypeName="XpresModel.DynamicInbMetric">
+              <MappingFragment StoreEntitySet="DynamicInbMetrics">
+                <ScalarProperty Name="ChildNum" ColumnName="ChildNum" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CategoryTreeLevel" ColumnName="CategoryTreeLevel" />
+                <ScalarProperty Name="CategoryTextValue" ColumnName="CategoryTextValue" />
+                <ScalarProperty Name="CategoryNumValue" ColumnName="CategoryNumValue" />
+                <ScalarProperty Name="CategoryType" ColumnName="CategoryType" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="XpresModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Replen" ColumnName="Replen" />
+                <ScalarProperty Name="Inventory" ColumnName="Inventory" />
+                <ScalarProperty Name="InBound" ColumnName="InBound" />
+                <ScalarProperty Name="OutBound" ColumnName="OutBound" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="XpresAccess" ColumnName="XpresAccess" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Dept" ColumnName="Dept" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TermDate" ColumnName="TermDate" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InboundActivities">
+            <EntityTypeMapping TypeName="XpresModel.InboundActivity">
+              <MappingFragment StoreEntitySet="InboundActivity">
+                <ScalarProperty Name="LPH" ColumnName="LPH" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CtrlId" ColumnName="CtrlId" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="LineItems" ColumnName="LineItems" />
+                <ScalarProperty Name="Finish" ColumnName="Finish" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="PO_LPN" ColumnName="PO_LPN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialReferences">
+            <EntityTypeMapping TypeName="XpresModel.MaterialReference">
+              <MappingFragment StoreEntitySet="MaterialReference">
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Sub" ColumnName="Sub" />
+                <ScalarProperty Name="ProdLine" ColumnName="ProdLine" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialRequests">
+            <EntityTypeMapping TypeName="XpresModel.MaterialRequest">
+              <MappingFragment StoreEntitySet="MaterialRequests">
+                <ScalarProperty Name="ReqQty" ColumnName="ReqQty" />
+                <ScalarProperty Name="InvStatus" ColumnName="InvStatus" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ReqStatus" ColumnName="ReqStatus" />
+                <ScalarProperty Name="DelvrTimestamp" ColumnName="DelvrTimestamp" />
+                <ScalarProperty Name="FillTimestamp" ColumnName="FillTimestamp" />
+                <ScalarProperty Name="AckTimestamp" ColumnName="AckTimestamp" />
+                <ScalarProperty Name="SubTimestamp" ColumnName="SubTimestamp" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+                <ScalarProperty Name="SubAssem" ColumnName="SubAssem" />
+                <ScalarProperty Name="ProdLine" ColumnName="ProdLine" />
+                <ScalarProperty Name="FacilityCode" ColumnName="FacilityCode" />
+                <ScalarProperty Name="RequestNum" ColumnName="RequestNum" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetricsAdjs">
+            <EntityTypeMapping TypeName="XpresModel.MetricsAdj">
+              <MappingFragment StoreEntitySet="MetricsAdj">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="AbsValue" ColumnName="AbsValue" />
+                <ScalarProperty Name="AdjValue" ColumnName="AdjValue" />
+                <ScalarProperty Name="AdjQty" ColumnName="AdjQty" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="Sub" ColumnName="Sub" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetricsInbounds">
+            <EntityTypeMapping TypeName="XpresModel.MetricsInbound">
+              <MappingFragment StoreEntitySet="MetricsInbound">
+                <ScalarProperty Name="NumValue" ColumnName="NumValue" />
+                <ScalarProperty Name="TextValue" ColumnName="TextValue" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CategoryTreeLevel" ColumnName="CategoryTreeLevel" />
+                <ScalarProperty Name="CategoryType" ColumnName="CategoryType" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetricsInboundV2">
+            <EntityTypeMapping TypeName="XpresModel.MetricsInboundV2">
+              <MappingFragment StoreEntitySet="MetricsInboundV2">
+                <ScalarProperty Name="Mic" ColumnName="Mic" />
+                <ScalarProperty Name="Sub" ColumnName="Sub" />
+                <ScalarProperty Name="Main" ColumnName="Main" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetricsInvs">
+            <EntityTypeMapping TypeName="XpresModel.MetricsInv">
+              <MappingFragment StoreEntitySet="MetricsInv">
+                <ScalarProperty Name="CountMonth" ColumnName="CountMonth" />
+                <ScalarProperty Name="Qtr" ColumnName="Qtr" />
+                <ScalarProperty Name="CountYear" ColumnName="CountYear" />
+                <ScalarProperty Name="CountArea" ColumnName="CountArea" />
+                <ScalarProperty Name="CountedZones" ColumnName="CountedZones" />
+                <ScalarProperty Name="ExpectedZones" ColumnName="ExpectedZones" />
+                <ScalarProperty Name="GCNIL" ColumnName="GCNIL" />
+                <ScalarProperty Name="SecondPassLocations" ColumnName="SecondPassLocations" />
+                <ScalarProperty Name="FirstPassLocations" ColumnName="FirstPassLocations" />
+                <ScalarProperty Name="TotalLocations" ColumnName="TotalLocations" />
+                <ScalarProperty Name="ValueAbs" ColumnName="ValueAbs" />
+                <ScalarProperty Name="ValueNet" ColumnName="ValueNet" />
+                <ScalarProperty Name="ValueAdd" ColumnName="ValueAdd" />
+                <ScalarProperty Name="ValueSub" ColumnName="ValueSub" />
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+                <ScalarProperty Name="UnitsAbs" ColumnName="UnitsAbs" />
+                <ScalarProperty Name="UnitsNet" ColumnName="UnitsNet" />
+                <ScalarProperty Name="UnitsAdd" ColumnName="UnitsAdd" />
+                <ScalarProperty Name="UnitsSub" ColumnName="UnitsSub" />
+                <ScalarProperty Name="TotalUnits" ColumnName="TotalUnits" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="XpresModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="PickNum" ColumnName="PickNum" />
+                <ScalarProperty Name="LPH" ColumnName="LPH" />
+                <ScalarProperty Name="MultiPick" ColumnName="MultiPick" />
+                <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+                <ScalarProperty Name="AuditEnd" ColumnName="AuditEnd" />
+                <ScalarProperty Name="AuditStart" ColumnName="AuditStart" />
+                <ScalarProperty Name="Picker" ColumnName="Picker" />
+                <ScalarProperty Name="LineCount" ColumnName="LineCount" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductionAreas">
+            <EntityTypeMapping TypeName="XpresModel.ProductionArea">
+              <MappingFragment StoreEntitySet="ProductionArea">
+                <ScalarProperty Name="SubAssem" ColumnName="SubAssem" />
+                <ScalarProperty Name="ProdLine" ColumnName="ProdLine" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RcvSchedules">
+            <EntityTypeMapping TypeName="XpresModel.RcvSchedule">
+              <MappingFragment StoreEntitySet="RcvSchedule">
+                <ScalarProperty Name="VNC" ColumnName="VNC" />
+                <ScalarProperty Name="PoNotPtwy" ColumnName="PoNotPtwy" />
+                <ScalarProperty Name="PoPtwy" ColumnName="PoPtwy" />
+                <ScalarProperty Name="PoNotRcvd" ColumnName="PoNotRcvd" />
+                <ScalarProperty Name="PoRcvd" ColumnName="PoRcvd" />
+                <ScalarProperty Name="ApptID" ColumnName="ApptID" />
+                <ScalarProperty Name="Ltl" ColumnName="Ltl" />
+                <ScalarProperty Name="PutawayStop" ColumnName="PutawayStop" />
+                <ScalarProperty Name="RecStop" ColumnName="RecStop" />
+                <ScalarProperty Name="UnloadStop" ColumnName="UnloadStop" />
+                <ScalarProperty Name="UnloadStart" ColumnName="UnloadStart" />
+                <ScalarProperty Name="Arrive" ColumnName="Arrive" />
+                <ScalarProperty Name="PalletNum" ColumnName="PalletNum" />
+                <ScalarProperty Name="Carrier" ColumnName="Carrier" />
+                <ScalarProperty Name="Appt" ColumnName="Appt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplenSAAGs">
+            <EntityTypeMapping TypeName="XpresModel.ReplenSAAG">
+              <MappingFragment StoreEntitySet="ReplenSAAG">
+                <ScalarProperty Name="CtrlID" ColumnName="CtrlID" />
+                <ScalarProperty Name="HUBSECURE" ColumnName="HUBSECURE" />
+                <ScalarProperty Name="PL" ColumnName="PL" />
+                <ScalarProperty Name="KARDEX" ColumnName="KARDEX" />
+                <ScalarProperty Name="LK00001" ColumnName="LK00001" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitCosts">
+            <EntityTypeMapping TypeName="XpresModel.UnitCost">
+              <MappingFragment StoreEntitySet="UnitCost">
+                <ScalarProperty Name="Unit_Cost" ColumnName="Unit Cost" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkBenchCounts">
+            <EntityTypeMapping TypeName="XpresModel.WorkBenchCount">
+              <MappingFragment StoreEntitySet="WorkBenchCounts">
+                <ScalarProperty Name="CounterName" ColumnName="CounterName" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="CorrAmnt" ColumnName="CorrAmnt" />
+                <ScalarProperty Name="SysVar" ColumnName="SysVar" />
+                <ScalarProperty Name="CountedQTY" ColumnName="CountedQTY" />
+                <ScalarProperty Name="Packed" ColumnName="Packed" />
+                <ScalarProperty Name="Unpacked" ColumnName="Unpacked" />
+                <ScalarProperty Name="SystemQTY" ColumnName="SystemQTY" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="Locator" ColumnName="Locator" />
+                <ScalarProperty Name="Subinventory" ColumnName="Subinventory" />
+                <ScalarProperty Name="ORG" ColumnName="ORG" />
+                <ScalarProperty Name="CountDate" ColumnName="CountDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

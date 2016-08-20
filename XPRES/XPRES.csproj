@@ -1,0 +1,775 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FC0386B8-AF6C-4E4A-B047-9E484F1BAB24}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XPRES</RootNamespace>
+    <AssemblyName>XPRES</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>\\XPRES-SERVER\XpresShared\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>\\XPRES-SERVER\XpresShared\</UpdateUrl>
+    <MinimumRequiredVersion>1.0.0.4</MinimumRequiredVersion>
+    <ApplicationRevision>32</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>A5B76EBA4E70DA1D63C8867AEF728B95BDE9762D</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>XPRES.Inventory_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <TargetZone>Internet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ExpandIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>XPRES.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Controls.DataVisualization.Toolkit.4.0.0.0\lib\net40-Client\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="system.windows.controls.ribbon" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Commands\HomeCommand.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAL\Adjustment.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\BomChanx.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CarrierList.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CCTracker.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CountSchedule.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DynamicInbMetric.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Employee.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\InboundActivity.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MaterialReference.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MaterialRequest.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MetricsAdj.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MetricsInbound.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MetricsInboundV2.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MetricsInv.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Order.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ProductionArea.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\RcvSchedule.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ReplenSAAG.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\UnitCost.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WorkBenchCount.cs">
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\XpresModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XpresModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\XpresModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XpresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\XpresModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XpresModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inbound\ViewModels\IbLphChartVm.cs" />
+    <Compile Include="Departments\Inbound\ViewModels\InbActStackCtrlVm.cs" />
+    <Compile Include="Departments\Inbound\ViewModels\InbActivityVm.cs" />
+    <Compile Include="Departments\Inbound\ViewModels\InbAuditVm.cs" />
+    <Compile Include="Departments\Inbound\ViewModels\InbSaagVm.cs" />
+    <Compile Include="Departments\Inbound\ViewModels\SchedStackVm.cs" />
+    <Compile Include="Departments\Inbound\Views\InbActivity.xaml.cs">
+      <DependentUpon>InbActivity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inbound\Views\InbAudit.xaml.cs">
+      <DependentUpon>InbAudit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\ViewModels\CycoCreateVm.cs" />
+    <Compile Include="Departments\Inventory\ViewModels\CycoMetricsVm.cs" />
+    <Compile Include="Departments\Inventory\ViewModels\CycoMgmtVm.cs" />
+    <Compile Include="Departments\Inventory\ViewModels\CycoReviewVm.cs" />
+    <Compile Include="Departments\Inventory\ViewModels\CycoTrackerVm.cs" />
+    <Compile Include="Departments\Inventory\ViewModels\GcMainVm.cs" />
+    <Compile Include="Departments\Inventory\ViewModels\NameToBrushConverter.cs" />
+    <Compile Include="Departments\Inventory\Views\Controls\CycoReviewControl.xaml.cs">
+      <DependentUpon>CycoReviewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Views\Controls\CycoCreateControl.xaml.cs">
+      <DependentUpon>CycoCreateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Views\Controls\CycoMgmt.xaml.cs">
+      <DependentUpon>CycoMgmt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Views\Controls\CycoTracker.xaml.cs">
+      <DependentUpon>CycoTracker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Views\GcMain.xaml.cs">
+      <DependentUpon>GcMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Outbound\Controls\CompStackControl.xaml.cs">
+      <DependentUpon>CompStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Outbound\ViewModels\ObSaagVm.cs" />
+    <Compile Include="Departments\Outbound\ViewModels\PickStackCtrlVm.cs" />
+    <Compile Include="Helpers\ViewModelBase.cs" />
+    <Compile Include="Main\ViewModels\MainWindowVM.cs" />
+    <Compile Include="Departments\Inbound\Views\Charts\IbLphChart.xaml.cs">
+      <DependentUpon>IbLphChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\ViewModels\LocAccChartVM.cs" />
+    <Compile Include="Departments\Inventory\Views\Charts\invPrevQtrLocChart.xaml.cs">
+      <DependentUpon>invPrevQtrLocChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Views\Charts\InvLocChart.xaml.cs">
+      <DependentUpon>InvLocChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Outbound\ViewModels\obLphChartVM.cs" />
+    <Compile Include="Departments\Outbound\Views\Charts\ObLphChart.xaml.cs">
+      <DependentUpon>ObLphChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Outbound\Views\obDash.xaml.cs">
+      <DependentUpon>obDash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Departments\Replen\Controls\rpAndonStackControl.xaml.cs">
+      <DependentUpon>rpAndonStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Replen\Controls\rpProdViewStackControl.xaml.cs">
+      <DependentUpon>rpProdViewStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Replen\ViewModels\WarehouseViewVM.cs" />
+    <Compile Include="Departments\Replen\ViewModels\rpDashVM.cs" />
+    <Compile Include="Departments\Replen\ViewModels\rpSaagVM.cs" />
+    <Compile Include="Departments\Replen\ViewModels\RequestInterfaceVM.cs" />
+    <Compile Include="Departments\Replen\Views\Charts\ReplenChart.xaml.cs">
+      <DependentUpon>ReplenChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Replen\Views\EditProdAreas.xaml.cs">
+      <DependentUpon>EditProdAreas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Replen\Views\EnterUserQty.xaml.cs">
+      <DependentUpon>EnterUserQty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Replen\Views\ProductionView.xaml.cs">
+      <DependentUpon>ProductionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Replen\Views\WarehouseView.xaml.cs">
+      <DependentUpon>WarehouseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Replen\Views\RequestInterface.xaml.cs">
+      <DependentUpon>RequestInterface.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AdjValueChart.cs" />
+    <Compile Include="Helpers\GetPercentage.cs" />
+    <Compile Include="Helpers\InbActivityCharts.cs" />
+    <Compile Include="Helpers\InbDashInfo.cs" />
+    <Compile Include="Helpers\LocAccChart.cs" />
+    <Compile Include="Helpers\XpsDates.cs" />
+    <Compile Include="Main\Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Outbound\ViewModels\obDashViewModel.cs" />
+    <Compile Include="Main\Views\FullCharts.xaml.cs">
+      <DependentUpon>FullCharts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inbound\Views\InbDash.xaml.cs">
+      <DependentUpon>InbDash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Adjustments\AdjMain.xaml.cs">
+      <DependentUpon>AdjMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Adjustments\Controls\AdjMetricsControl.xaml.cs">
+      <DependentUpon>AdjMetricsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\GeoCountPlacard.cs" />
+    <Compile Include="Helpers\InvSaagA.cs" />
+    <Compile Include="Helpers\InvSaagB.cs" />
+    <Compile Include="Departments\Inventory\Views\Charts\AdjValuesControl.xaml.cs">
+      <DependentUpon>AdjValuesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Views\Charts\LocAccControl.xaml.cs">
+      <DependentUpon>LocAccControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Views\InvMain.xaml.cs">
+      <DependentUpon>InvMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Manager\AddEmployee.xaml.cs">
+      <DependentUpon>AddEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Manager\EditEmployees.xaml.cs">
+      <DependentUpon>EditEmployees.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Manager\ManagerFunctions.xaml.cs">
+      <DependentUpon>ManagerFunctions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Adjustments\Controls\AdjCreateControl.xaml.cs">
+      <DependentUpon>AdjCreateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Adjustments\Controls\AdjStackControl.xaml.cs">
+      <DependentUpon>AdjStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Views\Controls\CycoStackControl.xaml.cs">
+      <DependentUpon>CycoStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Manager\EmployeeControl.xaml.cs">
+      <DependentUpon>EmployeeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inbound\Controls\InbActStackControl.xaml.cs">
+      <DependentUpon>InbActStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inbound\Controls\LtlStackControl.xaml.cs">
+      <DependentUpon>LtlStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Outbound\Controls\MultiAddControl.xaml.cs">
+      <DependentUpon>MultiAddControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Outbound\Controls\PickStackControl.xaml.cs">
+      <DependentUpon>PickStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Adjustments\Controls\ReconStackControl.xaml.cs">
+      <DependentUpon>ReconStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inbound\Controls\SmlPkStackControl.xaml.cs">
+      <DependentUpon>SmlPkStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\GeoCounts\GeoCountsMain.xaml.cs">
+      <DependentUpon>GeoCountsMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\Views\GcMetrics.xaml.cs">
+      <DependentUpon>GcMetrics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inventory\GeoCounts\GeoCountsSchedule.xaml.cs">
+      <DependentUpon>GeoCountsSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Inbound\Views\InbSAAG.xaml.cs">
+      <DependentUpon>InbSAAG.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Outbound\Views\obSAAG.xaml.cs">
+      <DependentUpon>obSAAG.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Replen\Controls\RepSaagStackControl.xaml.cs">
+      <DependentUpon>RepSaagStackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Replen\Views\RepDash.xaml.cs">
+      <DependentUpon>RepDash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\Replen\Views\RepSAAG.xaml.cs">
+      <DependentUpon>RepSAAG.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EntityDeploy Include="DAL\XpresModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>XpresModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAL\XpresModel.edmx.diagram">
+      <DependentUpon>XpresModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="XPRES.Inventory_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="XPRES.Main">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Departments\Inbound\Views\Charts\IbLphChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Departments\Inbound\Views\InbActivity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inbound\Views\InbAudit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Views\Charts\invPrevQtrLocChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Departments\Inventory\Views\Charts\InvLocChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Departments\Inventory\Views\Controls\CycoReviewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Departments\Inventory\Views\Controls\CycoCreateControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Views\Controls\CycoMgmt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Views\Controls\CycoTracker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Views\GcMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Outbound\Controls\CompStackControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Main\Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Outbound\Views\Charts\ObLphChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Departments\Outbound\Views\obDash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Replen\Controls\rpAndonStackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Replen\Controls\rpProdViewStackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Replen\Views\Charts\ReplenChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Departments\Replen\Views\EditProdAreas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Replen\Views\EnterUserQty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Replen\Views\ProductionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Departments\Replen\Views\WarehouseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Replen\Views\RequestInterface.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ControlsStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\SkinsDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\SmallImagesDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Main\Views\FullCharts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inbound\Views\InbDash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Adjustments\AdjMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Adjustments\Controls\AdjMetricsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Views\Charts\AdjValuesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Views\Charts\LocAccControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Views\InvMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Manager\AddEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Manager\EditEmployees.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Manager\ManagerFunctions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Adjustments\Controls\AdjCreateControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Adjustments\Controls\AdjStackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Views\Controls\CycoStackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Manager\EmployeeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inbound\Controls\InbActStackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inbound\Controls\LtlStackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Outbound\Controls\MultiAddControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Outbound\Controls\PickStackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Adjustments\Controls\ReconStackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inbound\Controls\SmlPkStackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\GeoCounts\GeoCountsMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\Views\GcMetrics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inventory\GeoCounts\GeoCountsSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Inbound\Views\InbSAAG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Outbound\Views\obSAAG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Replen\Controls\RepSaagStackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Replen\Views\RepDash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Departments\Replen\Views\RepSAAG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ExpandIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Small\ExpandIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Small\Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Small\close_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Small\save_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Small\check_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Small\Refresh.png" />
+    <Resource Include="Resources\Images\Small\Home.png" />
+    <Resource Include="Resources\Images\Small\Dashboard4.png" />
+    <Resource Include="Resources\Images\Small\LeftNav.png" />
+    <Resource Include="Resources\Images\Small\RightNav.png" />
+    <Resource Include="Resources\Images\Small\Timer.png" />
+    <Resource Include="Resources\Images\Small\StopTimer.png" />
+    <Resource Include="Resources\Images\Small\DiamondBullet.png" />
+    <Content Include="DAL\XpresModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XpresModel.edmx</DependentUpon>
+      <LastGenOutput>XpresModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\XpresModel.edmx.sql" />
+    <Resource Include="Resources\Images\Small\Calculator.png" />
+    <Content Include="DAL\XpresModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XpresModel.edmx</DependentUpon>
+      <LastGenOutput>XpresModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="XPRES.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Departments\Inventory\Controls\" />
+    <Folder Include="Departments\Inventory\GeoCounts\Controls\" />
+    <Folder Include="Departments\Outbound\Views\UserControls\" />
+    <Folder Include="Main\Controls\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

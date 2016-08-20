@@ -1,0 +1,476 @@
+﻿<Window x:Class="XPRES.Departments.Inventory.Views.InvMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:charts="clr-namespace:XPRES.Departments.Inventory.Views.Charts"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Inventory Dashboard"
+        Width="1280"
+        Height="720"
+        WindowState="Maximized"
+        mc:Ignorable="d">
+    <Grid Background="{StaticResource SolidBackDark}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Border Grid.Row="0"
+                    Margin="5"
+                    Style="{StaticResource CustomBorder}">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Name="BtnHome"
+                            Margin="5"
+                            Click="btnHome_Click">
+                        <Image Source="{StaticResource HomeIcon}" />
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Name="GrdTopMenu"
+              Grid.Row="0"
+              Grid.Column="1">
+            <Border Grid.Row="0"
+                    Margin="5"
+                    Style="{StaticResource CustomBorder}">
+                <StackPanel Grid.Row="0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                    <Button Name="BtnOutPrev"
+                            Width="100"
+                            Margin="5"
+                            Click="btnOutPrev_Click"
+                            Content="Prev"
+                            FontSize="16" />
+                    <Button Name="BtnOutNext"
+                            Width="100"
+                            Margin="5"
+                            Click="btnOutNext_Click"
+                            Content="Next"
+                            FontSize="16" />
+                    <Button Name="BtnClear"
+                            Width="100"
+                            Margin="5"
+                            Click="btnClear_Click"
+                            Content="Clear Dates"
+                            FontSize="16" />
+                    <Label VerticalAlignment="Center" Content="Start Date:" />
+                    <DatePicker Name="DtpStart"
+                                Margin="5"
+                                VerticalAlignment="Center" />
+                    <Label VerticalAlignment="Center" Content="End Date:" />
+                    <DatePicker Name="DtpEnd"
+                                Margin="5"
+                                VerticalAlignment="Center" />
+                    <Button Name="BtnRefresh"
+                            Margin="5"
+                            Click="btnRefresh_Click">
+                        <Image Source="{StaticResource RefreshIcon}" />
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Name="GrdLeftMenus"
+              Grid.Row="1"
+              Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0"
+                    Margin="5"
+                    Style="{StaticResource CustomBorder}">
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="25"
+                               Foreground="{StaticResource CoolBlue}"
+                               Text="Navigation" />
+                    <Button Name="BtnGc"
+                            Height="47"
+                            Margin="5"
+                            Click="btnGC_Click"
+                            Content="Geographic Counts" />
+                    <Button Name="BtnAdj"
+                            Height="45"
+                            Margin="5"
+                            Background="{x:Null}"
+                            BorderBrush="#FF19BAF1"
+                            Click="btnAdj_Click"
+                            Foreground="#FF19BAF1">
+                        Adjustments
+                    </Button>
+                    <Button Name="BtnInvDisc"
+                            Height="45"
+                            Margin="5"
+                            Content="Discrepancies" />
+                    <Button Name="BtnInvResc"
+                            Height="45"
+                            Margin="5"
+                            Content="SWI's" />
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="1"
+                    Margin="5"
+                    Style="{StaticResource CustomBorder}">
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="25"
+                               Foreground="{StaticResource CoolBlue}"
+                               Text="Charts" />
+                    <Button Name="BtnSaag"
+                            Height="45"
+                            Margin="5"
+                            Click="btnSAAG_Click"
+                            Content="SAAG" />
+                    <Button Name="BtnLocAcc"
+                            Height="45"
+                            Margin="5"
+                            Click="btnLocAcc_Click"
+                            Content="Location Accuracy" />
+                    <Button Name="BtnAdjVal"
+                            Height="45"
+                            Margin="5"
+                            Click="btnAdjVal_Click"
+                            Content="Adjustment Values" />
+                    <Button Name="BtnOffs"
+                            Height="45"
+                            Margin="5"
+                            Click="btnOffs_Click"
+                            Content="Write Offs" />
+                    <Button Name="BtnOns"
+                            Height="45"
+                            Margin="5"
+                            Click="btnOns_Click"
+                            Content="Write Ons" />
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Name="GrdCenter"
+              Grid.Row="1"
+              Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <Border Margin="5" Style="{StaticResource CustomBorder}">
+                <Grid Name="GrdCenterMain">
+                    <Grid Name="GrdSaag" Visibility="Visible">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Content="Inventory SAAG"
+                               FontSize="25"
+                               FontWeight="Normal" />
+                        <DataGrid Name="DgInvSaagA"
+                                  Grid.Row="1"
+                                  Margin="5"
+                                  AutoGenerateColumns="False"
+                                  Style="{StaticResource CustomDataGrid}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding Date}"
+                                                    FontSize="16"
+                                                    Header="Date" />
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding Goal}"
+                                                    FontSize="16"
+                                                    Header="Loc Count Goal" />
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding Actual}"
+                                                    FontSize="16"
+                                                    Header="Loc Count Actual" />
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding Errors}"
+                                                    FontSize="16"
+                                                    Header="Errors" />
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding Accuracy}"
+                                                    FontSize="16"
+                                                    Header="Location Acc" />
+                                <DataGridTextColumn Width="Auto"
+                                                    Binding="{Binding Comments}"
+                                                    FontSize="16"
+                                                    Header="Comments" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <DataGrid Name="DgInvSaagB"
+                                  Grid.Row="2"
+                                  Margin="5"
+                                  AutoGenerateColumns="False"
+                                  Style="{StaticResource CustomDataGrid}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding Period}"
+                                                    FontSize="16"
+                                                    Header="Period" />
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding NetGoal}"
+                                                    FontSize="16"
+                                                    Header="Net Unit Goal" />
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding NetAct}"
+                                                    FontSize="16"
+                                                    Header="Net Unit Actual" />
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding AbsGoal}"
+                                                    FontSize="16"
+                                                    Header="ABS Unit Goal" />
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding AbsAct}"
+                                                    FontSize="16"
+                                                    Header="ABS Unit Actual" />
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding LocGoal}"
+                                                    FontSize="16"
+                                                    Header="Loc Acc Goal" />
+                                <DataGridTextColumn Width="*"
+                                                    Binding="{Binding LocAct}"
+                                                    FontSize="16"
+                                                    Header="Loc Acc Actual" />
+                                <DataGridTextColumn Width="Auto"
+                                                    Binding="{Binding Comments}"
+                                                    FontSize="16"
+                                                    Header="Comments" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <Grid Name="GrdLocChart" Visibility="Hidden">
+                        <Grid>
+                            <charts:LocAccControl />
+                        </Grid>
+                    </Grid>
+                    <Grid Name="GrdAdjValueChart" Visibility="Hidden">
+                        <charts:AdjValuesControl />
+                    </Grid>
+                </Grid>
+            </Border>
+            <StackPanel Grid.Column="1">
+                <Border Margin="5" Style="{StaticResource CustomBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               Content="Geo Count Info"
+                               FontSize="20"
+                               FontWeight="Normal" />
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <!--<Label Content="Current Count Area:" Grid.Row="1" Grid.Column="0" FontSize="12" FontWeight="Normal" HorizontalAlignment="Right" />
+                            <Label Name="lblCntArea" Grid.Row="1" Grid.Column="1" FontSize="12" FontWeight="Normal" HorizontalAlignment="Center" />-->
+                            <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="First Counts Open:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="LblFirOpen"
+                                   Grid.Row="2"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Grid.Row="3"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="First Count ReDepartments:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="LblFirRev"
+                                   Grid.Row="3"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Grid.Row="4"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Second Counts Open:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="LblSecOpen"
+                                   Grid.Row="4"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Grid.Row="5"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Second Count ReDepartments:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="LblSecRev"
+                                   Grid.Row="5"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <!--<Separator BorderBrush="{StaticResource CoolBlue}" BorderThickness="2" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Center" Width="150" />
+                            <Label Content="Daily First Pass Acc:" Grid.Row="7" Grid.Column="0" FontSize="12" FontWeight="Normal" HorizontalAlignment="Right" />
+                            <Label Name="lblFirAcc" Grid.Row="7" Grid.Column="1" FontSize="12" FontWeight="Normal" HorizontalAlignment="Center" />-->
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Border Margin="5" Style="{StaticResource CustomBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               Content="Discrepancy Info"
+                               FontSize="20"
+                               FontWeight="Normal" />
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Open Discrepancies:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="LblDiscOpen"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Oldest Open Entry:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="LblDiscOld"
+                                   Grid.Row="2"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Grid.Row="3"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Entries in progress"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="LblDiscProg"
+                                   Grid.Row="3"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Border Margin="5" Style="{StaticResource CustomBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               Content="Adjustment Info"
+                               FontSize="20"
+                               FontWeight="Normal" />
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Need Review:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="LblAdjRev"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <!--<Label Content="Pending Finanace:" Grid.Row="2" Grid.Column="0" FontSize="12" FontWeight="Normal" HorizontalAlignment="Right" />
+                            <Label Name="lblAdjFinance" Grid.Row="2" Grid.Column="1" FontSize="12" FontWeight="Normal" HorizontalAlignment="Center" />-->
+                            <Label Grid.Row="3"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="Submitted to NCR:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="LblAdjSub"
+                                   Grid.Row="3"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Separator Grid.Row="4"
+                                       Grid.ColumnSpan="2"
+                                       Width="150"
+                                       HorizontalAlignment="Center"
+                                       BorderBrush="{StaticResource CoolBlue}"
+                                       BorderThickness="2" />
+                            <Label Grid.Row="5"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Right"
+                                   Content="YTD Net $$ Value:"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                            <Label Name="LblYtdNet"
+                                   Grid.Row="5"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Normal" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

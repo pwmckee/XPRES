@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="XPRES.Departments.Inbound.Controls.DynContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XPRES.Departments.Inbound.ViewModels"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:DynCtrlVm />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Name="GrdData" Visibility="Collapsed">
+            <TextBlock Name="TxbName" Text="{Binding CtrlCatName, Mode=OneWayToSource}" />
+        </Grid>
+        <StackPanel Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Name="LblDate"
+                       HorizontalAlignment="Center"
+                       Content="{Binding CtrlCatName, Mode=OneWayToSource}"
+                       FontSize="20" />
+                <Button Name="BtnAdd"
+                        Grid.Column="1"
+                        Width="20"
+                        Height="20"
+                        Margin="0,0,10,0"
+                        BorderBrush="{x:Null}"
+                        BorderThickness="0"
+                        Command="{Binding AddChildCommand}">
+                    <Image Source="{StaticResource ExpandIcon}" />
+                </Button>
+                <Button Name="BtnSave"
+                        Grid.Column="2"
+                        Width="20"
+                        Height="20"
+                        Margin="0,0,10,0"
+                        BorderBrush="{x:Null}"
+                        BorderThickness="0"
+                        Command="{Binding SaveCtrlsCommand}">
+                    <Image Source="{StaticResource SaveIcon}" />
+                </Button>
+                <Button Name="BtnDel"
+                        Grid.Column="3"
+                        Width="20"
+                        Height="20"
+                        Margin="0,0,10,0"
+                        BorderBrush="{x:Null}"
+                        BorderThickness="0"
+                        Click="btnDel_Click">
+                    <Image Source="{StaticResource CloseIcon}" />
+                </Button>
+            </Grid>
+            <Separator Margin="10,0,10,0"
+                       BorderBrush="{StaticResource CoolBlue}"
+                       BorderThickness="2" />
+        </StackPanel>
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding DynCtrls}" />
+    </Grid>
+</UserControl>

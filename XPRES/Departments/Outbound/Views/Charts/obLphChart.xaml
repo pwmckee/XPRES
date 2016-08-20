@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="XPRES.Departments.Outbound.Views.Charts.ObLphChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dvc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XPRES.Departments.Outbound.ViewModels"
+             d:DesignHeight="320"
+             d:DesignWidth="450"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:obLphChartVM />
+    </UserControl.DataContext>
+    <Grid>
+        <dvc:Chart Name="ChtOut"
+                   Title="Outbound Metrics (Lines Per Hour)"
+                   Width="Auto"
+                   Height="Auto"
+                   BorderBrush="{x:Null}"
+                   Foreground="{StaticResource CoolBlue}"
+                   Visibility="Visible">
+            <dvc:ColumnSeries Name="ColumnOutLph"
+                              Title="LPH"
+                              DependentValuePath="Value"
+                              IndependentValuePath="Key"
+                              IsSelectionEnabled="True"
+                              ItemsSource="{Binding OrderList}"
+                              ToolTipService.ToolTip="{Binding}">
+                <dvc:ColumnSeries.DataPointStyle>
+                    <Style TargetType="dvc:ColumnDataPoint">
+                        <Setter Property="Background" Value="#FF534066" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="dvc:ColumnDataPoint">
+                                    <Grid>
+                                        <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                        <Grid Margin="0 -20 -10 0"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Top">
+                                            <TextBlock Width="40"
+                                                       Margin="2"
+                                                       FontWeight="Bold"
+                                                       Foreground="Black"
+                                                       Text="{TemplateBinding FormattedDependentValue}" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </dvc:ColumnSeries.DataPointStyle>
+            </dvc:ColumnSeries>
+        </dvc:Chart>
+    </Grid>
+</UserControl>

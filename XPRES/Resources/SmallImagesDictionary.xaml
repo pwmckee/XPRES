@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ImageSource x:Key="SettingsIcon">/Resources/Images/Small/Settings.png</ImageSource>
+    <ImageSource x:Key="ExpandIcon">/Resources/Images/Small/ExpandIcon.png</ImageSource>
+    <ImageSource x:Key="CloseIcon">/Resources/Images/Small/close_32.png</ImageSource>
+    <ImageSource x:Key="SaveIcon">/Resources/Images/Small/save_32.png</ImageSource>
+    <ImageSource x:Key="CheckGreenIcon">/Resources/Images/Small/check_green.png</ImageSource>
+    <ImageSource x:Key="RefreshIcon">/Resources/Images/Small/Refresh.png</ImageSource>
+    <ImageSource x:Key="HomeIcon">/Resources/Images/Small/Home.png</ImageSource>
+    <ImageSource x:Key="DashBoard2">/Resources/Images/Small/DashBoard4.png</ImageSource>
+    <ImageSource x:Key="Left">/Resources/Images/Small/LeftNav.png</ImageSource>
+    <ImageSource x:Key="Right">/Resources/Images/Small/RightNav.png</ImageSource>
+    <ImageSource x:Key="Timer">/Resources/Images/Small/Timer.png</ImageSource>
+    <ImageSource x:Key="StopTimer">/Resources/Images/Small/StopTimer.png</ImageSource>
+    <ImageSource x:Key="DiamondBullet">/Resources/Images/Small/DiamondBullet.png</ImageSource>
+    <ImageSource x:Key="Calculator">/Resources/Images/Small/Calculator.png</ImageSource>
+</ResourceDictionary>

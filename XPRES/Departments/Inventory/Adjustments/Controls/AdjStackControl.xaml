@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="XPRES.Departments.Inventory.Adjustments.Controls.AdjStackControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:XPRES.Departments.Inventory.Adjustments.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="52" d:DesignWidth="838">
+    <Border  Style="{StaticResource CustomBorder}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Name="CtrlReqNum" Text="RequestNum" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Style="{StaticResource CustomTextBox}" />
+            <Label Grid.Column="1" Name="CtrlNetCost" Content="NetCost" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
+            <Label Grid.Column="2" Name="CtrlAdjType" Content="AdjType" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
+            <Label Grid.Column="3" Name="CtrlReqDate" Content="ReqDate" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
+            <Label Grid.Column="5" Name="CtrlRequester" Content="Requester" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
+        </Grid>
+    </Border>
+</UserControl>

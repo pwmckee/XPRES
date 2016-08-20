@@ -1,0 +1,538 @@
+﻿<Window x:Class="XPRES.Departments.Inventory.GeoCounts.GeoCountsMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Geographic Counts"
+        Width="1280"
+        Height="720"
+        Loaded="Window_Loaded"
+        WindowState="Maximized"
+        mc:Ignorable="d">
+    <Grid Background="{StaticResource SolidBackDark}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+                Margin="5"
+                Style="{StaticResource CustomBorder}">
+            <Grid Name="GrdMain">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="45" />
+                </Grid.RowDefinitions>
+                <StackPanel Name="SpMainMenu"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                    <Button Name="BtnCcTracker"
+                            MinWidth="240"
+                            Margin="5"
+                            Click="btnCCTracker_Click"
+                            FontSize="16">
+                        Geo Count Tracker
+                    </Button>
+                    <Button Name="BtnCountMgmt"
+                            MinWidth="240"
+                            Margin="5"
+                            Click="btnCountMgmt_Click"
+                            FontSize="16">
+                        Count Management
+                    </Button>
+                    <Button Name="BtnCountSched"
+                            MinWidth="240"
+                            Margin="5"
+                            Click="btnCountSched_Click"
+                            FontSize="16">
+                        Count Schedule
+                    </Button>
+                    <Button Name="BtnCountMetrics"
+                            MinWidth="240"
+                            Margin="5"
+                            Click="btnCountMetrics_Click"
+                            FontSize="16">
+                        Count Metrics
+                    </Button>
+                    <Button Name="BtnPrint"
+                            MinWidth="240"
+                            Margin="5"
+                            Click="btnPrint_Click"
+                            FontSize="16">
+                        Print
+                    </Button>
+                </StackPanel>
+                <StackPanel Name="SpCcTracker"
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal"
+                            Visibility="Hidden">
+                    <Label HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="16">
+                        From
+                    </Label>
+                    <DatePicker Name="DtpSdCCtracker"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                    <Label HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="16">
+                        To:
+                    </Label>
+                    <DatePicker Name="DtpEdCCtracker"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                    <Label Margin="5" FontSize="16">Part Number:</Label>
+                    <TextBox x:Name="TxtPidccTracker"
+                             Width="150"
+                             Margin="5"
+                             FontSize="16"
+                             TextAlignment="Left" />
+                    <Label Margin="5" FontSize="16">Count ID:</Label>
+                    <TextBox x:Name="TxtCidccTracker"
+                             Width="150"
+                             Margin="5"
+                             FontSize="16"
+                             TextAlignment="Left" />
+                    <Button Name="BtnClearCcTracker"
+                            Width="100"
+                            Margin="5"
+                            Click="btnClearCCTracker_Click"
+                            FontSize="16">
+                        Clear
+                    </Button>
+                    <Button Name="BtnFindCcTracker"
+                            Width="100"
+                            Margin="5"
+                            Click="btnFindCCTracker_Click"
+                            FontSize="16">
+                        Find
+                    </Button>
+                    <Button Name="BtnExportCcTracker"
+                            Width="100"
+                            Margin="5"
+                            Click="btnExportCCTracker_Click"
+                            Content="Export"
+                            FontSize="16" />
+                </StackPanel>
+                <StackPanel Name="SpCountMgmt"
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal"
+                            Visibility="Hidden">
+                    <Button Name="BtnCreateCounts"
+                            MinWidth="240"
+                            Margin="5"
+                            Click="btnCreateCounts_Click"
+                            Content="Create Counts"
+                            FontSize="16" />
+                    <Button Name="BtnFirstCounts"
+                            MinWidth="240"
+                            Margin="5"
+                            Click="btnFirstCounts_Click"
+                            Content="First Counts"
+                            FontSize="16" />
+                    <Button Name="BtnSecondCounts"
+                            MinWidth="240"
+                            Margin="5"
+                            Click="btnSecondCounts_Click"
+                            Content="Second Counts"
+                            FontSize="16" />
+                    <Button Name="BtnReviewCounts"
+                            MinWidth="240"
+                            Margin="5"
+                            Click="btnReviewCounts_Click"
+                            Content="Review Counts"
+                            FontSize="16" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Name="GrdCenter" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Border Name="BdrLeftMenu"
+                            Grid.Column="0"
+                            Margin="5"
+                            Padding="10"
+                            Style="{StaticResource CustomBorder}">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="BtnHome"
+                                        Width="25"
+                                        Height="25"
+                                        Margin="5,0,5,0"
+                                        HorizontalAlignment="Left"
+                                        Click="btnHome_Click">
+                                    <Image HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Source="{StaticResource HomeIcon}" />
+                                </Button>
+                                <Button Name="BtnDash"
+                                        Width="25"
+                                        Height="25"
+                                        HorizontalAlignment="Left"
+                                        Click="btnDash_Click">
+                                    <Image Width="25"
+                                           Height="25"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Source="{StaticResource DashBoard2}" />
+                                </Button>
+                            </StackPanel>
+                            <Label Name="LblCountId"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Content="Count ID"
+                                   FontWeight="Bold" />
+                            <TextBox x:Name="TxtCountId"
+                                     Width="150"
+                                     Height="30"
+                                     Margin="0,0,0,5"
+                                     FontSize="16"
+                                     TextAlignment="Left" />
+                            <Label Name="LblCounter"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Content="Counter:"
+                                   FontWeight="Bold" />
+                            <TextBox x:Name="TxtName"
+                                     Width="150"
+                                     Height="30"
+                                     Margin="0,0,0,5"
+                                     FontSize="16"
+                                     TextAlignment="Left" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="5"
+                            Padding="10"
+                            Style="{StaticResource CustomBorder}">
+                        <Grid x:Name="GrdLeftPanel" Grid.Row="1">
+
+                            <StackPanel Name="SpReviewCountLeft"
+                                        Margin="0,10,0,-10"
+                                        Visibility="Visible">
+                                <Button x:Name="BtnDeleteCount"
+                                        Height="40"
+                                        Margin="5"
+                                        Click="btnDeleteCount_Click"
+                                        Content="Delete" />
+                                <Button Name="BtnViewReDepartmentsheet"
+                                        Height="40"
+                                        Margin="5"
+                                        Click="btnViewReDepartmentsheet_Click"
+                                        Content="View Loaded Sheet" />
+                                <Expander Name="ExpReviewFirst"
+                                          Margin="5,15,5,20"
+                                          BorderBrush="{StaticResource CoolBlue}"
+                                          FontSize="14"
+                                          FontWeight="Bold"
+                                          Foreground="{StaticResource CoolBlue}"
+                                          Header="First Count">
+                                    <StackPanel>
+                                        <Button Name="BtnViewFirstReview"
+                                                Height="30"
+                                                Margin="5"
+                                                Click="btnViewFirstReview_Click"
+                                                Content="View Count List" />
+                                        <Button Name="BtnLoadFirstReview"
+                                                Height="30"
+                                                Margin="5"
+                                                Click="btnLoadFirstReview_Click"
+                                                Content="Load" />
+                                        <Button Name="BtnSubmitFirstReview"
+                                                Height="30"
+                                                Margin="5"
+                                                Click="btnSubmitFirstReview_Click"
+                                                Content="Submit" />
+                                        <Button Name="BtnExportFirstReview"
+                                                Height="30"
+                                                Margin="5"
+                                                Click="btnExportReview_Click"
+                                                Content="Export" />
+                                        <Button Name="BtnImportFirstReview"
+                                                Height="30"
+                                                Margin="5"
+                                                Click="btnImportReview_Click"
+                                                Content="Import" />
+                                    </StackPanel>
+                                </Expander>
+                                <Expander Name="ExpReDepartmentsecond"
+                                          Margin="5,0,5,20"
+                                          BorderBrush="{StaticResource CoolBlue}"
+                                          FontSize="14"
+                                          FontWeight="Bold"
+                                          Foreground="{StaticResource CoolBlue}"
+                                          Header="Second Count">
+                                    <StackPanel>
+                                        <Button Name="BtnDepartmentsecondReview"
+                                                Height="30"
+                                                Margin="5"
+                                                Click="btnDepartmentsecondReview_Click"
+                                                Content="View Count List" />
+                                        <Button Name="BtnLoadSecondReview"
+                                                Height="30"
+                                                Margin="5"
+                                                Click="btnLoadSecondReview_Click"
+                                                Content="Load" />
+                                        <Button Name="BtnSubmitSecondReview"
+                                                Height="30"
+                                                Margin="5"
+                                                Click="btnSubmitSecondReview_Click"
+                                                Content="Submit" />
+                                        <Button Name="BtnExportSecondReview"
+                                                Height="30"
+                                                Margin="5"
+                                                Click="btnExportReview_Click"
+                                                Content="Export" />
+                                        <Button Name="BtnImportSecondReview"
+                                                Height="30"
+                                                Margin="5"
+                                                Click="btnImportReview_Click"
+                                                Content="Import" />
+                                    </StackPanel>
+                                </Expander>
+                            </StackPanel>
+
+                            <StackPanel Name="SpCreateCountLeft" Visibility="Hidden">
+                                <Button Name="BtnFirstCountCreate"
+                                        Height="40"
+                                        Margin="5"
+                                        Click="btnFirstCountCreate_Click"
+                                        Content="Create" />
+                                <Button Name="BtnFirstCountSave"
+                                        Height="40"
+                                        Margin="5"
+                                        Click="btnFirstCountSave_Click"
+                                        Content="Save" />
+                                <Label Margin="5" Content="Starting Count Range:" />
+                                <TextBox Name="TxtCountFrom"
+                                         Width="150"
+                                         Height="30"
+                                         FontSize="16"
+                                         TextAlignment="Left" />
+                                <Label Margin="5" Content="Ending Count Range:" />
+                                <TextBox Name="TxtCountTo"
+                                         Width="150"
+                                         Height="30"
+                                         FontSize="16"
+                                         TextAlignment="Left" />
+                            </StackPanel>
+
+                            <StackPanel Name="SpFirstCountLeft" Visibility="Hidden">
+                                <Button Name="BtnFirstCountExport"
+                                        Height="40"
+                                        Margin="5"
+                                        Click="btnFirstExport_Click"
+                                        Content="Export" />
+                                <Button Name="BtnLoadFirst"
+                                        Height="40"
+                                        Margin="5"
+                                        Click="btnLoadFirst_Click"
+                                        Content="Load" />
+                                <Button Name="BtnSubmitFirst"
+                                        Height="40"
+                                        Margin="5"
+                                        Click="btnSubmitFirst_Click"
+                                        Content="Submit" />
+                            </StackPanel>
+
+                            <StackPanel Name="SpSecondCountLeft" Visibility="Hidden">
+                                <Button Name="BtnSecondCountExport"
+                                        Height="40"
+                                        Margin="5"
+                                        Click="btnSecondCountExport_Click"
+                                        Content="Export" />
+                                <Button Name="BtnLoadSecond"
+                                        Height="47"
+                                        Margin="5"
+                                        Click="btnLoadSecond_Click"
+                                        Content="Load" />
+                                <Button Name="BtnSubmitSecond"
+                                        Height="47"
+                                        Margin="5"
+                                        Click="btnSubmitSecond_Click"
+                                        Content="Submit" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Border Grid.Column="1"
+                        Margin="5"
+                        Style="{StaticResource CustomBorder}">
+                    <Grid Name="GrdCenterView">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="100" />
+                        </Grid.RowDefinitions>
+                        <Grid Name="GrdDataGrid" Visibility="Hidden">
+                            <DataGrid x:Name="DgTracker"
+                                      CanUserDeleteRows="True"
+                                      CanUserSortColumns="True"
+                                      Style="{StaticResource CustomDataGrid}" />
+                            <DataGrid x:Name="DgFinal"
+                                      CanUserAddRows="False"
+                                      CanUserDeleteRows="True"
+                                      CanUserSortColumns="False"
+                                      CurrentCellChanged="dgFinal_CurrentCellChanged"
+                                      Style="{StaticResource CustomDataGrid}" />
+                        </Grid>
+                        <Grid Name="GrdCountControls"
+                              Margin="10"
+                              Visibility="Hidden">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="18" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Count ID"
+                                       FontSize="20" />
+                                <Label Grid.Column="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Date"
+                                       FontSize="20" />
+                                <Label Grid.Column="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Zone"
+                                       FontSize="20" />
+                                <Label Grid.Column="3"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Status"
+                                       FontSize="20" />
+                                <Label Grid.Column="4"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="First Count"
+                                       FontSize="20" />
+                                <Label Grid.Column="5"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Content="Second Count"
+                                       FontSize="20" />
+                            </Grid>
+                            <ScrollViewer Grid.Row="1">
+                                <StackPanel Name="SpReqPanel" />
+                            </ScrollViewer>
+                        </Grid>
+                        <Grid Name="GrdWriteIns" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Content="Location"
+                                   FontSize="20" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Content="Part Number"
+                                   FontSize="20" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="2"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Content="Count"
+                                   FontSize="20" />
+                            <TextBox Name="TxtWriteinLoc"
+                                     Grid.Row="1"
+                                     Grid.Column="0"
+                                     Width="150"
+                                     Height="35" />
+                            <TextBox Name="TxtWriteinPid"
+                                     Grid.Row="1"
+                                     Grid.Column="1"
+                                     Width="150"
+                                     Height="35" />
+                            <TextBox Name="TxtWriteinCount"
+                                     Grid.Row="1"
+                                     Grid.Column="2"
+                                     Width="150"
+                                     Height="35" />
+                            <Button Name="BtnAddWritein"
+                                    Grid.Row="1"
+                                    Grid.Column="3"
+                                    Margin="10"
+                                    Click="btnAddWritein_Click"
+                                    Content="Add Write-in"
+                                    FontSize="20" />
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="2"
+                        Margin="5"
+                        Style="{StaticResource CustomBorder}">
+                    <Grid Name="GrdRightPanel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <Label HorizontalAlignment="Center" Content="Count Schedule Selection" />
+                            <Label Width="150" Content="Year:" />
+                            <ComboBox Name="CbxYear"
+                                      Width="150"
+                                      Margin="5"
+                                      SelectionChanged="cbxYear_SelectionChanged" />
+                            <Label Width="150" Content="Quarter:" />
+                            <ComboBox Name="CbxQuarter"
+                                      Width="150"
+                                      Margin="5"
+                                      SelectionChanged="cbxQuarter_SelectionChanged" />
+                            <Label Width="150" Content="Count Area:" />
+                            <ComboBox Name="CbxCountArea"
+                                      Width="150"
+                                      Margin="5"
+                                      SelectionChanged="cbxCountArea_SelectionChanged" />
+                            <Label Width="150" Content="Zone:" />
+                            <ComboBox Name="CbxZone"
+                                      Width="150"
+                                      Margin="5" />
+                        </StackPanel>
+                        <DataGrid Name="DgCountRange"
+                                  Grid.Row="1"
+                                  Margin="5"
+                                  CanUserAddRows="False"
+                                  Style="{StaticResource CustomDataGrid}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

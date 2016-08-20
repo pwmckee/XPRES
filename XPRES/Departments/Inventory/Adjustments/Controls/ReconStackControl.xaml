@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="XPRES.Departments.Inventory.Adjustments.Controls.ReconStackControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:XPRES.Departments.Inventory.Adjustments.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="52" d:DesignWidth="838">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Name="lblTrnId" Grid.Column="0" Content="Transaction ID" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label Name="lblTrnType" Grid.Column="1" Content="Transaction Type" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label Name="lblQty" Grid.Column="2" Content="QTY" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBox Name="lblFrom" Grid.Column="3" Text="From location" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource CustomTextBox}" />
+        <TextBox Name="lblTo" Grid.Column="4" Text="To Location" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource CustomTextBox}" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,227 @@
+﻿<UserControl x:Class="XPRES.Departments.Inbound.Controls.DynamicSubMetric"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XPRES.Departments.Inbound.ViewModels"
+             d:DesignHeight="100"
+             d:DesignWidth="200"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:DynamicMetricVm />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid Name="GrdDetails">
+            <TextBlock Name="TxbCtrlName"
+                       Text="{Binding CtrlName,
+                                      Mode=OneWayToSource}"
+                       Visibility="Collapsed" />
+            <TextBlock Name="TxbTreeLevel"
+                       Text="{Binding TreeLevel,
+                                      Mode=OneWayToSource}"
+                       Visibility="Collapsed" />
+            <TextBlock Name="TxbCtrlParent"
+                       Text="{Binding Parent,
+                                      Mode=OneWayToSource}"
+                       Visibility="Collapsed" />
+        </Grid>
+        
+        <Grid Name="GrdSubMetric" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Name="GrdSum" Visibility="Hidden">
+                <Grid Name="GrdViewSum" Visibility="Visible">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Button Name="BtnDelSum1"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Width="16"
+                            Height="16"
+                            VerticalAlignment="Top"
+                            BorderBrush="{x:Null}"
+                            BorderThickness="0"
+                            Click="btnDel_Click">
+                            <Image Source="{StaticResource CloseIcon}" />
+                        </Button>
+                    </StackPanel>
+                    <Label Grid.Column="1"
+                       Margin="5"
+                       VerticalAlignment="Center"
+                       Content="Summed Items:"
+                       FontSize="16"
+                       FontWeight="Normal" />
+                    <ComboBox Name="CboSum"
+                          Grid.Column="2"
+                          MinWidth="100"
+                          Margin="5"
+                          VerticalAlignment="Center"
+                          FontSize="12"
+                          ItemsSource="{Binding SumCats,
+                                                Mode=TwoWay}" />
+                </Grid>
+
+                <Grid Name="GrdAlterSum" Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <Button Name="BtnDelSum"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Width="16"
+                            Height="16"
+                            VerticalAlignment="Top"
+                            BorderBrush="{x:Null}"
+                            BorderThickness="0"
+                            Click="btnDelSum_Click">
+                            <Image Source="{StaticResource CloseIcon}" />
+                        </Button>
+                        <Button Name="BtnSumComp2"
+                            Grid.Column="0"
+                            Width="16"
+                            Height="16"
+                            Margin="0,2,0,2"
+                            VerticalAlignment="Top"
+                            BorderBrush="{x:Null}"
+                            BorderThickness="0"
+                            Command="{Binding FinalizeSubSumCategory}"
+                            ToolTip="Finalize">
+                            <Image Source="{StaticResource SaveIcon}" />
+                        </Button>
+                    </StackPanel>
+                    <Button Name="BtnSaveSum"
+                        Grid.Column="2"
+                        Height="20"
+                        Command="{Binding SaveSubSumCategory}">
+                        <Image Width="16"
+                           Height="16"
+                           Source="{StaticResource CheckGreenIcon}" />
+                    </Button>
+                </Grid>
+            </Grid>
+            <Grid Name="GrdView" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Width="12"
+                       Height="12"
+                       Source="{StaticResource DiamondBullet}" />
+                <Label Name="LblSubCat"
+                       Grid.Column="1"
+                       Margin="0,0,0,3"
+                       VerticalAlignment="Center"
+                       Content="{Binding CatName}"
+                       FontSize="16" />
+                <Button Name="BtnAlter"
+                        Grid.Column="2"
+                        Height="20"
+                        Click="btnAlter_Click">
+                    <Image Width="16"
+                           Height="16"
+                           Source="{StaticResource SettingsIcon}" />
+                </Button>
+            </Grid>
+            <Grid Name="GrdAlter" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <CheckBox Name="CbxSum"
+                              Grid.Column="0"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center" />
+                    <Button Name="BtnDel"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Width="16"
+                            Height="16"
+                            VerticalAlignment="Top"
+                            BorderBrush="{x:Null}"
+                            BorderThickness="0"
+                            Click="btnDel_Click">
+                        <Image Source="{StaticResource CloseIcon}" />
+                    </Button>
+                </Grid>
+
+                <TextBox Name="TxtSubCat"
+                         Grid.Column="1"
+                         Margin="5"
+                         VerticalAlignment="Center"
+                         FontSize="16"
+                         Text="{Binding CatName,
+                                        Mode=TwoWay}" />
+                <Button Name="BtnSave"
+                        Grid.Column="2"
+                        Height="20"
+                        Click="btnSave_Click">
+                    <Image Width="16"
+                           Height="16"
+                           Source="{StaticResource CheckGreenIcon}" />
+                </Button>
+            </Grid>
+            <Grid Name="GrdBtn" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Button Name="BtnAdd"
+                            Grid.Column="0"
+                            Width="18"
+                            Height="18"
+                            Margin="0,2,0,2"
+                            VerticalAlignment="Top"
+                            BorderBrush="{x:Null}"
+                            BorderThickness="0"
+                            Command="{Binding AddMicCategory}"
+                            ToolTip="Add Subcategory">
+                        <Image Source="{StaticResource ExpandIcon}" />
+                    </Button>
+                    <Button Name="BtnAddSum"
+                            Grid.Column="0"
+                            Width="18"
+                            Height="18"
+                            Margin="0,2,0,2"
+                            VerticalAlignment="Top"
+                            BorderBrush="{x:Null}"
+                            BorderThickness="0"
+                            Command="{Binding AddMicSumCategory}"
+                            ToolTip="Subtotal">
+                        <Image Source="{StaticResource Calculator}" />
+                    </Button>
+                    <Button Name="BtnComp"
+                            Grid.Column="0"
+                            Width="18"
+                            Height="18"
+                            Margin="0,2,0,2"
+                            VerticalAlignment="Top"
+                            BorderBrush="{x:Null}"
+                            BorderThickness="0"
+                            Command="{Binding FinalizeSubCategory}"
+                            ToolTip="Finalize">
+                        <Image Source="{StaticResource SaveIcon}" />
+                    </Button>
+                </StackPanel>
+                <ItemsControl Grid.Column="1" ItemsSource="{Binding MicMetric}" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,188 @@
+﻿<UserControl x:Class="XPRES.Departments.Inventory.Views.Controls.CycoFirstCountControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="680"
+             d:DesignWidth="1280"
+             mc:Ignorable="d">
+    <Grid Name="GrdCountControls"
+          Margin="5"
+          Visibility="Visible">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Name="GrdLeftControls">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border Margin="0,0,5,5" Style="{StaticResource CustomBorder}">
+                <StackPanel VerticalAlignment="Center">
+                    <Label Name="LblCountId"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Content="Count ID"
+                           FontWeight="Bold" />
+                    <TextBox x:Name="TxtCountId"
+                             Width="150"
+                             Height="30"
+                             Margin="0,0,0,5"
+                             FontSize="16"
+                             TextAlignment="Left" />
+                    <Label Name="LblCounter"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Content="Counter:"
+                           FontWeight="Bold" />
+                    <TextBox x:Name="TxtName"
+                             Width="150"
+                             Height="30"
+                             Margin="0,0,0,5"
+                             FontSize="16"
+                             TextAlignment="Left" />
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="1"
+                    Margin="0,0,5,0"
+                    Style="{StaticResource CustomBorder}">
+                <StackPanel Name="SpFirstCountLeft"
+                            Grid.Row="1"
+                            Visibility="Visible">
+                    <Button Name="BtnFirstCountExport"
+                            Height="40"
+                            Margin="5"
+                            Content="Export" />
+                    <Button Name="BtnLoadFirst"
+                            Height="40"
+                            Margin="5"
+                            Content="Load" />
+                    <Button Name="BtnSubmitFirst"
+                            Height="40"
+                            Margin="5"
+                            Content="Submit" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Border Name="BrdCenter"
+                Grid.Column="1"
+                Style="{StaticResource CustomBorder}">
+            <Grid Grid.Column="1">
+                <Grid Name="GrdStack" Visibility="Visible">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Name="GrdHeader">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="18" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Content="Count ID"
+                               FontSize="20" />
+                        <Label Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Content="Date"
+                               FontSize="20" />
+                        <Label Grid.Column="2"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Content="Zone"
+                               FontSize="20" />
+                        <Label Grid.Column="3"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Content="Status"
+                               FontSize="20" />
+                        <Label Grid.Column="4"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Content="First Count"
+                               FontSize="20" />
+                        <Label Grid.Column="5"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Content="Second Count"
+                               FontSize="20" />
+                    </Grid>
+
+                    <ScrollViewer Grid.Row="1" Margin="5">
+                        <StackPanel Name="SpReqPanel" />
+                    </ScrollViewer>
+                </Grid>
+                <Grid Name="GrdSheet" Visibility="Hidden">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding}" Style="{StaticResource CustomDataGrid}" />
+                    <Grid Name="GrdWriteIns" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Content="Location"
+                               FontSize="20" />
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Content="Part Number"
+                               FontSize="20" />
+                        <Label Grid.Row="0"
+                               Grid.Column="2"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Content="Count"
+                               FontSize="20" />
+                        <TextBox Name="TxtWriteinLoc"
+                                 Grid.Row="1"
+                                 Grid.Column="0"
+                                 Width="150"
+                                 Height="35" />
+                        <TextBox Name="TxtWriteinPid"
+                                 Grid.Row="1"
+                                 Grid.Column="1"
+                                 Width="150"
+                                 Height="35" />
+                        <TextBox Name="TxtWriteinCount"
+                                 Grid.Row="1"
+                                 Grid.Column="2"
+                                 Width="150"
+                                 Height="35" />
+                        <Button Name="BtnAddWritein"
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Margin="10"
+                                Content="Add Write-in"
+                                FontSize="20" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

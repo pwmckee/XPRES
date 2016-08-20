@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="XPRES.Departments.Inventory.Views.Controls.CycoTracker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XPRES.Departments.Inventory.ViewModels"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:CycoTrackerVm />
+    </UserControl.DataContext>
+    <Grid>
+        <Border Style="{StaticResource CustomBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Name="SpCcTracker"
+                            Grid.Row="0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal"
+                            Visibility="Visible">
+                    <Label HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="16">
+                        From
+                    </Label>
+                    <DatePicker Name="DtpSdCCtracker"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                SelectedDate="{Binding SDate,
+                                                       Mode=OneWayToSource}" />
+                    <Label HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="16">
+                        To:
+                    </Label>
+                    <DatePicker Name="DtpEdCCtracker"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                SelectedDate="{Binding EDate,
+                                                       Mode=OneWayToSource}" />
+                    <Label Margin="5" FontSize="16">Part Number:</Label>
+                    <TextBox x:Name="TxtPidccTracker"
+                             Width="150"
+                             Margin="5"
+                             FontSize="16"
+                             Text="{Binding Pid,
+                                            Mode=TwoWay}"
+                             TextAlignment="Left" />
+                    <Label Margin="5" FontSize="16">Count ID:</Label>
+                    <TextBox x:Name="TxtCidccTracker"
+                             Width="150"
+                             Margin="5"
+                             FontSize="16"
+                             Text="{Binding CountId,
+                                            Mode=TwoWay}"
+                             TextAlignment="Left" />
+                    <Button Name="BtnClearCcTracker"
+                            Width="100"
+                            Margin="5"
+                            Command="{Binding ClearTrackerCommand}"
+                            FontSize="16">
+                        Clear
+                    </Button>
+                    <Button Name="BtnFindCcTracker"
+                            Width="100"
+                            Margin="5"
+                            Command="{Binding GetCountsCommand}"
+                            FontSize="16">
+                        Find
+                    </Button>
+                    <Button Name="BtnExportCcTracker"
+                            Width="100"
+                            Margin="5"
+                            Command="{Binding ExportTrackerCommand}"
+                            Content="Export"
+                            FontSize="16" />
+                </StackPanel>
+                <Grid Grid.Row="1">
+                    <DataGrid AutoGenerateColumns="True"
+                              CanUserAddRows="True"
+                              ItemsSource="{Binding TrackerCollection}"
+                              Style="{StaticResource CustomDataGrid}"
+                              VerticalScrollBarVisibility="Visible" />
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

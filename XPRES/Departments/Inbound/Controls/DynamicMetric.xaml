@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="XPRES.Departments.Inbound.Controls.DynamicMetric"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrls="clr-namespace:XPRES.Departments.Inbound.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:XPRES.Departments.Inbound.Controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XPRES.Departments.Inbound.ViewModels"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:DynamicMetricVm />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid Name="GrdDetails">
+            <TextBlock Name="TxbCtrlName"
+                       Text="{Binding CtrlName,
+                                      Mode=OneWayToSource}"
+                       Visibility="Collapsed" />
+            <TextBlock Name="TxbTreeLevel"
+                       Text="{Binding TreeLevel,
+                                      Mode=OneWayToSource}"
+                       Visibility="Collapsed" />
+            <TextBlock Name="TxbCtrlParent"
+                       Text="{Binding Parent,
+                                      Mode=OneWayToSource}"
+                       Visibility="Collapsed" />
+        </Grid>
+        <Border Grid.Column="0" Style="{StaticResource CustomBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <!--  View Header  -->
+                <Grid Name="GrdView" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Width="Auto">
+                        <Label Name="LblMain"
+                               Content="{Binding CatName}"
+                               FontSize="25" />
+                        <Separator BorderBrush="{StaticResource CoolBlue}" BorderThickness="1" />
+                    </StackPanel>
+                    <Button Name="BtnAlter"
+                            Grid.Column="1"
+                            Width="20"
+                            Height="20"
+                            Margin="0,0,10,0"
+                            BorderBrush="{x:Null}"
+                            BorderThickness="0"
+                            Click="btnAlter_Click">
+                        <Image Source="{StaticResource SettingsIcon}" />
+                    </Button>
+                    <Button Name="BtnDel"
+                            Grid.Column="2"
+                            Width="20"
+                            Height="20"
+                            Margin="0,0,10,0"
+                            BorderBrush="{x:Null}"
+                            BorderThickness="0"
+                            Click="btnDel_Click">
+                        <Image Source="{StaticResource CloseIcon}" />
+                    </Button>
+                </Grid>
+
+                <Grid Name="GrdAlter"
+                      Grid.Row="0"
+                      Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="TxtMain"
+                             Margin="10"
+                             Text="{Binding CatName,
+                                            Mode=TwoWay}" />
+                    <Button Name="BtnSave"
+                            Grid.Column="1"
+                            Width="30"
+                            Height="30"
+                            HorizontalAlignment="Left"
+                            Click="btnSave_Click">
+                        <Image Source="{StaticResource CheckGreenIcon}" />
+                    </Button>
+                </Grid>
+
+                <!--  Sub Categories  -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Width="Auto">
+                        <Button Name="BtnAddSub"
+                                Width="20"
+                                Height="20"
+                                Margin="2,0,2,5"
+                                VerticalAlignment="Top"
+                                BorderBrush="{x:Null}"
+                                Command="{Binding AddSubCategory}">
+                            <Image Source="{StaticResource ExpandIcon}" />
+                        </Button>
+                        <Button Name="BtnAddSum"
+                                Grid.Column="0"
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Top"
+                                BorderBrush="{x:Null}"
+                                BorderThickness="0"
+                                Command="{Binding AddSubSumCategory}">
+                            <Image Source="{StaticResource Calculator}" />
+                        </Button>
+                        <Button Name="BtnComp"
+                                Grid.Column="0"
+                                Width="20"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                VerticalAlignment="Top"
+                                BorderBrush="{x:Null}"
+                                BorderThickness="0"
+                                Command="{Binding FinalizeMainCategory}"
+                                ToolTip="Finalize">
+                            <Image Source="{StaticResource SaveIcon}" />
+                        </Button>
+                    </StackPanel>
+                    <ItemsControl Grid.Column="1"
+                                  VerticalContentAlignment="Top"
+                                  ItemsSource="{Binding SubMetric}" />
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

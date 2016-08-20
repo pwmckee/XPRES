@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="XPRES.Departments.Inbound.Controls.MetricView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XPRES.Departments.Inbound.ViewModels"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:InbMetricsVm />
+    </UserControl.DataContext>
+    <Grid>
+        <Border Style="{StaticResource CustomBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <TextBox Name="TxtDate"
+                             Width="Auto"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Center"
+                             FontSize="35"
+                             Style="{StaticResource LikeALabel}"
+                             Text="{Binding EntryDate,
+                                            StringFormat=M/dd/yy}" />
+                </StackPanel>
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding MetricsCat1Wrap}" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

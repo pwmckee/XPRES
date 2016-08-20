@@ -1,0 +1,198 @@
+﻿<UserControl x:Class="XPRES.Departments.Inbound.Controls.LtlStackControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XPRES.Departments.Inbound.ViewModels"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             d:DesignHeight="50"
+             d:DesignWidth="1258"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:SchedStackVm />
+    </UserControl.DataContext>
+    <Border Style="{StaticResource CustomBorder}">
+        <Grid>
+            <Grid Name="GrdDisp" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="77" />
+                </Grid.ColumnDefinitions>
+                <Button Name="BtnDispSettings"
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        Click="btnDispSettings_Click">
+                    <Image Width="24"
+                           Height="24"
+                           Source="{StaticResource SettingsIcon}" />
+                </Button>
+                <Label Name="LblAppt"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Content="{Binding ApptTime}"
+                       FontSize="12" />
+                <Label Name="LblCarr"
+                       Grid.Column="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Content="{Binding Carrier}"
+                       FontSize="12" />
+                <Label Name="LblPlts"
+                       Grid.Column="3"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Content="{Binding PltNum}"
+                       FontSize="12" />
+                <Label Name="LblArv"
+                       Grid.Column="4"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Content="{Binding ArvTime}"
+                       FontSize="12" />
+                <Label Name="LblUnlStart"
+                       Grid.Column="5"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Content="{Binding UlStart}"
+                       FontSize="12" />
+                <Label Name="LblUnlStp"
+                       Grid.Column="6"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Content="{Binding UlStop}"
+                       FontSize="12" />
+                <Label Name="LblRcvStp"
+                       Grid.Column="7"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Content="{Binding RecStop}"
+                       FontSize="12" />
+                <Label Name="LblPtwyStp"
+                       Grid.Column="8"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Content="{Binding PutStop}"
+                       FontSize="12" />
+                <Button Name="BtnDispDelete"
+                        Grid.Column="9"
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        Click="btnDelete_Click">
+                    <Image Width="24"
+                           Height="24"
+                           Source="{StaticResource CloseIcon}" />
+                </Button>
+            </Grid>
+            <Grid Name="GrdEdit" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="77" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Height="Auto"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                    <Button Name="BtnSettings"
+                            Margin="10,10,5,10"
+                            Click="btnSettings_Click">
+                        <Image Width="24"
+                               Height="24"
+                               Source="{StaticResource SettingsIcon}" />
+                    </Button>
+                    <Button Name="BtnSave"
+                            Margin="5,10,10,10"
+                            Click="btnSave_Click"
+                            Command="{Binding SaveLtlApptCommand}">
+                        <Image Width="24"
+                               Height="24"
+                               Source="{StaticResource CheckGreenIcon}" />
+                    </Button>
+                </StackPanel>
+                <xctk:DateTimePicker Name="DtpAppt"
+                                     Grid.Column="1"
+                                     Margin="10"
+                                     Format="Custom"
+                                     FormatString="M/dd HH:mm"
+                                     Value="{Binding ApptTime,
+                                                    Mode=TwoWay}"
+                                     TimeFormat="ShortTime" />
+                <ComboBox Name="CboCarrier"
+                          Grid.Column="2"
+                          Margin="10"
+                          ItemsSource="{Binding CarrierList}"
+                          SelectedItem="{Binding Carrier,
+                                                 Mode=TwoWay}" />
+                <TextBox Name="TxtPalletCount"
+                         Grid.Column="3"
+                         Margin="10"
+                         Text="{Binding PltNum,
+                                        Mode=TwoWay}" />
+                <xctk:TimePicker Name="TpArrived"
+                                 Grid.Column="4"
+                                 Margin="10"
+                                 Format="ShortTime"
+                                 MaxDropDownHeight="300"
+                                 Text="{Binding ArvTime,
+                                                Mode=TwoWay}"
+                                 TimeInterval="0:30" />
+                <xctk:TimePicker Name="TpUlStart"
+                                 Grid.Column="5"
+                                 Margin="10"
+                                 Format="ShortTime"
+                                 MaxDropDownHeight="300"
+                                 Text="{Binding UlStart,
+                                                Mode=TwoWay}"
+                                 TimeInterval="0:30" />
+                <xctk:TimePicker Name="TpUlStop"
+                                 Grid.Column="6"
+                                 Margin="10"
+                                 Format="ShortTime"
+                                 MaxDropDownHeight="300"
+                                 Text="{Binding UlStop,
+                                                Mode=TwoWay}"
+                                 TimeInterval="0:30" />
+                <xctk:TimePicker Name="TpRcvStop"
+                                 Grid.Column="7"
+                                 Margin="10"
+                                 Format="ShortTime"
+                                 MaxDropDownHeight="300"
+                                 Text="{Binding RecStop,
+                                                Mode=TwoWay}"
+                                 TimeInterval="0:30" />
+                <xctk:TimePicker Name="TpPtwyStop"
+                                 Grid.Column="8"
+                                 Margin="10"
+                                 Format="ShortTime"
+                                 MaxDropDownHeight="300"
+                                 Text="{Binding PutStop,
+                                                Mode=TwoWay}"
+                                 TimeInterval="0:30" />
+                <Button Name="BtnEditDelete"
+                        Grid.Column="9"
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        Click="btnDelete_Click">
+                    <Image Width="24"
+                           Height="24"
+                           Source="{StaticResource CloseIcon}" />
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

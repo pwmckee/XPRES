@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="XPRES.Departments.Inventory.Views.Charts.invPrevQtrLocChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:XPRES.Departments.Inventory.Views.Charts"
+             xmlns:vm="clr-namespace:XPRES.Departments.Inventory.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="320" d:DesignWidth="450">
+    <UserControl.DataContext>
+        <vm:LocAccChartVm />
+    </UserControl.DataContext>
+    <Grid>
+        <DVC:Chart Name="chtInv" Title="Location Accuracy" Height="Auto" Width="Auto" Foreground="{StaticResource CoolBlue}" BorderBrush="{x:Null}" Visibility="Visible">
+            <DVC:ColumnSeries Name="CurrFirstPass" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="1st Pass" IndependentValuePath="Key" ItemsSource="{Binding PrevQtrFirstPass}" IsSelectionEnabled="True">
+                <DVC:ColumnSeries.DataPointStyle>
+                    <Style TargetType="DVC:ColumnDataPoint">
+                        <Setter Property="Background" Value="#FF4C60A2" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DVC:ColumnDataPoint">
+                                    <Grid>
+                                        <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                        <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                            <TextBlock Text="{TemplateBinding FormattedDependentValue}" FontWeight="Bold" Width="40" Foreground="Black" Margin="2" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DVC:ColumnSeries.DataPointStyle>
+            </DVC:ColumnSeries>
+            <DVC:ColumnSeries Name="CurrSecondPass" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="2nd Pass" IndependentValuePath="Key" ItemsSource="{Binding PrevQtrSecondPass}" IsSelectionEnabled="True">
+                <DVC:ColumnSeries.DataPointStyle>
+                    <Style TargetType="DVC:ColumnDataPoint">
+                        <Setter Property="Background" Value="#FF5A9B77" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DVC:ColumnDataPoint">
+                                    <Grid>
+                                        <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                        <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                            <TextBlock Text="{TemplateBinding FormattedDependentValue}" FontWeight="Bold" Width="40" Foreground="Black" Margin="2" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DVC:ColumnSeries.DataPointStyle>
+            </DVC:ColumnSeries>
+        </DVC:Chart>
+    </Grid>
+</UserControl>

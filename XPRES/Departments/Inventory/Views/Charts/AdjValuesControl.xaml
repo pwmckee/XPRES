@@ -1,0 +1,236 @@
+﻿<UserControl x:Class="XPRES.Departments.Inventory.Views.Charts.AdjValuesControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:local="clr-namespace:XPRES.Departments.Inventory.Views.Charts"
+             mc:Ignorable="d"
+             d:DesignHeight="627" d:DesignWidth="860">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Select Week Ending Date:" />
+                <DatePicker Name="dtpPrev" />
+                <Button Name="btnRefreshPrev" Margin="5,0,0,0" Click="btnRefreshPrev_Click">
+                    <Image Source="{StaticResource RefreshIcon}" />
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Select Week Ending Date:" />
+                <DatePicker Name="dtpCurr" />
+                <Button Name="btnRefreshCurr" Margin="5,0,0,0" Click="btnRefreshCurr_Click">
+                    <Image Source="{StaticResource RefreshIcon}" />
+                </Button>
+            </StackPanel>
+            <DVC:Chart Grid.Column="0" Grid.Row="1" Title="Previous Week" Height="Auto" Width="Auto" Foreground="{StaticResource CoolBlue}" BorderBrush="{x:Null}" Visibility="Visible">
+                <DVC:Chart.TitleStyle>
+                    <Style TargetType="DV:Title">
+                        <Setter Property="FontSize" Value="25" />
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                </DVC:Chart.TitleStyle>
+                <DVC:BarSeries Name="PrevNetSeries" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="Net" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True">
+                    <DVC:BarSeries.DataPointStyle>
+                        <Style TargetType="DVC:BarDataPoint">
+                            <Setter Property="Background" Value="#FF6170A4" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DVC:BarDataPoint">
+                                        <Grid>
+                                            <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                            <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                                <TextBlock Text="{TemplateBinding FormattedDependentValue}" Background="White" FontWeight="Bold" Width="Auto" Foreground="Black" Margin="2" />
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DVC:BarSeries.DataPointStyle>
+                </DVC:BarSeries>
+                <DVC:BarSeries Name="PrevOffSeries" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="Write Off" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True">
+                    <DVC:BarSeries.DataPointStyle>
+                        <Style TargetType="DVC:BarDataPoint">
+                            <Setter Property="Background" Value="#FFB84949" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DVC:BarDataPoint">
+                                        <Grid>
+                                            <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                            <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                                <TextBlock Text="{TemplateBinding FormattedDependentValue}" Background="White" FontWeight="Bold" Width="Auto" Foreground="Black" Margin="2" />
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DVC:BarSeries.DataPointStyle>
+                </DVC:BarSeries>
+                <DVC:BarSeries Name="PrevOnSeries" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="Write On" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True">
+                    <DVC:BarSeries.DataPointStyle>
+                        <Style TargetType="DVC:BarDataPoint">
+                            <Setter Property="Background" Value="#FF5A9B77" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DVC:BarDataPoint">
+                                        <Grid>
+                                            <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                            <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                                <TextBlock Text="{TemplateBinding FormattedDependentValue}" Background="White" FontWeight="Bold" Width="Auto" Foreground="Black" Margin="2" />
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DVC:BarSeries.DataPointStyle>
+                </DVC:BarSeries>
+            </DVC:Chart>
+            <DVC:Chart Grid.Column="1" Grid.Row="1" Title="Current Week" Height="Auto" Width="Auto" Foreground="{StaticResource CoolBlue}" BorderBrush="{x:Null}" Visibility="Visible">
+                <DVC:Chart.TitleStyle>
+                    <Style TargetType="DV:Title">
+                        <Setter Property="FontSize" Value="25" />
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                </DVC:Chart.TitleStyle>
+                <DVC:BarSeries Name="CurrNetSeries" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="Net" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True">
+                    <DVC:BarSeries.DataPointStyle>
+                        <Style TargetType="DVC:BarDataPoint">
+                            <Setter Property="Background" Value="#FF6170A4" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DVC:BarDataPoint">
+                                        <Grid>
+                                            <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                            <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                                <TextBlock Text="{TemplateBinding FormattedDependentValue}" FontWeight="Bold" Width="Auto" Foreground="Black" Margin="2" />
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DVC:BarSeries.DataPointStyle>
+                </DVC:BarSeries>
+                <DVC:BarSeries Name="CurrOffSeries" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="Write Off" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True">
+                    <DVC:BarSeries.DataPointStyle>
+                        <Style TargetType="DVC:BarDataPoint">
+                            <Setter Property="Background" Value="#FFB84949" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DVC:BarDataPoint">
+                                        <Grid>
+                                            <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                            <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                                <TextBlock Text="{TemplateBinding FormattedDependentValue}" FontWeight="Bold" Width="Auto" Foreground="Black" Margin="2" />
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DVC:BarSeries.DataPointStyle>
+                </DVC:BarSeries>
+                <DVC:BarSeries Name="CurrOnSeries" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="Write On" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True">
+                    <DVC:BarSeries.DataPointStyle>
+                        <Style TargetType="DVC:BarDataPoint">
+                            <Setter Property="Background" Value="#FF5A9B77" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DVC:BarDataPoint">
+                                        <Grid>
+                                            <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                            <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                                <TextBlock Text="{TemplateBinding FormattedDependentValue}" FontWeight="Bold" Width="Auto" Foreground="Black" Margin="2" />
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DVC:BarSeries.DataPointStyle>
+                </DVC:BarSeries>
+            </DVC:Chart>
+        </Grid>
+        <DVC:Chart Grid.Row="1" Title="YTD" Height="Auto" Width="Auto" Foreground="{StaticResource CoolBlue}" BorderBrush="{x:Null}" Visibility="Visible">
+            <DVC:Chart.TitleStyle>
+                <Style TargetType="DV:Title">
+                    <Setter Property="FontSize" Value="25" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                </Style>
+            </DVC:Chart.TitleStyle>
+            <DVC:ColumnSeries Name="YTDNetSeries" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="Net" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True">
+                <DVC:ColumnSeries.DataPointStyle>
+                    <Style TargetType="DVC:ColumnDataPoint">
+                        <Setter Property="Background" Value="#FF6170A4" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DVC:ColumnDataPoint">
+                                    <Grid>
+                                        <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                        <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                            <TextBlock Text="{TemplateBinding FormattedDependentValue}" FontWeight="Bold" Width="Auto" Foreground="Black" Margin="2" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DVC:ColumnSeries.DataPointStyle>
+            </DVC:ColumnSeries>
+            <DVC:ColumnSeries Name="YTDOffSeries" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="Write Off" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True">
+                <DVC:ColumnSeries.DataPointStyle>
+                    <Style TargetType="DVC:ColumnDataPoint">
+                        <Setter Property="Background" Value="#FFB84949" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DVC:ColumnDataPoint">
+                                    <Grid>
+                                        <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                        <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                            <TextBlock Text="{TemplateBinding FormattedDependentValue}" FontWeight="Bold" Width="Auto" Foreground="Black" Margin="2" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DVC:ColumnSeries.DataPointStyle>
+            </DVC:ColumnSeries>
+            <DVC:ColumnSeries Name="YTDOnSeries" ToolTipService.ToolTip="{Binding}" DependentValuePath="Value" Title="Write On" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True">
+                <DVC:ColumnSeries.DataPointStyle>
+                    <Style TargetType="DVC:ColumnDataPoint">
+                        <Setter Property="Background" Value="#FF5A9B77" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DVC:ColumnDataPoint">
+                                    <Grid>
+                                        <Rectangle Fill="{TemplateBinding Background}" Stroke="Black" />
+                                        <Grid Margin="0 -20 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                            <TextBlock Text="{TemplateBinding FormattedDependentValue}" FontWeight="Bold" Width="Auto" Foreground="Black" Margin="2" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DVC:ColumnSeries.DataPointStyle>
+            </DVC:ColumnSeries>
+        </DVC:Chart>
+    </Grid>
+</UserControl>

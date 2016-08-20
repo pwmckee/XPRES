@@ -1,0 +1,4 @@
+Org	Sub	Locator	Item	Item Description	On-hand	Inbound	Ordered Quantity	Unpacked	Packed	Cost Group	LPN	Loaded	LPN Context	Planning Party	Owning Party	Lot	Serial	Grade	Lot Expiry Date	Parent Lot	Supplier Lot	Document Type	Document Number	Document Line Number	Line Type	Release Number	Release Line Number	Shipment Number	ASN	Trading Partner	Trading Partner Site	From Org	To Org	Expected Receipt Date	Shipped Date	Owning Org	Project	Task	Status	
+MID	MFGHUB	BS100738B..	497-0481871	P1230 MSR Blank	264			264	0																															
+MID	MFGRAW	05KDX010102..	497-0481871	P1230 MSR Blank	66			66	0																															
+MID	MFGHUB	GP041703C..	497-0481871	P1230 MSR Blank	360			360	0																															

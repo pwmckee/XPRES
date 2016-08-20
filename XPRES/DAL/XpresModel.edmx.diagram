@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="668896407ccd42c1b8e165970b4fde4c" Name="Diagram1">
+        <EntityTypeShape EntityType="XpresModel.Adjustment" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="XpresModel.BomChanx" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="XpresModel.CarrierList" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="XpresModel.CCTracker" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="XpresModel.CountSchedule" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="XpresModel.DynamicInbMetric" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="XpresModel.Employee" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="XpresModel.InboundActivity" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="XpresModel.MaterialReference" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="XpresModel.MaterialRequest" Width="1.5" PointX="8.75" PointY="7.75" />
+        <EntityTypeShape EntityType="XpresModel.MetricsAdj" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="XpresModel.MetricsInbound" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="XpresModel.MetricsInboundV2" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="XpresModel.MetricsInv" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="XpresModel.Order" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="XpresModel.ProductionArea" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="XpresModel.RcvSchedule" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="XpresModel.ReplenSAAG" Width="1.5" PointX="12.75" PointY="5.75" />
+        <EntityTypeShape EntityType="XpresModel.UnitCost" Width="1.5" PointX="6.75" PointY="12.75" />
+        <EntityTypeShape EntityType="XpresModel.WorkBenchCount" Width="1.5" PointX="12.75" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

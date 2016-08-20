@@ -1,0 +1,38 @@
+﻿<Window x:Class="XPRES.Main.Views.FullCharts"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XPRES.Main.Views"
+        mc:Ignorable="d"
+        Title="Metric Charts" Height="720" Width="1280" WindowState="Maximized">
+    <Grid Background="{StaticResource SolidBackDark}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Style="{StaticResource CustomBorder}" Margin="5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2" VerticalAlignment="Center">
+                <Button Name="btnPrev" Margin="0,0,5,0">
+                    <Image Source="{StaticResource Left}" Height="20" Width="30" VerticalAlignment="Center" />
+                </Button>
+                <Grid Name="grdTimer">
+                    <Button Name="btnTimer" Margin="5,0,5,0" Visibility="Visible" Click="btnTimer_Click">
+                        <Image Source="{StaticResource Timer}" Height="20" Width="30" VerticalAlignment="Center" />
+                    </Button>
+                    <Button Name="btnStopTimer" Margin="5,0,5,0" Visibility="Hidden" Click="btnStopTimer_Click">
+                        <Image Source="{StaticResource StopTimer}" Height="20" Width="30" VerticalAlignment="Center" />
+                    </Button>
+                </Grid>
+                <Button Name="btnNext" Margin="0,0,5,0">
+                    <Image Source="{StaticResource Right}" Height="20" Width="30" VerticalAlignment="Center" />
+                </Button>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1"  Style="{StaticResource CustomBorder}" Margin="5">
+            <Grid Name="grdChart" Margin="5">
+                <!--Chart goes here-->
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

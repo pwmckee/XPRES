@@ -1,0 +1,237 @@
+﻿<Window x:Class="XPRES.Departments.Inventory.Views.GcMetrics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:XPRES.Departments.Inventory.ViewModels"
+        Title="GeoCountsMetrics"
+        Width="1280"
+        Height="720"
+        mc:Ignorable="d">
+    <Window.DataContext>
+        <vm:CycoMetricsVm />
+    </Window.DataContext>
+
+    <Window.Resources>
+
+        <vm:NameToBrushConverter x:Key="NameToBrushConverter" />
+
+        <Style x:Key="Q4" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="{Binding Q4, Converter={StaticResource NameToBrushConverter}}" />
+        </Style>
+        <Style x:Key="Q3" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="{Binding Q3, Converter={StaticResource NameToBrushConverter}}" />
+        </Style>
+        <Style x:Key="Q2" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="{Binding Q2, Converter={StaticResource NameToBrushConverter}}" />
+        </Style>
+        <Style x:Key="Q1" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="{Binding Q1, Converter={StaticResource NameToBrushConverter}}" />
+        </Style>
+        <Style x:Key="Ytd" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="{Binding YTD, Converter={StaticResource NameToBrushConverter}}" />
+        </Style>
+        <Style x:Key="Mtd" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="{Binding MTD, Converter={StaticResource NameToBrushConverter}}" />
+        </Style>
+        <Style x:Key="Week1" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="{Binding PriorWeek, Converter={StaticResource NameToBrushConverter}}" />
+        </Style>
+        <Style x:Key="Week2" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="{Binding ReportWeek, Converter={StaticResource NameToBrushConverter}}" />
+        </Style>
+        <Style x:Key="CellAlign" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+    </Window.Resources>
+    <Grid Background="{StaticResource SolidBackDark}">
+        <Grid Name="GrdView">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="175" />
+                <ColumnDefinition Width="*" />
+                <!--<ColumnDefinition Width="*" />-->
+            </Grid.ColumnDefinitions>
+            <Grid Name="GrdOptions"
+                  Grid.Column="0"
+                  Margin="5">
+                <Border Style="{StaticResource CustomBorder}">
+                    <StackPanel Name="SpOptions">
+                        <Label Margin="0,0,0,20"
+                               HorizontalAlignment="Center"
+                               FontSize="21.333">
+                            Metrics Menu
+                        </Label>
+                        <Label VerticalAlignment="Center" FontSize="16">From</Label>
+                        <DatePicker Name="DtpSdMetrics"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    SelectedDate="{Binding FromDate,
+                                                           Mode=OneWayToSource}" />
+                        <Label VerticalAlignment="Center" FontSize="16">To:</Label>
+                        <DatePicker Name="DtpEdMetrics"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    SelectedDate="{Binding ToDate,
+                                                           Mode=OneWayToSource}" />
+                        <Label VerticalAlignment="Center"
+                               Content="Count Area:"
+                               FontSize="16" />
+                        <TextBox x:Name="TxtArea"
+                                 Width="150"
+                                 Height="30"
+                                 FontSize="16"
+                                 MaxLines="1"
+                                 Text="{Binding CountArea,
+                                                Mode=OneWayToSource}"
+                                 TextAlignment="Left" />
+                        <Button Name="BtnCalc"
+                                Height="32"
+                                Margin="5,20,5,5"
+                                Command="{Binding CalcMetricsCommand}"
+                                Content="Calculate Metrics" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border Grid.Column="1"
+                    Margin="5"
+                    Style="{StaticResource CustomBorder}">
+                <Grid Name="GrdMetrics">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="20,5,5,5"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                        <Label Content="Year:" />
+                        <ComboBox Name="CboYear"
+                                  Width="100"
+                                  Margin="5"
+                                  ItemsSource="{Binding ListYear}"
+                                  SelectedItem="{Binding SelYear}" />
+                        <Label Content="Month:" />
+                        <ComboBox Name="CboMonth"
+                                  Width="100"
+                                  Margin="5"
+                                  ItemsSource="{Binding ListMonth}"
+                                  SelectedItem="{Binding SelMonth}" />
+                        <Label Content="Prior Week:" />
+                        <DatePicker Name="DtpPrior" SelectedDate="{Binding PrevWeek, Mode=OneWayToSource}" />
+                        <Label Margin="15,0,0,0" Content="Report Week:" />
+                        <DatePicker Name="DtpReport" SelectedDate="{Binding CurrWeek, Mode=OneWayToSource}" />
+                        <Button Name="BtnView"
+                                Width="150"
+                                Margin="10,0,10,0"
+                                Command="{Binding ViewMetricsCommand}"
+                                Content="View" />
+                    </StackPanel>
+                    <DataGrid Name="DgMetricPercents"
+                              Grid.Row="1"
+                              Width="Auto"
+                              VerticalAlignment="Center"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              ItemsSource="{Binding MetricsView}"
+                              Style="{StaticResource CustomDataGrid}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="100"
+                                                Binding="{Binding PulsePoints}"
+                                                CellStyle="{StaticResource DescCells}"
+                                                Header="Pulse Points" />
+                            <DataGridTextColumn Width="50"
+                                                Binding="{Binding Goals}"
+                                                CellStyle="{StaticResource DescCells}"
+                                                Header="Goals" />
+
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding Q4}"
+                                                ElementStyle="{StaticResource Q4}"
+                                                Header="Q4" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding Q3}"
+                                                ElementStyle="{StaticResource Q3}"
+                                                Header="Q3" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding Q2}"
+                                                ElementStyle="{StaticResource Q2}"
+                                                Header="Q2" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding Q1}"
+                                                ElementStyle="{StaticResource Q1}"
+                                                Header="Q1" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding YTD}"
+                                                ElementStyle="{StaticResource Ytd}"
+                                                Header="YTD" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding MTD}"
+                                                ElementStyle="{StaticResource Mtd}"
+                                                Header="MTD" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding PriorWeek}"
+                                                ElementStyle="{StaticResource Week1}">
+                                <DataGridTextColumn.Header>
+                                    <Label Name="LblPrior"
+                                           Content="{Binding PrevWeek}"
+                                           FontWeight="Normal"
+                                           Foreground="Black" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding ReportWeek}"
+                                                ElementStyle="{StaticResource Week2}">
+                                <DataGridTextColumn.Header>
+                                    <Label Name="LblReport"
+                                           Content="{Binding CurrWeek}"
+                                           FontWeight="Normal"
+                                           Foreground="Black" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <DataGrid Name="DgMetricDetails"
+                              Grid.Row="2"
+                              Width="Auto"
+                              VerticalAlignment="Center"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              ItemsSource="{Binding DetailsView}"
+                              Style="{StaticResource CustomDataGrid}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="150"
+                                                Binding="{Binding PulsePoints}"
+                                                CellStyle="{StaticResource DescCells}" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding Q4}"
+                                                ElementStyle="{StaticResource CellAlign}" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding Q3}"
+                                                ElementStyle="{StaticResource CellAlign}" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding Q2}"
+                                                ElementStyle="{StaticResource CellAlign}" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding Q1}"
+                                                ElementStyle="{StaticResource CellAlign}" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding YTD}"
+                                                ElementStyle="{StaticResource CellAlign}" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding MTD}"
+                                                ElementStyle="{StaticResource CellAlign}" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding PriorWeek}"
+                                                ElementStyle="{StaticResource CellAlign}" />
+                            <DataGridTextColumn Width="*"
+                                                Binding="{Binding ReportWeek}"
+                                                ElementStyle="{StaticResource CellAlign}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
