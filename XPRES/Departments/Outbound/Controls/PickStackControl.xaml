@@ -13,7 +13,6 @@
     <Border Grid.Row="0" Style="{StaticResource CustomBorder}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20" />
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -21,19 +20,15 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
-            <CheckBox Grid.Column="0"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      IsChecked="{Binding CompCheck}" />
             <Label Name="lblDelID"
-                   Grid.Column="1"
+                   Grid.Column="0"
                    Margin="5"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Content="{Binding DelId}"
                    FontSize="16" />
             <TextBlock Name="lblStart"
-                       Grid.Column="2"
+                       Grid.Column="1"
                        Margin="5"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
@@ -42,14 +37,14 @@
                        Text="{Binding StartPick,
                                       StringFormat=HH:mm}" />
             <Label Name="lblLines"
-                   Grid.Column="3"
+                   Grid.Column="2"
                    Margin="5"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Content="{Binding LineCount}"
                    FontSize="16" />
             <TextBlock Name="lblEst"
-                       Grid.Column="4"
+                       Grid.Column="3"
                        Margin="5"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
@@ -58,13 +53,13 @@
                        Text="{Binding EstFinish,
                                       StringFormat=HH:mm}" />
             <Label Name="lblPicker"
-                   Grid.Column="5"
+                   Grid.Column="4"
                    Margin="5"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Content="{Binding Picker}"
                    FontSize="16" />
-            <Button Grid.Column="6"
+            <Button Grid.Column="5"
                     Height="25"
                     Click="DeletePickEvent">
                 <Image Source="{StaticResource CloseIcon}" />

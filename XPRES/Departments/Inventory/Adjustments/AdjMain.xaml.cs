@@ -1756,7 +1756,11 @@ namespace XPRES.Departments.Inventory.Adjustments
                     return;
                 }
             }
-            else _sDate = Convert.ToDateTime("1/1/2000");
+            else
+            {
+                _sDate = Convert.ToDateTime("1/1/2000");
+            }
+
             if (dtpEdCountSheet.SelectedDate.ToString() != "")
             {
                 try
@@ -1769,7 +1773,11 @@ namespace XPRES.Departments.Inventory.Adjustments
                     return;
                 }
             }
-            else _eDate = DateTime.Today.Date;
+            else
+            {
+                _eDate = DateTime.Today.Date;
+            }
+
             string _pid = txtPIDCountSheet.Text.Trim().ToUpper();
             string _counter = txtNameCountSheet.Text;
 

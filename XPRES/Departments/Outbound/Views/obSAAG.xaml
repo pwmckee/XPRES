@@ -8,8 +8,8 @@
         Title="Picking SAAG"
         Width="1280"
         Height="720"
-        WindowState="Maximized"
         Closing="Window_Closing"
+        WindowState="Maximized"
         mc:Ignorable="d">
 
     <!--#region Window Properties-->
@@ -141,11 +141,35 @@
                              Text="{Binding LineCount,
                                             Mode=TwoWay,
                                             UpdateSourceTrigger=PropertyChanged}"
-                             TextAlignment="Center">
-                        <!--<TextBox.InputBindings>
-                            <KeyBinding Key="Return" Command="{Binding StartSinglePickCommand}" />
-                        </TextBox.InputBindings>-->
-                    </TextBox>
+                             TextAlignment="Center" />
+                    <Button Name="btnResetSinglePick"
+                            Width="Auto"
+                            Height="Auto"
+                            Margin="20,5,5,5"
+                            VerticalAlignment="Center"
+                            Click="btnResetSinglePick_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="5,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"
+                                       Text="Reset" />
+                            <Image Margin="10,10,5,5" Source="{StaticResource RefreshIcon}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Name="btnCancelSinglePick"
+                            Width="Auto"
+                            Height="Auto"
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            Click="btnCancelSinglePick_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="5,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"
+                                       Text="Cancel" />
+                            <Image Margin="10,10,5,5" Source="{StaticResource CloseIcon}" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
 
                 <!--#endregion Single Pick Entry-->
@@ -221,11 +245,35 @@
                              Text="{Binding LineCount,
                                             Mode=TwoWay,
                                             UpdateSourceTrigger=PropertyChanged}"
-                             TextAlignment="Center">
-                        <!--<TextBox.InputBindings>
-                            <KeyBinding Key="Return" Command="{Binding AddMultiPickCommand}" />
-                        </TextBox.InputBindings>-->
-                    </TextBox>
+                             TextAlignment="Center" />
+                    <Button Name="btnResetMultiPick"
+                            Width="Auto"
+                            Height="Auto"
+                            Margin="20,5,5,5"
+                            VerticalAlignment="Center"
+                            Click="btnResetMultiPick_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="5,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"
+                                       Text="Reset Pick Entry" />
+                            <Image Margin="10,10,5,5" Source="{StaticResource RefreshIcon}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Name="btnCancelMultiPick"
+                            Width="Auto"
+                            Height="Auto"
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            Click="btnCancelMultiPick_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="5,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"
+                                       Text="Cancel" />
+                            <Image Margin="10,10,5,5" Source="{StaticResource CloseIcon}" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
 
                 <!--#endregion Multi Pick Entry-->
@@ -233,13 +281,17 @@
                 <!--#region Complete Pick-->
 
                 <StackPanel Name="spComplete"
+                            Height="50"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Orientation="Horizontal"
                             Visibility="Hidden">
-                    <Label Content="Picker Name:" FontSize="21" />
+                    <Label VerticalAlignment="Center"
+                           Content="Picker Name:"
+                           FontSize="21" />
                     <TextBox Name="txtCompletePicker"
                              Width="150"
+                             Height="30"
                              Background="{x:Null}"
                              CaretBrush="Yellow"
                              FontSize="21"
@@ -248,6 +300,34 @@
                              Text="{Binding Picker,
                                             Mode=TwoWay,
                                             UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Name="btnResetCompletePick"
+                            Width="Auto"
+                            Height="Auto"
+                            Margin="20,5,5,5"
+                            VerticalAlignment="Center"
+                            Click="btnResetCompletePick_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="5,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"
+                                       Text="Reset" />
+                            <Image Margin="10,10,5,5" Source="{StaticResource RefreshIcon}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Name="btnCancelCompletePick"
+                            Width="Auto"
+                            Height="Auto"
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            Click="btnCancelCompletePick_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="5,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"
+                                       Text="Cancel" />
+                            <Image Margin="10,10,5,5" Source="{StaticResource CloseIcon}" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
 
                 <!--#endregion Complete Pick-->

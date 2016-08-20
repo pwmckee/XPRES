@@ -19,7 +19,7 @@ namespace XPRES.Departments.Inventory.ViewModels
 
         #region ICommand Members
 
-        public ICommand ViewTrackerCommand { get { return new RelayCommand(x => ViewTracker()); } }
+        public ICommand ViewTrackerCommand => new RelayCommand(x => ViewTracker());
 
         #endregion ICommand Members
 

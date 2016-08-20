@@ -28,7 +28,7 @@ namespace XPRES.Departments.Inventory.ViewModels
         }
 
         #endregion Constructor
-        
+
         #region Properties
 
         #region CountSchedule Properties
@@ -228,9 +228,9 @@ namespace XPRES.Departments.Inventory.ViewModels
 
         #region ICommand Members
 
-        public ICommand CreateCycoCommand { get { return new RelayCommand(x => NewCreate());} }
+        public ICommand CreateCycoCommand => new RelayCommand(x => NewCreate());
 
-        public ICommand SaveCycoCommand { get { return new RelayCommand(x => SaveNewCountSheet()); } }
+        public ICommand SaveCycoCommand => new RelayCommand(x => SaveNewCountSheet());
 
         #endregion ICommand Members
 

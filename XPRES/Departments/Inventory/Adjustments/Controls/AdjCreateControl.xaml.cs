@@ -350,7 +350,7 @@ namespace XPRES.Departments.Inventory.Adjustments.Controls
                 _fileID = q;
                 if (_fileID != null)
                 {
-                    _fileID = _fileID + 1;
+                    _fileID += 1;
                 }
                 else
                 {
@@ -359,7 +359,7 @@ namespace XPRES.Departments.Inventory.Adjustments.Controls
             }
             catch
             {
-                _fileID = _fileID + 1;
+                _fileID += 1;
             }
 
             string _reqID = _subDate.ToString("MM/dd/yyyy") + "_" + _adjType + "_" + _fileID;

@@ -136,7 +136,7 @@ namespace XPRES.Departments.Inbound.ViewModels
 
         #region ICommand Members
 
-        public ICommand SaveCtrlCommand { get { return new RelayCommand(x => SaveCtrl()); } }
+        public ICommand SaveCtrlCommand => new RelayCommand(x => SaveCtrl());
 
         #endregion ICommand Members
 

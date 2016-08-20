@@ -93,7 +93,7 @@ namespace XPRES.Departments.Inventory.ViewModels
                 FillMonths();
             }
         }
-        
+
         private int? _selMonth;
 
         public int? SelMonth
@@ -170,10 +170,10 @@ namespace XPRES.Departments.Inventory.ViewModels
 
         #region ICommand Members
 
-        public ICommand CalcMetricsCommand { get { return new RelayCommand(x => CalcMetrics());} }
+        public ICommand CalcMetricsCommand => new RelayCommand(x => CalcMetrics());
 
-        public ICommand ViewMetricsCommand { get { return new RelayCommand(x => ViewMetrics()); } }
-        
+        public ICommand ViewMetricsCommand => new RelayCommand(x => ViewMetrics());
+
         #endregion ICommand Members
 
         #region Methods
@@ -303,14 +303,13 @@ namespace XPRES.Departments.Inventory.ViewModels
             string _area = _countArea;
             int _month = _edate.Month;
             int _qtr = (_month - 1) / 3 + 1;
-            
 
             if (_area.ToString() == "")
             {
                 System.Windows.Forms.MessageBox.Show(@"Count area must be entered.");
                 return;
             }
-            
+
             List<CCTracker> _valueData = (from _a in new XpresEntities().CCTrackers
                              where _a.CountDate >= _sdate && _a.CountDate <= _edate
                              select _a).ToList();
@@ -347,7 +346,6 @@ namespace XPRES.Departments.Inventory.ViewModels
                 }
             }
 
-             
             List<int?> _zoneData = (from _a in new XpresEntities().CountSchedules
                             where _a.ActualDate >= _sdate && _a.ActualDate <= _edate
                             select _a.Zone).Distinct().ToList();
@@ -460,7 +458,7 @@ namespace XPRES.Departments.Inventory.ViewModels
                                  where _a.CountYear == _selYear
                                  select _a);
             GetMetrics(6, _yearQuery);
-            
+
             var _monthsQuery = _yearQuery.Where(x => x.CountMonth == _selMonth);
             GetMetrics(7, _monthsQuery);
 
@@ -503,7 +501,7 @@ namespace XPRES.Departments.Inventory.ViewModels
                         break;
                 }
             }
-            
+
             _metricsView = _dt.DefaultView;
         }
 
@@ -543,7 +541,7 @@ namespace XPRES.Departments.Inventory.ViewModels
             _detailsArr[14] = metrics.Sum(sum => sum.CountedZones);
             _detailsArr[15] = metrics.Sum(sum => sum.GCNIL);
 
-            for (int _i = 0; _i < _detailsArr.GetUpperBound(0); _i++) 
+            for (int _i = 0; _i < _detailsArr.GetUpperBound(0); _i++)
             {
                 _detailsArr[_i] = Math.Round(Convert.ToDouble(_detailsArr[_i]), 2);
             }
@@ -591,7 +589,9 @@ namespace XPRES.Departments.Inventory.ViewModels
 
             double? _tZones = metrics.Sum(sum => sum.ExpectedZones);
             double? _zoneComp = metrics.Sum(sum => sum.CountedZones);
+#pragma warning disable RCS1032 // Remove redundant parentheses.
             double? _pcntZoneComp = ((1 - (_tZones - _zoneComp) / _tZones)) * 100;
+#pragma warning restore RCS1032 // Remove redundant parentheses.
 
             _pcntUnitNet = Math.Round(Convert.ToDouble(_pcntUnitNet), 2);
             _pcntUnitAbs = Math.Round(Convert.ToDouble(_pcntUnitAbs), 2);

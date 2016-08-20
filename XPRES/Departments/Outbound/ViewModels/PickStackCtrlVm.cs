@@ -11,18 +11,6 @@ namespace XPRES.Departments.Outbound.ViewModels
     {
         #region Properties
 
-        private bool _compCheck;
-
-        public bool CompCheck
-        {
-            get { return _compCheck; }
-            set
-            {
-                _compCheck = value;
-                OnPropertyChanged();
-            }
-        }
-
         private int? _delId;
 
         public int? DelId

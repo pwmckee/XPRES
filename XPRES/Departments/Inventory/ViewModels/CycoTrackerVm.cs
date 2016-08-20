@@ -99,11 +99,11 @@ namespace XPRES.Departments.Inventory.ViewModels
 
         #region ICommand Members
 
-        public ICommand GetCountsCommand { get { return new RelayCommand(x => GetCounts()); } }
+        public ICommand GetCountsCommand => new RelayCommand(x => GetCounts());
 
-        public ICommand ClearTrackerCommand { get { return new RelayCommand(x => ClearTracker()); } }
+        public ICommand ClearTrackerCommand => new RelayCommand(x => ClearTracker());
 
-        public ICommand ExportTrackerCommand { get { return new RelayCommand(x => ExportTracker()); } }
+        public ICommand ExportTrackerCommand => new RelayCommand(x => ExportTracker());
 
         #endregion ICommand Members
 

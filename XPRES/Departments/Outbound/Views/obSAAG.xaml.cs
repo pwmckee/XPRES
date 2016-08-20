@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -41,7 +42,7 @@ namespace XPRES.Departments.Outbound.Views
             {
                 if (txtCommand.Text.Trim() == "")
                 {
-                    txtCommand.Background = Brushes.LightSalmon;
+                    txtCommand.Background = Brushes.Salmon;
                     return;
                 }
                 else
@@ -85,7 +86,7 @@ namespace XPRES.Departments.Outbound.Views
                 if (txtSinglePicker.Text.Trim() == "")
                 {
                     txtSingleDeliveryID.Clear();
-                    txtSinglePicker.Background = Brushes.LightSalmon;
+                    txtSinglePicker.Background = Brushes.Salmon;
                     txtSinglePicker.Focus();
                 }
                 else
@@ -104,13 +105,13 @@ namespace XPRES.Departments.Outbound.Views
                 if (txtSinglePicker.Text.Trim() == "")
                 {
                     txtSingleLineCount.Clear();
-                    txtSinglePicker.Background = Brushes.LightSalmon;
+                    txtSinglePicker.Background = Brushes.Salmon;
                     txtSinglePicker.Focus();
                 }
                 else if (txtSingleDeliveryID.Text.Trim() == "")
                 {
                     txtSingleLineCount.Clear();
-                    txtSingleDeliveryID.Background = Brushes.LightSalmon;
+                    txtSingleDeliveryID.Background = Brushes.Salmon;
                     txtSingleDeliveryID.Focus();
                 }
                 else
@@ -155,7 +156,7 @@ namespace XPRES.Departments.Outbound.Views
                 if (txtMultiPicker.Text.Trim() == "")
                 {
                     txtMultiPickNum.Clear();
-                    txtMultiPicker.Background = Brushes.LightSalmon;
+                    txtMultiPicker.Background = Brushes.Salmon;
                     txtMultiPicker.Focus();
                 }
                 else
@@ -168,7 +169,7 @@ namespace XPRES.Departments.Outbound.Views
                         if (_multiPickNum > 100)
                         {
                             System.Windows.Forms.MessageBox.Show(@"Invalid amount of picks entered");
-                            txtMultiPickNum.Background = Brushes.LightSalmon;
+                            txtMultiPickNum.Background = Brushes.Salmon;
                             txtMultiPickNum.Clear();
                             return;
                         }
@@ -178,7 +179,7 @@ namespace XPRES.Departments.Outbound.Views
                     catch
                     {
                         System.Windows.Forms.MessageBox.Show(@"Invalid amount of picks entered");
-                        txtMultiPickNum.Background = Brushes.LightSalmon;
+                        txtMultiPickNum.Background = Brushes.Salmon;
                         txtMultiPickNum.Clear();
                     }
                 }
@@ -191,13 +192,13 @@ namespace XPRES.Departments.Outbound.Views
             {
                 if (txtMultiPicker.Text.Trim() == "")
                 {
-                    txtMultiPicker.Background = Brushes.LightSalmon;
+                    txtMultiPicker.Background = Brushes.Salmon;
                     txtMultiDeliveryID.Clear();
                     txtMultiPicker.Focus();
                 }
                 else if (txtMultiPickNum.Text.Trim() == "")
                 {
-                    txtMultiPickNum.Background = Brushes.LightSalmon;
+                    txtMultiPickNum.Background = Brushes.Salmon;
                     txtMultiDeliveryID.Clear();
                     txtMultiPickNum.Focus();
                 }
@@ -217,18 +218,18 @@ namespace XPRES.Departments.Outbound.Views
             {
                 if (txtMultiPicker.Text.Trim() == "")
                 {
-                    txtMultiPicker.Background = Brushes.LightSalmon;
+                    txtMultiPicker.Background = Brushes.Salmon;
                     txtMultiPicker.Focus();
                 }
                 else if (txtMultiPickNum.Text.Trim() == "")
                 {
-                    txtMultiPickNum.Background = Brushes.LightSalmon;
+                    txtMultiPickNum.Background = Brushes.Salmon;
                     txtMultiPickNum.Focus();
                 }
                 else if (txtMultiDeliveryID.Text.Trim() == "")
                 {
                     txtMultiLineCount.Clear();
-                    txtMultiDeliveryID.Background = Brushes.LightSalmon;
+                    txtMultiDeliveryID.Background = Brushes.Salmon;
                 }
                 else
                 {
@@ -311,13 +312,23 @@ namespace XPRES.Departments.Outbound.Views
 
         private void CheckMultiPick()
         {
+            if (_multiPickNum < 2)
+            {
+                System.Windows.Forms.MessageBox.Show(@"Pick number must be more than 1");
+                txtMultiPickNum.Clear();
+                txtMultiDeliveryID.Clear();
+                txtMultiLineCount.Clear();
+                txtMultiPickNum.Focus();
+                return;
+            }
             var _vm = DataContext as ObSaagVm;
             grdMultiPick.Visibility = Visibility.Visible;
             grdFinishedPicks.Visibility = Visibility.Hidden;
             _vm.AddMultiPick();
             txtMultiDeliveryID.Clear();
             txtMultiDeliveryID.Focus();
-            if (_vm.MultiPickCtrls.Count == _multiPickNum)
+            int _multiCtrlCheck = _vm.MultiPickCtrls.Count(x => x.Visibility == Visibility.Visible);
+            if (_multiCtrlCheck == _multiPickNum)
             {
                 foreach (StackPanel _sp in grdMainMenu.Children)
                 {
@@ -332,6 +343,7 @@ namespace XPRES.Departments.Outbound.Views
                 }
                 grdMultiPick.Visibility = Visibility.Hidden;
                 grdFinishedPicks.Visibility = Visibility.Visible;
+                txtMultiPickNum.Clear();
                 txtCommand.Clear();
                 txtCommand.Focus();
                 _vm.StartMultiPick();
@@ -358,10 +370,93 @@ namespace XPRES.Departments.Outbound.Views
 
         #endregion Methods
 
+        #region Misc Events
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var _vm = DataContext as ObSaagVm;
             _vm.PickStackTimer.Stop();
+        }
+
+        private void btnResetSinglePick_Click(object sender, RoutedEventArgs e)
+        {
+            txtSinglePicker.Clear();
+            txtSingleDeliveryID.Clear();
+            txtSingleLineCount.Clear();
+            txtSinglePicker.Focus();
+        }
+
+        private void btnResetMultiPick_Click(object sender, RoutedEventArgs e)
+        {
+            txtMultiPicker.Clear();
+            txtMultiPickNum.Clear();
+            txtMultiDeliveryID.Clear();
+            txtMultiLineCount.Clear();
+            txtMultiPicker.Focus();
+        }
+
+        private void btnCancelSinglePick_Click(object sender, RoutedEventArgs e)
+        {
+            txtSinglePicker.Clear();
+            txtSingleDeliveryID.Clear();
+            txtSingleLineCount.Clear();
+            foreach (StackPanel _sp in grdMainMenu.Children)
+            {
+                if (_sp.Name == nameof(spCommand))
+                {
+                    _sp.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    _sp.Visibility = Visibility.Hidden;
+                }
+            }
+            txtCommand.Focus();
+        }
+
+        private void btnCancelMultiPick_Click(object sender, RoutedEventArgs e)
+        {
+            txtMultiPicker.Clear();
+            txtMultiPickNum.Clear();
+            txtMultiDeliveryID.Clear();
+            txtMultiLineCount.Clear();
+            foreach (StackPanel _sp in grdMainMenu.Children)
+            {
+                if (_sp.Name == nameof(spCommand))
+                {
+                    _sp.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    _sp.Visibility = Visibility.Hidden;
+                }
+            }
+            txtCommand.Focus();
+        }
+
+        #endregion Misc Events
+
+        private void btnResetCompletePick_Click(object sender, RoutedEventArgs e)
+        {
+            txtCompletePicker.Clear();
+            txtCompletePicker.Focus();
+        }
+
+        private void btnCancelCompletePick_Click(object sender, RoutedEventArgs e)
+        {
+            txtCompletePicker.Clear();
+            foreach (StackPanel _sp in grdMainMenu.Children)
+            {
+                if (_sp.Name == nameof(spCommand))
+                {
+                    _sp.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    _sp.Visibility = Visibility.Hidden;
+                }
+            }
+            txtCommand.Focus();
         }
     }
 }

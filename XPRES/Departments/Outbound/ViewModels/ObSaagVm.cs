@@ -22,7 +22,7 @@ namespace XPRES.Departments.Outbound.ViewModels
             _compPicksCtrls = new ObservableCollection<CompStackControl>();
             _multiPickCtrls = new ObservableCollection<MultiAddControl>();
             _pickerList = new List<string>();
-            PickStackTimer = new DispatcherTimer { Interval = new TimeSpan(0,0,3) };
+            PickStackTimer = new DispatcherTimer { Interval = new TimeSpan(0,0,15) };
             PickStackTimer.Tick += new EventHandler(PickStackTimer_Tick);
             PickStackTimer.Start();
             RefreshPicks();
@@ -219,7 +219,7 @@ namespace XPRES.Departments.Outbound.ViewModels
             {
                 _orders = (from a in new XpresEntities().Orders
                            where a.EndTime == null
-                           orderby a.StartTime
+                           orderby a.StartTime descending
                            select a).ToList();
             }
             catch (Exception _ex)
@@ -293,7 +293,7 @@ namespace XPRES.Departments.Outbound.ViewModels
             {
                 var _compOrders = (from _a in new XpresEntities().Orders
                                    where _a.EndTime != null && _a.StartTime >= _today
-                                   orderby _a.StartTime
+                                   orderby _a.StartTime descending
                                    select _a).ToList();
 
                 foreach (var _o in _compOrders)
@@ -394,6 +394,7 @@ namespace XPRES.Departments.Outbound.ViewModels
                 System.Windows.Forms.MessageBox.Show(@"Please make sure all required information is entered in before adding order.");
                 return;
             }
+            
             if (_multiPickCtrls.Any())
             {
                 foreach (MultiAddControl _ctrlTest in _multiPickCtrls)
@@ -431,7 +432,7 @@ namespace XPRES.Departments.Outbound.ViewModels
 
             MultiAddControl _ctrl = new MultiAddControl
             {
-                DataContext = _vm
+                DataContext = _vm,
             };
             _multiPickCtrls.Add(_ctrl);
             DelId = null;
@@ -462,21 +463,24 @@ namespace XPRES.Departments.Outbound.ViewModels
 
             foreach (MultiAddControl _ctrl in _multiPickCtrls)
             {
-                var _vm = _ctrl.DataContext as PickStackCtrlVm;
-                int _ctrlDelId = (int)_vm.DelId;
-                int _ctrlLineCount = (int)_vm.LineCount;
-                Order _pick = new Order
+                if (_ctrl.Visibility == System.Windows.Visibility.Visible)
                 {
-                    DeliveryID = _ctrlDelId,
-                    StartTime = _startTime,
-                    LineCount = _ctrlLineCount,
-                    Picker = _picker,
-                    PickNum = _pickNum,
-                    MultiPick = true
-                };
+                    var _vm = _ctrl.DataContext as PickStackCtrlVm;
+                    int _ctrlDelId = (int)_vm.DelId;
+                    int _ctrlLineCount = (int)_vm.LineCount;
+                    Order _pick = new Order
+                    {
+                        DeliveryID = _ctrlDelId,
+                        StartTime = _startTime,
+                        LineCount = _ctrlLineCount,
+                        Picker = _picker,
+                        PickNum = _pickNum,
+                        MultiPick = true
+                    };
 
-                _xps.Orders.Add(_pick);
-                _pickNum++;
+                    _xps.Orders.Add(_pick);
+                    _pickNum++;
+                }
             }
 
             try
@@ -552,6 +556,9 @@ namespace XPRES.Departments.Outbound.ViewModels
                         _end = DateTime.Now;
                         _mins = _end - _start;
                         _minsNum = Convert.ToDouble(_mins.TotalMinutes);
+
+                        //Offset to accomodate start time issues
+                        _minsNum -= 2;
 
                         if (_minsNum < 1) _minsNum = 1;
 

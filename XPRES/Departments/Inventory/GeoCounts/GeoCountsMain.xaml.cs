@@ -713,7 +713,11 @@ namespace XPRES.Departments.Inventory.GeoCounts
                     return;
                 }
             }
-            else SDate = Convert.ToDateTime("1/1/2000");
+            else
+            {
+                SDate = Convert.ToDateTime("1/1/2000");
+            }
+
             if (DtpEdCCtracker.SelectedDate.ToString() != "")
             {
                 try
@@ -726,7 +730,11 @@ namespace XPRES.Departments.Inventory.GeoCounts
                     return;
                 }
             }
-            else EDate = DateTime.Today.Date;
+            else
+            {
+                EDate = DateTime.Today.Date;
+            }
+
             PID = TxtPidccTracker.Text.Trim().ToUpper();
             int _cid = 0;
             if (TxtCidccTracker.Text.Trim().ToUpper() != string.Empty)

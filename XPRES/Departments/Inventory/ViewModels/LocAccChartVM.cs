@@ -151,7 +151,7 @@ namespace XPRES.Departments.Inventory.ViewModels
             _firPass = 0;
             _secPass = 0;
 
-            if (_metricsQtr.Any())
+            if (_metricsQtr.Count > 0)
             {
                 foreach (var _item in _metricsQtr)
                 {

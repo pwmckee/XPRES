@@ -91,17 +91,17 @@ namespace XPRES.Departments.Inbound.ViewModels
 
         #region ICommand Members
 
-        public ICommand AddLtlCommand { get { return new RelayCommand(x => AddLtl()); } }
+        public ICommand AddLtlCommand => new RelayCommand(x => AddLtl());
 
-        public ICommand GetLtlSchedCommand { get { return new RelayCommand(x => GetSched(true)); } }
+        public ICommand GetLtlSchedCommand => new RelayCommand(x => GetSched(true));
 
-        public ICommand AddSmlPkCommand { get { return new RelayCommand(x => AddSmlPkTruck()); } }
+        public ICommand AddSmlPkCommand => new RelayCommand(x => AddSmlPkTruck());
 
-        public ICommand GetSmlPkSchedCommand { get { return new RelayCommand(x => GetSched(false)); } }
+        public ICommand GetSmlPkSchedCommand => new RelayCommand(x => GetSched(false));
 
-        public ICommand AddCarrierCommand { get { return new RelayCommand(x => AddCarrier()); } }
+        public ICommand AddCarrierCommand => new RelayCommand(x => AddCarrier());
 
-        public ICommand DeleteCarrierCommand { get { return new RelayCommand(x => DeleteCarrier()); } }
+        public ICommand DeleteCarrierCommand => new RelayCommand(x => DeleteCarrier());
 
         #endregion ICommand Members
 
@@ -111,7 +111,7 @@ namespace XPRES.Departments.Inbound.ViewModels
         {
             try
             {
-                if(_carrierList.Any()) _carrierList.Clear();
+                if(_carrierList.Count > 0) _carrierList.Clear();
                 var _carrQuery = (from _a in new XpresEntities().CarrierLists
                                   orderby _a.Carrier select _a.Carrier).ToList();
                 CarrierList = _carrQuery;
@@ -152,7 +152,7 @@ namespace XPRES.Departments.Inbound.ViewModels
                 {
                     _schedList = (from _a in new XpresEntities().RcvSchedules
                                   where _a.Appt >= _schedDate && _a.Appt < _tomorrow && _a.Ltl == true
-                                  orderby _a.Appt 
+                                  orderby _a.Appt
                                   select _a).ToList();
                 }
                 else
@@ -168,7 +168,7 @@ namespace XPRES.Departments.Inbound.ViewModels
                 System.Windows.Forms.MessageBox.Show(@"Error retrieving schedule information: " + _ex.Message);
             }
 
-            if (!_schedList.Any()) return;
+            if (_schedList.Count == 0) return;
 
             foreach (RcvSchedule _apt in _schedList)
             {

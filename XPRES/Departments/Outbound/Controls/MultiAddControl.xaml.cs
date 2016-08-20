@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using XPRES.Departments.Outbound.ViewModels;
 
 namespace XPRES.Departments.Outbound.Controls
 {

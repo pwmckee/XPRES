@@ -112,19 +112,19 @@ namespace XPRES.Departments.Inventory.ViewModels
 
         #region ICommand Members
 
-        public ICommand GetFirstReviewStackCommand { get { return new RelayCommand(x => GetOpenCounts("FirstSubmitReview")); } }
+        public ICommand GetFirstReviewStackCommand => new RelayCommand(x => GetOpenCounts("FirstSubmitReview"));
 
-        public ICommand GetSecondReviewStackCommand { get { return new RelayCommand(x => GetOpenCounts("SecondSubmitReview")); } }
+        public ICommand GetSecondReviewStackCommand => new RelayCommand(x => GetOpenCounts("SecondSubmitReview"));
 
-        public ICommand LoadReviewCommand { get { return new RelayCommand(x => LoadReview()); } }
+        public ICommand LoadReviewCommand => new RelayCommand(x => LoadReview());
 
-        public ICommand SubmitReviewCommand { get { return new RelayCommand(x => ReviewSubmit()); } }
+        public ICommand SubmitReviewCommand => new RelayCommand(x => ReviewSubmit());
 
-        public ICommand ExportCommand { get { return new RelayCommand(x => ExportLocal()); } }
+        public ICommand ExportCommand => new RelayCommand(x => ExportLocal());
 
-        public ICommand ImportCommand { get { return new RelayCommand(x => ImportLocal()); } }
+        public ICommand ImportCommand => new RelayCommand(x => ImportLocal());
 
-        public ICommand AddWriteInCommand { get { return new RelayCommand(x => AddWriteIn()); } }
+        public ICommand AddWriteInCommand => new RelayCommand(x => AddWriteIn());
 
         #endregion ICommand Members
 
@@ -531,14 +531,6 @@ namespace XPRES.Departments.Inventory.ViewModels
                 _dataRow[15] = _status;
                 _dataRow[16] = _id;
 
-                if (_status == "NewCreate")
-                {
-                   
-                }
-                else
-                {
-                    
-                }
                 _writeInCnt = "";
                 _writeInLoc = "";
                 _writeInPid = "";

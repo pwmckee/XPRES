@@ -21,7 +21,11 @@ namespace XPRES.Commands
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             if (execute == null)
+            {
+#pragma warning disable RCS1015 // Use nameof operator.
                 throw new ArgumentNullException("execute");
+            }
+#pragma warning restore RCS1015 // Use nameof operator.
 
             _execute = execute;
             _canExecute = canExecute;

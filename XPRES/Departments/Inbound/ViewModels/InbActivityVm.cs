@@ -128,15 +128,15 @@ namespace XPRES.Departments.Inbound.ViewModels
 
         #region ICommand Members
 
-        public ICommand ViewDateRangeCommand { get { return new RelayCommand(x => ViewDateRange());} }
+        public ICommand ViewDateRangeCommand => new RelayCommand(x => ViewDateRange());
 
-        public ICommand AddOperatorCommand { get { return new RelayCommand(x => AddOperator()); } }
+        public ICommand AddOperatorCommand => new RelayCommand(x => AddOperator());
 
-        public ICommand DeleteOperatorCommand { get { return new RelayCommand(x => DeleteOperator()); } }
+        public ICommand DeleteOperatorCommand => new RelayCommand(x => DeleteOperator());
 
-        public ICommand AddRecCtrlCommand { get { return new RelayCommand(x => AddCtrl(true)); } }
+        public ICommand AddRecCtrlCommand => new RelayCommand(x => AddCtrl(true));
 
-        public ICommand AddPutCtrlCommand { get { return new RelayCommand(x => AddCtrl(false)); } }
+        public ICommand AddPutCtrlCommand => new RelayCommand(x => AddCtrl(false));
 
         #endregion ICommand Members
 

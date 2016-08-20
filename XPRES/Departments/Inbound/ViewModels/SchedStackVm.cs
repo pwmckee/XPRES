@@ -206,9 +206,9 @@ namespace XPRES.Departments.Inbound.ViewModels
 
         #region ICommand Members
 
-        public ICommand SaveLtlApptCommand { get { return new RelayCommand(x => SaveAppt(true));} }
+        public ICommand SaveLtlApptCommand => new RelayCommand(x => SaveAppt(true));
 
-        public ICommand SaveSmlPkApptCommand { get { return new RelayCommand(x => SaveAppt(false)); } }
+        public ICommand SaveSmlPkApptCommand => new RelayCommand(x => SaveAppt(false));
 
         #endregion ICommand Members
 

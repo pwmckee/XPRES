@@ -45,7 +45,7 @@ namespace XPRES.Departments.Inbound.Controls
             if (_diag == System.Windows.Forms.DialogResult.Yes)
             {
                 Visibility = Visibility.Collapsed;
-                
+
                 try
                 {
                     SchedStackVm _vm = DataContext as SchedStackVm;

@@ -115,17 +115,17 @@ namespace XPRES.Departments.Inventory.ViewModels
 
         #region ICommandMembers
 
-        public ICommand FirstCountsCommand { get { return new RelayCommand(x => GetOpenCounts("NewCreate")); } }
+        public ICommand FirstCountsCommand => new RelayCommand(x => GetOpenCounts("NewCreate"));
 
-        public ICommand SecondCountsCommand { get { return new RelayCommand(x => GetOpenCounts("SecondReady")); } }
+        public ICommand SecondCountsCommand => new RelayCommand(x => GetOpenCounts("SecondReady"));
 
-        public ICommand LoadCountCommand { get { return new RelayCommand(x => LoadCount()); } }
+        public ICommand LoadCountCommand => new RelayCommand(x => LoadCount());
 
-        public ICommand ExportCountCommand { get { return new RelayCommand(x => ExportCount()); } }
+        public ICommand ExportCountCommand => new RelayCommand(x => ExportCount());
 
-        public ICommand SubmitCountCommand { get { return new RelayCommand(x => SubmitCount()); } }
+        public ICommand SubmitCountCommand => new RelayCommand(x => SubmitCount());
 
-        public ICommand AddWriteInCommand { get { return new RelayCommand(x => AddWriteIn()); } }
+        public ICommand AddWriteInCommand => new RelayCommand(x => AddWriteIn());
 
         #endregion ICommandMembers
 
