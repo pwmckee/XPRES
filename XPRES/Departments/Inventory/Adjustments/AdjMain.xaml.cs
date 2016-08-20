@@ -711,7 +711,11 @@ namespace XPRES.Departments.Inventory.Adjustments
                     return;
                 }
             }
-            else eDate = DateTime.Today.Date;
+            else
+            {
+                eDate = DateTime.Today.Date;
+            }
+
             pid = txtPIDAdjTracker.Text.Trim().ToUpper();
             seq = txtSeqAdjTracker.Text.Trim().ToUpper();
             adjType = txtAdjType.Text;
